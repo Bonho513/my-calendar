@@ -231,6 +231,9 @@ body.ai main{padding-bottom:calc(230px + env(safe-area-inset-bottom))}
 .dl .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
 .dl.overdue .cd{--c:var(--danger)}
 .none{padding:18px 16px 20px;color:var(--muted);font-size:14px}
+.syncgrp{display:none}.syncgrp.show{display:block}
+.codebox{min-height:220px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;background:rgba(0,0,0,.28);resize:vertical}
+.okdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);margin-right:6px;vertical-align:1px}
 .remall{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 16px;border-radius:18px;font-size:14px;font-weight:500;
   background:linear-gradient(90deg,rgba(61,107,255,.18),rgba(79,227,255,.12));border:1px solid rgba(79,227,255,.3);color:var(--ink)}
 .remall svg{width:18px;height:18px;color:var(--cyan)}
@@ -521,11 +524,26 @@ body.typing.ai .dock{display:none}
   </div>
   <div class="sec">
     <h4>跨裝置同步</h4>
-    <div class="field"><label for="sGh">GitHub Token（只需 gist 權限）</label><input id="sGh" type="password" placeholder="ghp_..." autocomplete="off"></div>
-    <div class="field"><label for="sGist">Gist ID</label><input id="sGist" placeholder="首部裝置請留空，系統將自動建立"></div>
-    <div class="field"><label class="toggle">修改後自動同步<input type="checkbox" id="sAuto"></label></div>
+    <div class="field"><label for="sMode">同步方式</label>
+      <select id="sMode"><option value="none">不同步</option><option value="gdrive">Google Drive（建議）</option><option value="gist">GitHub Gist</option></select></div>
+    <div class="syncgrp" data-mode="gdrive">
+      <div class="field"><label for="sGdUrl">Apps Script 網址</label><input id="sGdUrl" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"></div>
+      <div class="field"><label for="sGdKey">同步密碼</label><input id="sGdKey" autocomplete="off" spellcheck="false"></div>
+      <div class="actions"><button class="btn primary" id="gdConnect">連接 Google Drive</button><button class="btn ghost" id="gdHelp">設定教學</button></div>
+      <p class="hint">資料儲存於你 Google Drive 的「my-calendar-data.json」。於其他裝置填入同一網址及同步密碼，即可同步同一份日曆。</p>
+    </div>
+    <div class="syncgrp" data-mode="gist">
+      <div class="field"><label for="sGh">GitHub Token（只需 gist 權限）</label><input id="sGh" type="password" placeholder="ghp_..." autocomplete="off"></div>
+      <div class="field"><label for="sGist">Gist ID</label><input id="sGist" placeholder="首部裝置請留空，系統將自動建立"></div>
+      <p class="hint">GitHub → Settings → Developer settings → Personal access tokens (classic)，只勾 gist。於其他裝置填入同一 Gist ID，即可同步同一份日曆。</p>
+    </div>
+    <div class="field" style="margin-top:12px"><label class="toggle">自動同步（修改後及每 2 分鐘）<input type="checkbox" id="sAuto"></label></div>
     <button class="btn ghost" id="syncNow" style="width:100%">立即同步</button>
-    <p class="hint">GitHub → Settings → Developer settings → Personal access tokens (classic)，只勾 gist。於其他裝置填入同一 Gist ID，即可同步同一份日曆。</p>
+  </div>
+  <div class="sec">
+    <h4>iPhone 主畫面小工具</h4>
+    <p class="hint" style="margin:0 0 12px">透過免費 App「Scriptable」，在主畫面或智慧堆疊顯示今日及明日待辦。須先完成 Google Drive 同步設定。</p>
+    <div class="actions"><button class="btn ghost" id="wgCopy">複製小工具程式碼</button><button class="btn ghost" id="wgHelp">設定教學</button></div>
   </div>
   <div class="sec">
     <h4>匯入及匯出</h4>
@@ -542,6 +560,45 @@ body.typing.ai .dock{display:none}
 
 <!-- Daily brief -->
 <div class="overlay" id="ovBrief"><div class="sheet" role="dialog" aria-label="每日簡報" id="briefBody"></div></div>
+
+<!-- Google Drive help -->
+<div class="overlay" id="ovGd"><div class="sheet" role="dialog" aria-label="Google Drive 同步設定">
+  <h3><span>設定 Google Drive 同步</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <p class="hint" style="margin:0 0 6px">建議在電腦上完成，約需 5 分鐘，只需設定一次。</p>
+  <ol class="steps">
+    <li>在電腦開啟 <b>script.google.com</b>，以你的 Google 帳號登入，點選「新專案」</li>
+    <li>刪除編輯器內的預設內容，貼上<b>伺服器程式碼</b><span class="sub">點選下方「複製伺服器程式碼」。程式碼已包含你的同步密碼，無須修改。</span></li>
+    <li>點選「儲存」，再點選右上角 <b>部署 → 新增部署作業</b></li>
+    <li>類型選擇 <b>網頁應用程式</b><span class="sub">執行身分選「我」；具有存取權的使用者選「所有人」；然後點選「部署」。</span></li>
+    <li>點選 <b>授權存取</b> 並選擇你的 Google 帳號<span class="sub">如出現「Google 尚未驗證這個應用程式」，點選「進階」→「前往（不安全）」→「允許」。這是你自己的程式，只會讀寫 my-calendar-data.json 這個檔案。</span></li>
+    <li>複製 <b>網頁應用程式網址</b>，貼到設定中的「Apps Script 網址」，點選「連接 Google Drive」</li>
+    <li>在其他裝置開啟日曆 App，同步方式選 Google Drive，填入<b>同一網址及同步密碼</b></li>
+  </ol>
+  <div class="actions" style="margin-top:14px"><button class="btn primary" id="gdCopy">複製伺服器程式碼</button><button class="btn ghost" data-close>完成</button></div>
+</div></div>
+
+<!-- Widget help -->
+<div class="overlay" id="ovWg"><div class="sheet" role="dialog" aria-label="主畫面小工具設定">
+  <h3><span>設定主畫面小工具</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <ol class="steps">
+    <li>先完成 <b>Google Drive 同步</b> 設定<span class="sub">小工具會從同一份 Drive 資料讀取待辦事項。</span></li>
+    <li>在 App Store 安裝免費 App <b>Scriptable</b></li>
+    <li>在 iPhone 開啟本日曆 App，於設定點選 <b>複製小工具程式碼</b><span class="sub">程式碼已包含你的同步網址及密碼。</span></li>
+    <li>開啟 Scriptable，點選右上角「＋」，貼上程式碼<span class="sub">點選頂部標題改名為「日曆小工具」，再點選右下角 ▶ 預覽。</span></li>
+    <li>返回主畫面，長按空白處 → <b>編輯 → 加入小工具</b><span class="sub">搜尋「Scriptable」，選擇中或大尺寸，點選「加入小工具」。</span></li>
+    <li>長按小工具 → <b>編輯小工具</b>，Script 選擇「日曆小工具」</li>
+    <li>如要組成<b>智慧堆疊</b>，把另一個相同尺寸的小工具拖到這個小工具上即可<span class="sub">小工具的更新頻率由 iOS 決定，約 15 分鐘至 1 小時；點選小工具會以 Safari 開啟日曆。</span></li>
+  </ol>
+  <div class="actions" style="margin-top:14px"><button class="btn primary" id="wgCopy2">複製小工具程式碼</button><button class="btn ghost" data-close>完成</button></div>
+</div></div>
+
+<!-- Code viewer -->
+<div class="overlay" id="ovCode"><div class="sheet" role="dialog" aria-label="程式碼">
+  <h3><span id="codeTitle">程式碼</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <p class="hint" style="margin:0 0 10px">未能自動複製。請長按下方內容選擇「全選」後複製。</p>
+  <textarea class="codebox" id="codeBox" readonly></textarea>
+  <div class="actions"><button class="btn primary" id="codeSel">全選</button><button class="btn ghost" data-close>關閉</button></div>
+</div></div>
 
 <!-- Reminders help -->
 <div class="overlay" id="ovHelp"><div class="sheet" role="dialog" aria-label="設定捷徑教學">
@@ -563,9 +620,250 @@ body.typing.ai .dock{display:none}
 
 <div class="toast" id="toast" role="status"></div>
 
+<script type="text/plain" id="tplServer">
+// 我的日曆：Google Drive 同步伺服器（Google Apps Script）
+// 由日曆 App 自動產生，已包含你的同步密碼。
+// 部署：部署 → 新增部署作業 → 網頁應用程式 → 執行身分「我」→ 具有存取權的使用者「所有人」。
+const KEY = "__KEY__";
+const FILE_NAME = "my-calendar-data.json";
+
+function getFile_() {
+  const it = DriveApp.getFilesByName(FILE_NAME);
+  if (it.hasNext()) return it.next();
+  return DriveApp.createFile(FILE_NAME, JSON.stringify({ app: "my-calendar", events: [] }), "application/json");
+}
+
+function read_(f) {
+  try {
+    const d = JSON.parse(f.getBlob().getDataAsString() || "{}");
+    return Array.isArray(d.events) ? d.events : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function merge_(a, b) {
+  const m = {};
+  [].concat(a || [], b || []).forEach(function (e) {
+    if (!e || !e.id) return;
+    const o = m[e.id];
+    if (!o || (e.updatedAt || 0) > (o.updatedAt || 0)) m[e.id] = e;
+  });
+  const cutoff = Date.now() - 90 * 864e5;
+  return Object.keys(m)
+    .map(function (k) { return m[k]; })
+    .filter(function (e) { return !(e.deleted && (e.updatedAt || 0) < cutoff); });
+}
+
+function out_(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doGet(e) {
+  if (!e || !e.parameter || e.parameter.key !== KEY) return out_({ ok: false, error: "unauthorized" });
+  const f = getFile_();
+  return out_({ ok: true, events: read_(f), updated: f.getLastUpdated().getTime() });
+}
+
+function doPost(e) {
+  let body;
+  try {
+    body = JSON.parse(e.postData.contents);
+  } catch (err) {
+    return out_({ ok: false, error: "bad_request" });
+  }
+  if (!body || body.key !== KEY) return out_({ ok: false, error: "unauthorized" });
+  const lock = LockService.getScriptLock();
+  lock.waitLock(15000);
+  try {
+    const f = getFile_();
+    const merged = merge_(read_(f), body.events);
+    f.setContent(JSON.stringify({ app: "my-calendar", version: 3, updated: Date.now(), events: merged }));
+    return out_({ ok: true, events: merged });
+  } finally {
+    lock.releaseLock();
+  }
+}
+</script>
+<script type="text/plain" id="tplWidget">
+// 我的日曆：iPhone 主畫面小工具（Scriptable）
+// 由日曆 App 自動產生，已包含你的同步網址及密碼。
+const SYNC_URL = "__URL__";
+const SYNC_KEY = "__KEY__";
+const APP_URL = "__APP__";
+
+const C = {
+  ink: new Color("#EAF0FF"),
+  muted: new Color("#8B96C2"),
+  faint: new Color("#56628F"),
+  cyan: new Color("#4FE3FF"),
+  red: new Color("#FF5C7A")
+};
+const WK = ["日", "一", "二", "三", "四", "五", "六"];
+const pad = n => String(n).padStart(2, "0");
+const ymd = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+
+async function loadEvents() {
+  const fm = FileManager.local();
+  const cache = fm.joinPath(fm.documentsDirectory(), "my-calendar-widget-cache.json");
+  try {
+    const req = new Request(SYNC_URL + "?key=" + encodeURIComponent(SYNC_KEY));
+    req.timeoutInterval = 20;
+    const j = await req.loadJSON();
+    if (j && j.ok) {
+      fm.writeString(cache, JSON.stringify({ at: Date.now(), events: j.events || [] }));
+      return { events: j.events || [], at: Date.now(), offline: false, empty: false };
+    }
+  } catch (e) {}
+  if (fm.fileExists(cache)) {
+    const c = JSON.parse(fm.readString(cache));
+    return { events: c.events || [], at: c.at, offline: true, empty: false };
+  }
+  return { events: [], at: 0, offline: true, empty: true };
+}
+
+const data = await loadEvents();
+const now = new Date();
+const T = ymd(now), TM = ymd(addDays(now, 1)), BACK = ymd(addDays(now, -30));
+const live = data.events.filter(e => e && !e.deleted);
+const sk = e => (e.allDay || !e.start) ? "00:00" : e.start;
+const on = ds => live.filter(e => e.date === ds).sort((a, b) => sk(a).localeCompare(sk(b)));
+const todo = on(T).filter(e => !e.done);
+const tmr = on(TM).filter(e => !e.done);
+const overdue = live.filter(e => !e.done && e.date < T && e.date >= BACK && (e.allDay || !e.start || e.color === "#FFC94D"));
+const fam = config.widgetFamily || "large";
+
+function accessory() {
+  const lw = new ListWidget();
+  const a = lw.addText(todo.length ? "今日 " + todo.length + " 項待辦" : "今日暫無待辦");
+  a.font = Font.boldSystemFont(13);
+  if (todo[0]) {
+    const b = lw.addText(((todo[0].allDay || !todo[0].start) ? "全日" : todo[0].start) + " " + todo[0].title);
+    b.font = Font.systemFont(12);
+    b.lineLimit = 1;
+  }
+  lw.url = APP_URL;
+  return lw;
+}
+
+function main() {
+  const w = new ListWidget();
+  const g = new LinearGradient();
+  g.colors = [new Color("#1A2C7A"), new Color("#060A1C")];
+  g.locations = [0, 1];
+  g.startPoint = new Point(1, 0);
+  g.endPoint = new Point(0, 1);
+  w.backgroundGradient = g;
+  w.url = APP_URL;
+  w.setPadding(14, 15, 12, 15);
+  w.refreshAfterDate = new Date(Date.now() + 15 * 60 * 1000);
+
+  const head = w.addStack();
+  head.centerAlignContent();
+  const day = head.addText(String(now.getDate()));
+  day.font = Font.boldSystemFont(fam === "small" ? 30 : 28);
+  day.textColor = C.ink;
+  head.addSpacer(7);
+  const hv = head.addStack();
+  hv.layoutVertically();
+  const t1 = hv.addText((now.getMonth() + 1) + "月　星期" + WK[now.getDay()]);
+  t1.font = Font.mediumSystemFont(11);
+  t1.textColor = C.muted;
+  const t2 = hv.addText(todo.length ? "今日 " + todo.length + " 項待辦" : "今日暫無待辦");
+  t2.font = Font.boldSystemFont(12);
+  t2.textColor = C.cyan;
+  head.addSpacer();
+  if (overdue.length && fam !== "small") {
+    const od = head.addText("逾期 " + overdue.length);
+    od.font = Font.boldSystemFont(11);
+    od.textColor = C.red;
+  }
+  w.addSpacer(fam === "small" ? 8 : 10);
+
+  const row = (e, compact) => {
+    const s = w.addStack();
+    s.centerAlignContent();
+    s.spacing = 7;
+    const bar = s.addStack();
+    bar.size = new Size(3, compact ? 13 : 15);
+    bar.cornerRadius = 1.5;
+    bar.backgroundColor = new Color(e.color || "#4F7BFF");
+    if (!compact) {
+      const ts = s.addStack();
+      ts.size = new Size(36, 0);
+      const tt = ts.addText((e.allDay || !e.start) ? "全日" : e.start);
+      tt.font = Font.mediumSystemFont(11);
+      tt.textColor = C.muted;
+    }
+    const ti = s.addText(e.title || "");
+    ti.font = Font.mediumSystemFont(compact ? 12 : 13);
+    ti.textColor = C.ink;
+    ti.lineLimit = 1;
+    s.addSpacer();
+    w.addSpacer(compact ? 4 : 5);
+  };
+  const label = text => {
+    const l = w.addText(text);
+    l.font = Font.boldSystemFont(11);
+    l.textColor = C.muted;
+    w.addSpacer(5);
+  };
+  const note = text => {
+    const n = w.addText(text);
+    n.font = Font.systemFont(12);
+    n.textColor = C.muted;
+  };
+  const more = n => {
+    if (n <= 0) return;
+    const m = w.addText("另有 " + n + " 項");
+    m.font = Font.systemFont(10.5);
+    m.textColor = C.faint;
+  };
+
+  if (fam === "small") {
+    const list = todo.length ? todo : tmr;
+    if (!todo.length && tmr.length) label("明日待辦");
+    list.slice(0, 3).forEach(e => row(e, true));
+    more(list.length - 3);
+  } else if (fam === "medium") {
+    if (todo.length) {
+      todo.slice(0, 3).forEach(e => row(e));
+      more(todo.length - 3);
+    } else {
+      label(tmr.length ? "明日待辦　" + tmr.length + " 項" : "明日暫無安排");
+      tmr.slice(0, 2).forEach(e => row(e));
+    }
+  } else {
+    if (todo.length) {
+      todo.slice(0, 5).forEach(e => row(e));
+      more(todo.length - 5);
+    } else note("今日暫無待辦");
+    w.addSpacer(10);
+    label("明日待辦" + (tmr.length ? "　" + tmr.length + " 項" : ""));
+    if (tmr.length) {
+      tmr.slice(0, 4).forEach(e => row(e));
+      more(tmr.length - 4);
+    } else note("明日暫無安排");
+  }
+
+  w.addSpacer();
+  const at = data.at ? new Date(data.at) : null;
+  const ft = w.addText(data.empty ? "未能連線，請檢查同步設定" : (data.offline ? "離線，顯示 " : "更新於 ") + (at ? pad(at.getHours()) + ":" + pad(at.getMinutes()) : ""));
+  ft.font = Font.systemFont(9.5);
+  ft.textColor = C.faint;
+  return w;
+}
+
+const widget = fam.startsWith("accessory") ? accessory() : main();
+if (config.runsInWidget) Script.setWidget(widget);
+else await widget.presentLarge();
+Script.complete();
+</script>
 <script>
 (()=>{
 const DEMO=false;
+const APP_VERSION='2026.11.18-4';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -595,7 +893,8 @@ let events=store.get('cal.events',null);
 let chat=store.get('cal.chat',null);
 if(!events){events=DEMO?demoEvents():[]}
 if(!chat){chat=DEMO?demoChat():[]}
-let settings=Object.assign({baseUrl:'https://api.deepseek.com',model:'deepseek-chat',apiKey:'',ghToken:'',gistId:'',autoSync:true,lastSync:0,remName:'加入提醒',remLead:15,brief:true,eve:true},store.get('cal.settings',{}));
+let settings=Object.assign({baseUrl:'https://api.deepseek.com',model:'deepseek-chat',apiKey:'',ghToken:'',gistId:'',autoSync:true,lastSync:0,remName:'加入提醒',remLead:15,brief:true,eve:true,syncMode:'',gdUrl:'',gdKey:''},store.get('cal.settings',{}));
+if(!settings.syncMode)settings.syncMode=settings.ghToken?'gist':'none';
 let view=store.get('cal.view','todo');
 if(!['todo','day','week','month','ai','stats'].includes(view))view='todo';
 let calSub=store.get('cal.sub','day')==='week'?'week':'day';
@@ -829,7 +1128,7 @@ function renderStats(s){
 }
 function renderSyncStatus(){
   const el=$('#syncStatus');el.classList.toggle('err',!!syncError);
-  if(!settings.ghToken){el.textContent='';return}
+  if(!syncReady()){el.textContent='';return}
   if(syncing){el.textContent='同步中…';return}
   if(syncError){el.textContent='同步失敗';el.title=syncError;return}
   el.textContent=settings.lastSync?'已同步 '+new Date(settings.lastSync).toLocaleTimeString('zh-HK',{hour:'2-digit',minute:'2-digit'}):'';
@@ -1251,6 +1550,7 @@ setInterval(()=>{
 function fillSettings(){
   $('#sBase').value=settings.baseUrl;$('#sModel').value=settings.model;$('#sKey').value=settings.apiKey;
   $('#sGh').value=settings.ghToken;$('#sGist').value=settings.gistId;$('#sAuto').checked=settings.autoSync;
+  $('#sMode').value=settings.syncMode;$('#sGdUrl').value=settings.gdUrl||'';$('#sGdKey').value=settings.gdKey||'';showSyncGroup();
   $('#sBrief').checked=settings.brief!==false;$('#sEve').checked=settings.eve!==false;
   $('#sRemName').value=settings.remName||'';$('#sRemLead').value=String(settings.remLead??15);
   const p=[...$('#sPreset').options].find(o=>o.value===settings.baseUrl+'|'+settings.model);$('#sPreset').value=p?p.value:'';
@@ -1261,12 +1561,13 @@ function readSettings(){
   const g=$('#sGist').value.trim().replace(/^.*\//,'');
   if(g!==settings.gistId){settings.gistId=g;settings.lastSync=0}
   settings.autoSync=$('#sAuto').checked;
+  settings.syncMode=$('#sMode').value;settings.gdUrl=$('#sGdUrl').value.trim();settings.gdKey=$('#sGdKey').value.trim()||settings.gdKey;
   settings.brief=$('#sBrief').checked;settings.eve=$('#sEve').checked;
   settings.remName=$('#sRemName').value.trim()||'加入提醒';settings.remLead=+$('#sRemLead').value||0;saveSettings();
 }
 $('#openSettings').onclick=()=>{fillSettings();openOv('#ovSet')};
 $('#sPreset').onchange=e=>{if(!e.target.value)return;const[b,m]=e.target.value.split('|');$('#sBase').value=b;$('#sModel').value=m};
-$('#saveSet').onclick=()=>{readSettings();closeOv($('#ovSet'));render();toast('設定已儲存');if(settings.ghToken)sync()};
+$('#saveSet').onclick=()=>{readSettings();closeOv($('#ovSet'));render();toast('設定已儲存');if(syncReady())sync()};
 $('#testAi').onclick=async()=>{readSettings();const b=$('#testAi');b.disabled=true;b.innerHTML='<span class="spin"></span>測試中';
   try{if(!settings.apiKey)throw new Error('請先填入 API Key');await callAPI([{role:'system',content:'只輸出 JSON'},{role:'user',content:'回覆 {"ok":true}'}]);toast('連線成功')}
   catch(e){toast(netErr(e.message),4000)}
@@ -1275,7 +1576,8 @@ $('#syncNow').onclick=()=>{readSettings();fillSettings();sync(true)};
 
 /* ---------- sync (GitHub Gist) ---------- */
 let syncing=false,syncError='',syncTimer=null,syncAgain=false;
-function scheduleSync(){if(settings.autoSync&&settings.ghToken){clearTimeout(syncTimer);syncTimer=setTimeout(()=>sync(),1200)}}
+const syncReady=()=>settings.syncMode==='gdrive'?!!(settings.gdUrl&&settings.gdKey):settings.syncMode==='gist'?!!settings.ghToken:false;
+function scheduleSync(){if(settings.autoSync&&syncReady()){clearTimeout(syncTimer);syncTimer=setTimeout(()=>sync(),1200)}}
 async function gh(path,opt={}){
   const r=await fetch('https://api.github.com'+path,{...opt,cache:'no-store',headers:{Authorization:'Bearer '+settings.ghToken,Accept:'application/vnd.github+json',...(opt.body?{'Content-Type':'application/json'}:{})}});
   if(!r.ok)throw new Error(r.status===401?'GitHub Token 不正確':r.status===404?'找不到這個 Gist，請檢查 ID 和 Token 權限':'GitHub 回應 '+r.status);
@@ -1287,12 +1589,26 @@ function merge(a,b){
   const cutoff=Date.now()-90*864e5;
   return [...m.values()].filter(e=>!(e.deleted&&(e.updatedAt||0)<cutoff));
 }
-$('#syncBtn').onclick=()=>{if(!settings.ghToken){fillSettings();openOv('#ovSet');toast('請先設定 GitHub 同步');return}sync(true)};
+$('#syncBtn').onclick=()=>{if(!syncReady()){fillSettings();openOv('#ovSet');toast('請先設定跨裝置同步');return}sync(true)};
+async function syncDrive(){
+  const r=await fetch(settings.gdUrl,{method:'POST',body:JSON.stringify({key:settings.gdKey,events}),cache:'no-store'});
+  if(!r.ok)throw new Error('Google Drive 回應 '+r.status);
+  let j;try{j=await r.json()}catch(e){throw new Error('未能讀取回應，請確認部署時「具有存取權的使用者」設為「所有人」')}
+  if(!j.ok)throw new Error(j.error==='unauthorized'?'同步密碼不正確':'同步失敗：'+(j.error||'未知錯誤'));
+  return Array.isArray(j.events)?j.events:[];
+}
 async function sync(manual){
-  if(!settings.ghToken)return;
+  if(!syncReady())return;
   if(syncing){syncAgain=true;return}
   syncing=true;syncError='';renderSyncStatus();
   try{
+    if(settings.syncMode==='gdrive'){
+      const remote=await syncDrive();const merged=merge(events,remote);const changedLocal=JSON.stringify(merged)!==JSON.stringify(events);
+      events=merged;persist();settings.lastSync=Date.now();saveSettings();
+      if(changedLocal&&view!=='ai'){const y=window.scrollY;render();window.scrollTo(0,y)}
+      if(manual)toast('已與 Google Drive 同步');
+      return;
+    }
     let remote=[];
     if(settings.gistId){
       const g=await gh('/gists/'+settings.gistId);const f=g.files&&g.files['calendar.json'];
@@ -1317,7 +1633,48 @@ async function sync(manual){
   }catch(e){syncError=netErr(e.message);if(manual)toast(syncError,3500)}
   finally{syncing=false;renderSyncStatus();if(syncAgain){syncAgain=false;sync()}}
 }
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(selected<todayStr()&&view!=='month')selected=todayStr();if(view!=='ai'){const y=window.scrollY;render();window.scrollTo(0,y)}maybeBrief();if(settings.ghToken)sync()}});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(selected<todayStr()&&view!=='month')selected=todayStr();if(view!=='ai'){const y=window.scrollY;render();window.scrollTo(0,y)}maybeBrief();checkUpdate();if(syncReady())sync()}});
+
+/* ---------- Google Drive、小工具及版本更新 ---------- */
+function genKey(){const a=new Uint8Array(12);crypto.getRandomValues(a);return Array.from(a,b=>'abcdefghijkmnpqrstuvwxyz23456789'[b%32]).join('')}
+if(!settings.gdKey){settings.gdKey=genKey();saveSettings()}
+const APP_HOME=/github\.io$/.test(location.hostname)?location.origin+location.pathname:'https://bonho513.github.io/my-calendar/';
+const tplText=id=>document.getElementById(id).textContent.replace(/^\n/,'');
+const serverCode=()=>tplText('tplServer').replace('"__KEY__"',JSON.stringify(settings.gdKey));
+const widgetCode=()=>tplText('tplWidget').replace('"__URL__"',JSON.stringify(settings.gdUrl)).replace('"__KEY__"',JSON.stringify(settings.gdKey)).replace('"__APP__"',JSON.stringify(APP_HOME));
+function showSyncGroup(){const m=$('#sMode').value;document.querySelectorAll('.syncgrp').forEach(g=>g.classList.toggle('show',g.dataset.mode===m))}
+$('#sMode').onchange=showSyncGroup;
+function showCode(t,label){$('#codeTitle').textContent=label;$('#codeBox').value=t;openOv('#ovCode')}
+async function copyText(t,label){try{await navigator.clipboard.writeText(t);toast('已複製'+label)}catch(e){showCode(t,label)}}
+$('#codeSel').onclick=()=>{const b=$('#codeBox');b.focus();b.select();b.setSelectionRange(0,b.value.length)};
+$('#gdHelp').onclick=()=>{readSettings();openOv('#ovGd')};
+$('#gdCopy').onclick=()=>{readSettings();copyText(serverCode(),'伺服器程式碼')};
+$('#gdConnect').onclick=async()=>{
+  readSettings();
+  if(!settings.gdUrl){toast('請先填入 Apps Script 網址');$('#sGdUrl').focus();return}
+  if(!/^https:\/\/script\.google(usercontent)?\.com\//.test(settings.gdUrl)){toast('網址格式不正確，應以 https://script.google.com/ 開頭',3500);return}
+  settings.syncMode='gdrive';$('#sMode').value='gdrive';showSyncGroup();saveSettings();
+  const b=$('#gdConnect');b.disabled=true;b.innerHTML='<span class="spin"></span>連接中';
+  await sync(true);
+  b.disabled=false;b.textContent='連接 Google Drive';
+};
+const copyWidget=()=>{readSettings();if(settings.syncMode!=='gdrive'||!settings.gdUrl){toast('請先完成 Google Drive 同步設定',3000);return}copyText(widgetCode(),'小工具程式碼')};
+$('#wgCopy').onclick=copyWidget;$('#wgCopy2').onclick=copyWidget;
+$('#wgHelp').onclick=()=>openOv('#ovWg');
+setInterval(()=>{if(document.visibilityState==='visible'&&settings.autoSync&&syncReady()&&!document.querySelector('.overlay.show'))sync()},120000);
+async function checkUpdate(){
+  if(DEMO||location.protocol!=='https:'||!/github\.io$/.test(location.hostname))return;
+  if(document.querySelector('.overlay.show')||/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName||''))return;
+  try{
+    const r=await fetch(location.pathname+'?check='+Date.now(),{cache:'no-store'});if(!r.ok)return;
+    const m=(await r.text()).match(new RegExp("const APP_"+"VERSION='([^']+)'"));if(!m||m[1]===APP_VERSION)return;
+    const last=store.get('cal.updTry',{});if(last.v===m[1]&&Date.now()-last.t<10*60*1000)return;
+    store.set('cal.updTry',{v:m[1],t:Date.now()});store.set('cal.updated',m[1]);
+    location.replace(location.pathname+'?v='+encodeURIComponent(m[1]));
+  }catch(e){}
+}
+setInterval(checkUpdate,30*60*1000);
+if(store.get('cal.updated','')===APP_VERSION){store.set('cal.updated','');setTimeout(()=>toast('已更新至最新版本'),1200)}
 
 /* ---------- import / export ---------- */
 function download(name,text,type){
@@ -1384,7 +1741,8 @@ autosize();
 render();
 setTimeout(maybeBrief,700);
 if(view==='ai')scrollChat(false);
-if(settings.ghToken)sync();
+if(syncReady())sync();
+setTimeout(checkUpdate,2500);
 })();
 </script>
 </body>
