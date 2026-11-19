@@ -579,6 +579,10 @@ body.typing.ai .dock{display:none}
 .htype button{flex:1;padding:10px 6px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:14px;color:var(--ink)}
 .htype button.on{border-color:rgba(255,123,142,.6);color:var(--sun);background:rgba(255,123,142,.1)}
 .htype button.on[data-t="own"]{border-color:rgba(255,163,107,.6);color:var(--leave);background:rgba(255,163,107,.1)}
+
+.gcbox{margin-top:14px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.gcbox .field{margin:0}
+#gcStat{margin:8px 0 0}
 </style>
 </head>
 <body>
@@ -623,6 +627,7 @@ body.typing.ai .dock{display:none}
 <!-- Editor -->
 <div class="overlay" id="ovEdit"><div class="sheet" role="dialog" aria-label="行程">
   <h3><span id="edTitle">新行程</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <p class="hint" id="gcNote" style="display:none;margin:0 0 12px;color:#FFC94D"></p>
   <div class="field"><input id="fTitle" placeholder="事項名稱" style="font-size:19px;font-weight:500"></div>
   <div class="field"><label>分類</label><div class="cats" id="fCats"></div></div>
   <div class="field"><label for="fDate">日期</label><input id="fDate" type="date"></div>
@@ -683,6 +688,7 @@ body.typing.ai .dock{display:none}
       <div class="field"><label for="sGdKey">同步密碼</label><input id="sGdKey" autocomplete="off" spellcheck="false"></div>
       <div class="actions"><button class="btn primary" id="gdConnect">連接 Google Drive</button><button class="btn ghost" id="gdHelp">設定教學</button></div>
       <p class="hint">資料儲存於你 Google Drive 的「my-calendar-data.json」。於其他裝置填入同一網址及同步密碼，即可同步同一份日曆。</p>
+      <div class="gcbox"><div class="field"><label class="toggle">與 Google 日曆雙向同步<input type="checkbox" id="sGcal"></label></div><p class="hint" style="margin:8px 0 0">開啟後，日曆 App 的行程會寫入你的 Google 主要日曆，Google 日曆的行程亦會顯示在 App。任何一邊新增、修改或刪除，另一邊都會跟着更改。同步範圍為過去 30 日至未來 1 年。在 iPhone「設定 → App → 日曆 → 日曆帳號」加入同一個 Google 帳戶，即可使用 iPhone 內置的日曆小工具。</p><p class="hint" id="gcStat"></p></div>
     </div>
     <div class="syncgrp" data-mode="gist">
       <div class="field"><label for="sGh">GitHub Token（只需 gist 權限）</label><input id="sGh" type="password" placeholder="ghp_..." autocomplete="off"></div>
@@ -846,13 +852,17 @@ body.typing.ai .dock{display:none}
 <div class="toast" id="toast" role="status"></div>
 
 <script type="text/plain" id="tplServer">
-// 我的日曆：Google Drive 同步伺服器（Google Apps Script）第 2 版
+// 我的日曆：Google Drive 同步伺服器（Google Apps Script）第 3 版
 // 由日曆 App 自動產生，已包含你的同步密碼。
 // 部署：部署 → 新增部署作業 → 網頁應用程式 → 執行身分「我」→ 具有存取權的使用者「所有人」。
 // 更新：貼上新程式碼並儲存 → 部署 → 管理部署作業 → 編輯 → 版本選「新版本」→ 部署（網址不變）。
 const KEY = "__KEY__";
 const FILE_NAME = "my-calendar-data.json";
-const SERVER_VERSION = 2;
+const SERVER_VERSION = 3;
+const CAL_PAST_DAYS = 30, CAL_FUTURE_DAYS = 365, CAL_PULL_EVERY = 90 * 1000, CAL_MAX_PUSH = 40;
+const TO_GCOLOR = { "#4F7BFF": "9", "#FFC94D": "5", "#FF6F9C": "4", "#3FE0A5": "10", "#A98BFF": "3", "#3FD3F0": "7", "#8C97B8": "8" };
+const FROM_GCOLOR = { "9": "#4F7BFF", "5": "#FFC94D", "6": "#FFC94D", "4": "#FF6F9C", "11": "#FF6F9C", "10": "#3FE0A5", "2": "#3FE0A5", "3": "#A98BFF", "1": "#A98BFF", "7": "#3FD3F0", "8": "#8C97B8" };
+const GC_FIELDS = ["gcId", "gcKey", "gcAt", "gcPushed", "gcRec", "src"];
 
 function getFile_() {
   const it = DriveApp.getFilesByName(FILE_NAME);
@@ -860,17 +870,22 @@ function getFile_() {
   return DriveApp.createFile(FILE_NAME, JSON.stringify({ app: "my-calendar", events: [] }), "application/json");
 }
 
-function read_(f) {
+function readAll_(f) {
   try {
     const d = JSON.parse(f.getBlob().getDataAsString() || "{}");
-    return Array.isArray(d.events) ? d.events : [];
+    if (!Array.isArray(d.events)) d.events = [];
+    return d;
   } catch (e) {
-    return [];
+    return { events: [] };
   }
 }
 
-function write_(f, events) {
-  f.setContent(JSON.stringify({ app: "my-calendar", version: 3, updated: Date.now(), events: events }));
+function read_(f) {
+  return readAll_(f).events;
+}
+
+function write_(f, events, data) {
+  f.setContent(JSON.stringify({ app: "my-calendar", version: 3, updated: Date.now(), calPullAt: (data && data.calPullAt) || 0, events: events }));
 }
 
 function merge_(a, b) {
@@ -878,7 +893,10 @@ function merge_(a, b) {
   [].concat(a || [], b || []).forEach(function (e) {
     if (!e || !e.id) return;
     const o = m[e.id];
-    if (!o || (e.updatedAt || 0) > (o.updatedAt || 0)) m[e.id] = e;
+    if (!o || (e.updatedAt || 0) > (o.updatedAt || 0)) {
+      if (o && !("gcId" in e)) GC_FIELDS.forEach(function (k) { if (k in o) e[k] = o[k]; });
+      m[e.id] = e;
+    }
   });
   const cutoff = Date.now() - 90 * 864e5;
   return Object.keys(m)
@@ -909,7 +927,127 @@ function dur_(m) {
   return Math.floor(m / 60) + " 小時" + (m % 60 ? " " + (m % 60) + " 分" : "");
 }
 
-// 地點打卡：iPhone 捷徑「到達／離開」自動化呼叫此功能
+// ---------- Google 日曆雙向同步 ----------
+function calCfg_(evs) {
+  return evs.filter(function (e) { return e && e.id === "cfg-gcal" && !e.deleted; })[0] || null;
+}
+
+function ymd_(d, tz) { return Utilities.formatDate(d, tz, "yyyy-MM-dd"); }
+function hm_(d, tz) { return Utilities.formatDate(d, tz, "HH:mm"); }
+function at_(ds, hm, tz) { return Utilities.parseDate(ds + " " + (hm || "00:00"), tz, "yyyy-MM-dd HH:mm"); }
+
+function calWindow_(tz) {
+  const now = Date.now();
+  const from = new Date(now - CAL_PAST_DAYS * 864e5), to = new Date(now + CAL_FUTURE_DAYS * 864e5);
+  return { from: from, to: to, fromS: ymd_(from, tz), toS: ymd_(to, tz) };
+}
+
+function calPush_(evs, cal, tz) {
+  const w = calWindow_(tz);
+  let n = 0, more = false;
+  for (let i = 0; i < evs.length; i++) {
+    const e = evs[i];
+    if (!e || e.cfg || !e.id || !e.date) continue;
+    const dirty = e.gcId ? (e.updatedAt || 0) > (e.gcPushed || 0) : !e.deleted;
+    if (!dirty) continue;
+    if (e.gcRec) { e.gcPushed = e.updatedAt || 0; continue; }
+    if (n >= CAL_MAX_PUSH) { more = true; break; }
+    if (e.deleted) {
+      try { const g0 = cal.getEventById(e.gcId); if (g0) g0.deleteEvent(); } catch (x) {}
+      e.gcId = ""; e.gcKey = ""; e.updatedAt = (e.updatedAt || 0) + 1; e.gcPushed = e.updatedAt; n++;
+      continue;
+    }
+    if (e.date < w.fromS || e.date > w.toS) continue;
+    let g = null;
+    if (e.gcId) { try { g = cal.getEventById(e.gcId); } catch (x) { g = null; } }
+    const title = String(e.title || "（無標題）");
+    const opts = { location: e.location || "", description: e.notes || "" };
+    const allDay = e.allDay || !e.start;
+    let s = null, en = null;
+    if (!allDay) {
+      s = at_(e.date, e.start, tz);
+      en = e.end && toMin_(e.end) > toMin_(e.start) ? at_(e.date, e.end, tz) : new Date(s.getTime() + 60 * 60000);
+    }
+    if (!g) {
+      g = allDay ? cal.createAllDayEvent(title, at_(e.date, "00:00", tz), opts) : cal.createEvent(title, s, en, opts);
+      g.setTag("appId", e.id);
+    } else {
+      g.setTitle(title);
+      g.setLocation(opts.location);
+      g.setDescription(opts.description);
+      if (allDay) g.setAllDayDate(at_(e.date, "00:00", tz)); else g.setTime(s, en);
+    }
+    if (TO_GCOLOR[e.color]) { try { g.setColor(TO_GCOLOR[e.color]); } catch (x) {} }
+    n++;
+    e.gcId = g.getId(); e.gcKey = e.gcKey || e.gcId; e.gcRec = false;
+    e.gcAt = g.getLastUpdated().getTime();
+    e.updatedAt = (e.updatedAt || 0) + 1; e.gcPushed = e.updatedAt;
+  }
+  return { pushed: n, more: more };
+}
+
+function calPull_(evs, cal, tz) {
+  const w = calWindow_(tz);
+  const byKey = {};
+  evs.forEach(function (e) { if (e && e.gcKey) byKey[e.gcKey] = e; });
+  const seen = {};
+  cal.getEvents(w.from, w.to).forEach(function (g) {
+    const rec = g.isRecurringEvent(), allDay = g.isAllDayEvent();
+    const st = allDay ? g.getAllDayStartDate() : g.getStartTime();
+    const date = ymd_(st, tz);
+    const key = g.getId() + (rec ? "|" + date : "");
+    seen[key] = true;
+    const lu = g.getLastUpdated().getTime();
+    let e = byKey[key];
+    if (e && (e.deleted || lu <= (e.gcAt || 0))) return;
+    let end = "";
+    if (!allDay) { const et = g.getEndTime(); end = ymd_(et, tz) === date ? hm_(et, tz) : "23:59"; }
+    let notes = String(g.getDescription() || "").replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, "").slice(0, 2000);
+    if (allDay) {
+      const last = new Date(g.getAllDayEndDate().getTime() - 864e5);
+      if (ymd_(last, tz) > date) notes = ("至 " + ymd_(last, tz) + (notes ? "\n" + notes : "")).slice(0, 2000);
+    }
+    const f = {
+      title: String(g.getTitle() || "（無標題）").slice(0, 60), date: date, allDay: allDay,
+      start: allDay ? "" : hm_(g.getStartTime(), tz), end: end, location: g.getLocation() || "", notes: notes
+    };
+    const gc = FROM_GCOLOR[g.getColor()];
+    if (gc) f.color = gc;
+    const t = Math.max(Date.now(), e ? (e.updatedAt || 0) + 1 : 0);
+    if (!e) {
+      e = { id: "gc-" + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, key)).replace(/=+$/, "").slice(0, 16), done: false, color: "", src: "gcal" };
+      evs.push(e);
+      byKey[key] = e;
+    }
+    Object.keys(f).forEach(function (k) { e[k] = f[k]; });
+    e.gcId = g.getId(); e.gcKey = key; e.gcRec = rec; e.gcAt = lu; e.updatedAt = t; e.gcPushed = t;
+  });
+  evs.forEach(function (e) {
+    if (e && e.gcKey && e.gcAt && !e.deleted && !seen[e.gcKey] && e.date >= w.fromS && e.date <= w.toS) {
+      e.deleted = true; e.gcId = ""; e.updatedAt = Math.max(Date.now(), (e.updatedAt || 0) + 1); e.gcPushed = e.updatedAt;
+    }
+  });
+}
+
+function calSync_(evs, data, force) {
+  const cfg = calCfg_(evs);
+  if (!cfg || !cfg.on) return { more: false };
+  const tz = cfg.tz || "Asia/Macau";
+  const cal = CalendarApp.getDefaultCalendar();
+  const r = calPush_(evs, cal, tz);
+  if (force || Date.now() - (data.calPullAt || 0) > CAL_PULL_EVERY) {
+    calPull_(evs, cal, tz);
+    data.calPullAt = Date.now();
+  }
+  return { more: r.more };
+}
+
+// 在編輯器選擇此函式並按「執行」，即可授權存取 Google 日曆
+function authorize() {
+  return CalendarApp.getDefaultCalendar().getName();
+}
+
+// ---------- 地點打卡：iPhone 捷徑「到達／離開」自動化呼叫此功能 ----------
 function geo_(p) {
   const tz = p.tz || "Asia/Macau";
   const now = new Date();
@@ -923,7 +1061,8 @@ function geo_(p) {
   lock.waitLock(15000);
   try {
     const f = getFile_();
-    const evs = read_(f);
+    const data = readAll_(f);
+    const evs = data.events;
     const open = evs
       .filter(function (e) { return e.geo === pid && !e.deleted && !e.geoOut; })
       .sort(function (a, b) { return (b.date + b.start).localeCompare(a.date + a.start); });
@@ -938,7 +1077,7 @@ function geo_(p) {
           start: hm, end: fromMin_(toMin_(hm) + 1), location: place, notes: "到達地點時自動記錄",
           color: p.color || "#3FE0A5", done: false, geo: pid, geoSeen: now.getTime(), updatedAt: now.getTime()
         });
-        write_(f, evs);
+        write_(f, evs, data);
         msg = "已到達" + (place || "地點") + "，開始記錄" + title + "（" + hm + "）";
       }
     } else {
@@ -958,7 +1097,7 @@ function geo_(p) {
           e.done = true;
           msg = "已結束" + title + "，共 " + dur_(toMin_(e.end) - toMin_(e.start));
         }
-        write_(f, evs);
+        write_(f, evs, data);
       }
     }
     return text_(msg);
@@ -984,12 +1123,19 @@ function doPost(e) {
   }
   if (!body || body.key !== KEY) return out_({ ok: false, error: "unauthorized" });
   const lock = LockService.getScriptLock();
-  lock.waitLock(15000);
+  lock.waitLock(25000);
   try {
     const f = getFile_();
-    const merged = merge_(read_(f), body.events);
-    write_(f, merged);
-    return out_({ ok: true, server: SERVER_VERSION, events: merged });
+    const data = readAll_(f);
+    const merged = merge_(data.events, body.events);
+    let more = false, calErr = "";
+    try {
+      more = calSync_(merged, data, !!body.calForce).more;
+    } catch (x) {
+      calErr = String((x && x.message) || x).slice(0, 300);
+    }
+    write_(f, merged, data);
+    return out_({ ok: true, server: SERVER_VERSION, events: merged, more: more, calErr: calErr });
   } finally {
     lock.releaseLock();
   }
@@ -1183,7 +1329,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.19-4';
+const APP_VERSION='2026.11.20-1';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -1552,6 +1698,8 @@ function openEditor(ev,date,preset){
   $('#timeRow').style.display=src.allDay?'none':'flex';
   $('#delBtn').style.display=ev?'block':'none';$('#doneRow').style.display=ev?'block':'none';
   $('#remOne').style.display=ev?'flex':'none';$('#wkOpenEd').style.display=ev&&catIdx(src.color)===3?'flex':'none';
+  const ro=!!(ev&&ev.gcRec);$('#gcNote').style.display=ro?'':'none';$('#gcNote').textContent=ro?'這是 Google 日曆的重複活動，請在 Google 日曆修改。':'';
+  $('#saveBtn').style.display=ro?'none':'';if(ro)$('#delBtn').style.display='none';
   openOv('#ovEdit');
   if(!ev)setTimeout(()=>$('#fTitle').focus(),260);
 }
@@ -1768,7 +1916,7 @@ const md=ds=>{const d=parseYmd(ds);return `${d.getMonth()+1}月${d.getDate()}日
 const durTxt=m=>m<60?`${Math.max(1,m)} 分鐘`:`${Math.floor(m/60)} 小時${m%60?` ${m%60} 分`:''}`;
 const aiReady=()=>!!settings.apiKey||!!(window.claude&&typeof window.claude.use==='function');
 function greetWord(){const h=new Date().getHours();return h<5?'晚安':h<12?'早安':h<18?'午安':'晚安'}
-function overdueList(){const t=todayStr(),back=ymd(addDays(new Date(),-30));return live().filter(e=>!e.done&&e.date<t&&e.date>=back&&(e.allDay||!e.start||catIdx(e.color)===1)).sort((a,b)=>(a.date+sortKey(a)).localeCompare(b.date+sortKey(b)))}
+function overdueList(){const t=todayStr(),back=ymd(addDays(new Date(),-30));return live().filter(e=>!e.done&&e.src!=='gcal'&&e.date<t&&e.date>=back&&(e.allDay||!e.start||catIdx(e.color)===1)).sort((a,b)=>(a.date+sortKey(a)).localeCompare(b.date+sortKey(b)))}
 function nowNext(){
   const nm=nowMin();let cur=null,next=null;
   for(const e of eventsOn(todayStr())){if(e.done||e.allDay||!e.start||(e.geo&&!e.geoOut))continue;const[s,en]=spanOf(e);
@@ -1893,7 +2041,7 @@ function fillSettings(){
   $('#sBase').value=settings.baseUrl;$('#sModel').value=settings.model;$('#sKey').value=settings.apiKey;
   $('#sGh').value=settings.ghToken;$('#sGist').value=settings.gistId;$('#sAuto').checked=settings.autoSync;
   $('#sMode').value=settings.syncMode;$('#sGdUrl').value=settings.gdUrl||'';$('#sGdKey').value=settings.gdKey||'';showSyncGroup();
-  $('#sGeoAuto').checked=settings.geoAuto!==false;renderPlaces();renderHolList();
+  $('#sGeoAuto').checked=settings.geoAuto!==false;renderPlaces();renderHolList();$('#sGcal').checked=!!(gcCfg()&&gcCfg().on);renderGcStatus();
   $('#sBrief').checked=settings.brief!==false;$('#sEve').checked=settings.eve!==false;
   $('#sRemName').value=settings.remName||'';$('#sRemLead').value=String(settings.remLead??15);
   const p=[...$('#sPreset').options].find(o=>o.value===settings.baseUrl+'|'+settings.model);$('#sPreset').value=p?p.value:'';
@@ -1933,29 +2081,36 @@ function merge(a,b){
   for(const e of [...a,...b]){const o=m.get(e.id);if(!o){m.set(e.id,e);continue}
     let w=(e.updatedAt||0)>(o.updatedAt||0)?e:o;const l=w===e?o:e;
     if(!w.deleted&&(l.wkAt||0)>(w.wkAt||0))w={...w,wk:l.wk,wkAt:l.wkAt,updatedAt:Math.max(w.updatedAt||0,l.updatedAt||0)+1};
+    if(!('gcId' in w)&&('gcId' in l)){w={...w};for(const k of ['gcId','gcKey','gcAt','gcPushed','gcRec','src'])if(k in l)w[k]=l[k]}
     m.set(e.id,w)}
   const cutoff=Date.now()-90*864e5;
   return [...m.values()].filter(e=>!(e.deleted&&(e.updatedAt||0)<cutoff));
 }
 $('#syncBtn').onclick=()=>{if(!syncReady()){fillSettings();openOv('#ovSet');toast('請先設定跨裝置同步');return}sync(true)};
 async function syncDrive(){
-  const r=await fetch(settings.gdUrl,{method:'POST',body:JSON.stringify({key:settings.gdKey,events}),cache:'no-store'});
+  const force=gcForce;gcForce=false;
+  const r=await fetch(settings.gdUrl,{method:'POST',body:JSON.stringify({key:settings.gdKey,events,calForce:force}),cache:'no-store'});
   if(!r.ok)throw new Error('Google Drive 回應 '+r.status);
   let j;try{j=await r.json()}catch(e){throw new Error('未能讀取回應，請確認部署時「具有存取權的使用者」設為「所有人」')}
   if(!j.ok)throw new Error(j.error==='unauthorized'?'同步密碼不正確':'同步失敗：'+(j.error||'未知錯誤'));
-  settings.gdServer=j.server||1;
+  settings.gdServer=j.server||1;gcErr=j.calErr||'';if(j.more)syncAgain=true;
   return Array.isArray(j.events)?j.events:[];
 }
 async function sync(manual){
   if(!syncReady())return;
+  if(manual)gcForce=true;
   if(syncing){syncAgain=true;return}
   syncing=true;syncError='';renderSyncStatus();
   try{
     if(settings.syncMode==='gdrive'){
-      const remote=await syncDrive();const merged=merge(events,remote);const dd=geoDedupe(merged);const changedLocal=dd||JSON.stringify(merged)!==JSON.stringify(events);
+      const remote=await syncDrive();const merged=merge(events,remote);
+      for(const e of merged)if(!e.cfg&&!e.color&&e.title)e.color=colorFor('',e.title+' '+(e.notes||''));
+      const dd=geoDedupe(merged);const changedLocal=dd||JSON.stringify(merged)!==JSON.stringify(events);
       events=merged;persist();settings.lastSync=Date.now();saveSettings();if(dd||evSig(merged)!==evSig(remote))syncAgain=true;
       if(changedLocal&&view!=='ai'){const y=window.scrollY;render();window.scrollTo(0,y)}
       if(manual)toast('已與 Google Drive 同步');
+      if(gcErr&&(gcErr!==gcErrShown||manual)&&gcCfg()&&gcCfg().on){gcErrShown=gcErr;toast(gcErrMsg(gcErr),5000)}else if(!gcErr)gcErrShown='';
+      renderGcStatus();
       return;
     }
     let remote=[];
@@ -2458,6 +2613,25 @@ $('#hbGo').onclick=()=>{
   for(const r of ok){if(list.some(x=>x.date===r.date&&x.name===r.name))continue;list.push({id:'h'+uid().slice(-7),...r});n++}
   holSave(list);closeOv($('#ovHolBulk'));renderHolList();render();
   toast(`已加入 ${n} 項假期${bad.length?`，${bad.length} 行未能辨識`:''}`,3500);
+};
+
+/* ---------- Google 日曆 ---------- */
+let gcForce=false,gcErr='',gcErrShown='';
+const gcCfg=()=>events.find(e=>e.id==='cfg-gcal'&&!e.deleted);
+function gcErrMsg(m){return /permission|authoriz|授權|權限/i.test(m)?'Google 日曆尚未授權，請在 Apps Script 完成授權後再試':'Google 日曆同步失敗：'+m}
+function gcSet(on){
+  let c=events.find(e=>e.id==='cfg-gcal');if(!c){c={id:'cfg-gcal',cfg:'gcal'};events.push(c)}
+  c.deleted=false;c.on=!!on;c.tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Asia/Macau';c.updatedAt=Date.now();persist();
+}
+function renderGcStatus(){
+  const el=$('#gcStat');if(!el)return;const on=!!(gcCfg()&&gcCfg().on),old=(settings.gdServer||1)<3;
+  el.textContent=!on?'':old?'需要先更新 Google Drive 伺服器程式碼至第 3 版。':gcErr?gcErrMsg(gcErr):'已開啟。每次同步都會更新 Google 日曆，Google 日曆的改動約 2 分鐘內會出現在 App。';
+  el.style.color=on&&(old||gcErr)?'var(--danger)':'';
+}
+$('#sGcal').onchange=()=>{
+  const on=$('#sGcal').checked;
+  if(on&&!(settings.syncMode==='gdrive'&&settings.gdUrl)){toast('請先連接 Google Drive');$('#sGcal').checked=false;return}
+  gcSet(on);gcForce=on;renderGcStatus();if(syncReady())sync(true).then(renderGcStatus);
 };
 
 autosize();
