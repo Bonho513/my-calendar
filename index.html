@@ -863,7 +863,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.18-4';
+const APP_VERSION='2026.11.19-1';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -1562,6 +1562,7 @@ function readSettings(){
   if(g!==settings.gistId){settings.gistId=g;settings.lastSync=0}
   settings.autoSync=$('#sAuto').checked;
   settings.syncMode=$('#sMode').value;settings.gdUrl=$('#sGdUrl').value.trim();settings.gdKey=$('#sGdKey').value.trim()||settings.gdKey;
+  const km=settings.gdUrl.match(/[?&]key=([^&#\s]+)/);if(km){settings.gdKey=decodeURIComponent(km[1]);settings.gdUrl=settings.gdUrl.replace(/[?&]key=[^&#\s]*/,'').replace(/\?$/,'');$('#sGdUrl').value=settings.gdUrl;$('#sGdKey').value=settings.gdKey}
   settings.brief=$('#sBrief').checked;settings.eve=$('#sEve').checked;
   settings.remName=$('#sRemName').value.trim()||'加入提醒';settings.remLead=+$('#sRemLead').value||0;saveSettings();
 }
