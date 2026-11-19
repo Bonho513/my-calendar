@@ -428,6 +428,41 @@ body.typing.ai .dock{display:none}
 .slide-l{animation:sl .24s ease}.slide-r{animation:sr .24s ease}
 @keyframes sl{from{opacity:0;transform:translateX(24px)}}@keyframes sr{from{opacity:0;transform:translateX(-24px)}}
 @media (prefers-reduced-motion:reduce){.slide-l,.slide-r{animation:none}}
+
+/* ---------- 地點打卡 ---------- */
+.gycard{display:flex;align-items:center;gap:14px;padding:14px 16px}
+.gycard.live{border-color:rgba(63,224,165,.45);background:linear-gradient(120deg,rgba(63,224,165,.17),rgba(20,30,70,.52) 62%)}
+.gy-pin{position:relative;width:44px;height:44px;border-radius:15px;display:grid;place-items:center;flex:none;color:var(--ok);background:rgba(63,224,165,.12);border:1px solid rgba(63,224,165,.3)}
+.gy-pin svg{width:22px;height:22px}
+.gycard.live .gy-pin::after{content:"";position:absolute;inset:-5px;border-radius:19px;border:2px solid rgba(63,224,165,.55);animation:gypulse 2.2s ease-out infinite}
+@keyframes gypulse{0%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(1.2)}}
+.gy-b{flex:1;min-width:0}
+.gy-b b{display:block;font-size:16px;font-weight:700}
+.gy-b span{display:block;font-size:13px;color:var(--muted);margin-top:3px;line-height:1.45}
+.gy-b em{font-style:normal;font-family:var(--num);color:var(--ok);font-weight:600}
+.gy-go{flex:none;font-size:13.5px;padding:9px 14px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink)}
+.gycard.live .gy-go{background:var(--ok);color:#04261A;border-color:transparent;font-weight:700}
+.gy-go:disabled{opacity:.6}
+@media (prefers-reduced-motion:reduce){.gycard.live .gy-pin::after{animation:none;opacity:.5}}
+.plc{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;margin-bottom:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);text-align:left;color:var(--ink)}
+.plc svg{width:20px;height:20px;color:var(--ok);flex:none}
+.plc .pb{flex:1;min-width:0}
+.plc .pb b{display:block;font-size:15px;font-weight:600}
+.plc .pb span{font-size:12.5px;color:var(--muted)}
+.plc .pe{font-size:12.5px;color:var(--cyan)}
+.geourl{padding:12px 0 14px;border-bottom:1px solid var(--line)}
+.geourl b{display:block;font-size:14.5px;margin-bottom:8px}
+.habit{padding:0 16px 16px}
+.habit .hk{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 16px}
+.habit .hk div{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.habit .hk b{display:block;font-family:var(--num);font-size:21px;font-weight:600;color:var(--ok)}
+.habit .hk span{font-size:12px;color:var(--muted)}
+.hbars{display:flex;align-items:flex-end;gap:6px;height:64px}
+.hbars i{flex:1;border-radius:6px 6px 3px 3px;background:rgba(63,224,165,.16);min-height:4px}
+.hbars i.on{background:linear-gradient(180deg,#3FE0A5,rgba(63,224,165,.4))}
+.hbars i.cur{outline:1.5px solid var(--ok);outline-offset:2px}
+.hlbl{display:flex;gap:6px;margin-top:7px}
+.hlbl span{flex:1;text-align:center;font-size:10.5px;color:var(--faint);font-family:var(--num)}
 </style>
 </head>
 <body>
@@ -546,6 +581,14 @@ body.typing.ai .dock{display:none}
     <div class="actions"><button class="btn ghost" id="wgCopy">複製小工具程式碼</button><button class="btn ghost" id="wgHelp">設定教學</button></div>
   </div>
   <div class="sec">
+    <h4>地點打卡</h4>
+    <p class="hint" style="margin:0 0 12px">設定健身室等常去地點。身處該地點時開啟 App，會自動開始記錄；離開後再開啟 App，會自動結束並計算時間。配合 iPhone 捷徑自動化，毋須開啟 App 亦可記錄。</p>
+    <div id="placeList"></div>
+    <button class="btn ghost" id="placeAdd" style="width:100%">＋ 新增地點</button>
+    <div class="field" style="margin-top:12px"><label class="toggle">開啟 App 時自動偵測位置<input type="checkbox" id="sGeoAuto"></label></div>
+    <button class="btn ghost" id="geoHelp" style="width:100%">設定自動打卡捷徑</button>
+  </div>
+  <div class="sec">
     <h4>匯入及匯出</h4>
     <div class="actions">
       <button class="btn ghost" id="expIcs">匯出 .ics</button>
@@ -574,6 +617,7 @@ body.typing.ai .dock{display:none}
     <li>複製 <b>網頁應用程式網址</b>，貼到設定中的「Apps Script 網址」，點選「連接 Google Drive」</li>
     <li>在其他裝置開啟日曆 App，同步方式選 Google Drive，填入<b>同一網址及同步密碼</b></li>
   </ol>
+  <p class="hint">已部署舊版本？貼上新程式碼並儲存後，點選「部署 → 管理部署作業 → 編輯（鉛筆圖示）」，版本選「新版本」再點選「部署」即可，網址維持不變。</p>
   <div class="actions" style="margin-top:14px"><button class="btn primary" id="gdCopy">複製伺服器程式碼</button><button class="btn ghost" data-close>完成</button></div>
 </div></div>
 
@@ -590,6 +634,35 @@ body.typing.ai .dock{display:none}
     <li>如要組成<b>智慧堆疊</b>，把另一個相同尺寸的小工具拖到這個小工具上即可<span class="sub">小工具的更新頻率由 iOS 決定，約 15 分鐘至 1 小時；點選小工具會以 Safari 開啟日曆。</span></li>
   </ol>
   <div class="actions" style="margin-top:14px"><button class="btn primary" id="wgCopy2">複製小工具程式碼</button><button class="btn ghost" data-close>完成</button></div>
+</div></div>
+
+<!-- Place editor -->
+<div class="overlay" id="ovPlace"><div class="sheet" role="dialog" aria-label="地點">
+  <h3><span id="plTitle">新增地點</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div class="field"><label for="plName">地點名稱</label><input id="plName" placeholder="例如：健身室" autocomplete="off"></div>
+  <div class="row">
+    <div class="field"><label for="plAct">記錄為</label><input id="plAct" placeholder="健身" autocomplete="off"></div>
+    <div class="field"><label for="plR">偵測範圍</label><select id="plR"><option value="80">80 米</option><option value="150">150 米</option><option value="250">250 米</option><option value="400">400 米</option></select></div>
+  </div>
+  <div class="field"><label for="plPos">位置座標</label><input id="plPos" placeholder="例如：22.193500, 113.539000" autocomplete="off" spellcheck="false"></div>
+  <button class="btn ghost" id="plHere" style="width:100%">使用目前位置</button>
+  <p class="hint" id="plInfo">身處該地點時點選「使用目前位置」。亦可在 Google 地圖長按該地點，複製座標後貼上。</p>
+  <div class="actions" style="margin-top:16px"><button class="btn danger" id="plDel">刪除</button><button class="btn primary" id="plSave">儲存</button></div>
+</div></div>
+
+<!-- Geo shortcut help -->
+<div class="overlay" id="ovGeo"><div class="sheet" role="dialog" aria-label="設定自動打卡捷徑">
+  <h3><span>設定自動打卡捷徑</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <p class="hint" style="margin:0 0 6px">iPhone 會在你到達或離開地點時自動執行捷徑，直接把記錄寫入 Google Drive，毋須開啟日曆 App。每個地點需建立「到達」及「離開」兩個自動化。</p>
+  <div id="geoUrls"></div>
+  <ol class="steps">
+    <li>開啟「捷徑」App，點選底部 <b>自動化</b>，再點選右上角「＋」</li>
+    <li>選擇 <b>到達</b>，點選「位置」並搜尋你的健身室<span class="sub">下方選擇「立即執行」。如沒有此選項，請選「執行前確認」，到達時點一下通知即可。</span></li>
+    <li>點選「下一步」→「新增空白自動化」，加入動作 <b>取得 URL 內容</b><span class="sub">網址貼上上方複製的「到達」網址，方法保持「GET」。</span></li>
+    <li>加入動作 <b>顯示通知</b>，內容選「URL 內容」<span class="sub">到達時會顯示「已開始記錄健身」。此步可略過。</span></li>
+    <li>重複以上步驟，建立 <b>離開</b> 自動化<span class="sub">網址改為貼上「離開」網址。停留少於 10 分鐘（例如路過）不會留下記錄。</span></li>
+  </ol>
+  <div class="actions" style="margin-top:14px"><button class="btn ghost" data-close>完成</button></div>
 </div></div>
 
 <!-- Code viewer -->
@@ -621,11 +694,13 @@ body.typing.ai .dock{display:none}
 <div class="toast" id="toast" role="status"></div>
 
 <script type="text/plain" id="tplServer">
-// 我的日曆：Google Drive 同步伺服器（Google Apps Script）
+// 我的日曆：Google Drive 同步伺服器（Google Apps Script）第 2 版
 // 由日曆 App 自動產生，已包含你的同步密碼。
 // 部署：部署 → 新增部署作業 → 網頁應用程式 → 執行身分「我」→ 具有存取權的使用者「所有人」。
+// 更新：貼上新程式碼並儲存 → 部署 → 管理部署作業 → 編輯 → 版本選「新版本」→ 部署（網址不變）。
 const KEY = "__KEY__";
 const FILE_NAME = "my-calendar-data.json";
+const SERVER_VERSION = 2;
 
 function getFile_() {
   const it = DriveApp.getFilesByName(FILE_NAME);
@@ -640,6 +715,10 @@ function read_(f) {
   } catch (e) {
     return [];
   }
+}
+
+function write_(f, events) {
+  f.setContent(JSON.stringify({ app: "my-calendar", version: 3, updated: Date.now(), events: events }));
 }
 
 function merge_(a, b) {
@@ -659,10 +738,89 @@ function out_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
+function text_(s) {
+  return ContentService.createTextOutput(s).setMimeType(ContentService.MimeType.TEXT);
+}
+
+function toMin_(s) {
+  const p = String(s || "0:0").split(":");
+  return Number(p[0]) * 60 + Number(p[1] || 0);
+}
+
+function fromMin_(m) {
+  m = Math.max(0, Math.min(1439, m));
+  return ("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + (m % 60)).slice(-2);
+}
+
+function dur_(m) {
+  if (m < 60) return Math.max(1, m) + " 分鐘";
+  return Math.floor(m / 60) + " 小時" + (m % 60 ? " " + (m % 60) + " 分" : "");
+}
+
+// 地點打卡：iPhone 捷徑「到達／離開」自動化呼叫此功能
+function geo_(p) {
+  const tz = p.tz || "Asia/Macau";
+  const now = new Date();
+  const date = Utilities.formatDate(now, tz, "yyyy-MM-dd");
+  const hm = Utilities.formatDate(now, tz, "HH:mm");
+  const pid = String(p.pid || "place").slice(0, 40);
+  const title = String(p.title || "健身").slice(0, 60);
+  const place = String(p.place || "").slice(0, 60);
+  const minStay = Number(p.min || 10);
+  const lock = LockService.getScriptLock();
+  lock.waitLock(15000);
+  try {
+    const f = getFile_();
+    const evs = read_(f);
+    const open = evs
+      .filter(function (e) { return e.geo === pid && !e.deleted && !e.geoOut; })
+      .sort(function (a, b) { return (b.date + b.start).localeCompare(a.date + a.start); });
+    let msg;
+    if (p.act === "in") {
+      const today = open.filter(function (e) { return e.date === date; })[0];
+      if (today) {
+        msg = title + "已於 " + today.start + " 開始記錄";
+      } else {
+        evs.push({
+          id: "geo-" + date + "-" + pid + "-" + hm.replace(":", ""), title: title, date: date, allDay: false,
+          start: hm, end: fromMin_(toMin_(hm) + 1), location: place, notes: "到達地點時自動記錄",
+          color: p.color || "#3FE0A5", done: false, geo: pid, geoSeen: now.getTime(), updatedAt: now.getTime()
+        });
+        write_(f, evs);
+        msg = "已到達" + (place || "地點") + "，開始記錄" + title + "（" + hm + "）";
+      }
+    } else {
+      const e = open[0];
+      if (!e) {
+        msg = "未有進行中的" + title + "記錄";
+      } else {
+        const mins = e.date === date ? toMin_(hm) - toMin_(e.start) : 1440;
+        e.geoOut = true;
+        e.updatedAt = now.getTime();
+        if (e.date === date && mins < minStay) {
+          e.deleted = true;
+          msg = "停留少於 " + minStay + " 分鐘，未有記錄" + title;
+        } else {
+          e.end = e.date === date ? hm : "23:59";
+          if (toMin_(e.end) <= toMin_(e.start)) e.end = fromMin_(toMin_(e.start) + 1);
+          e.done = true;
+          msg = "已結束" + title + "，共 " + dur_(toMin_(e.end) - toMin_(e.start));
+        }
+        write_(f, evs);
+      }
+    }
+    return text_(msg);
+  } finally {
+    lock.releaseLock();
+  }
+}
+
 function doGet(e) {
-  if (!e || !e.parameter || e.parameter.key !== KEY) return out_({ ok: false, error: "unauthorized" });
+  const p = (e && e.parameter) || {};
+  if (p.key !== KEY) return p.act ? text_("同步密碼不正確") : out_({ ok: false, error: "unauthorized" });
+  if (p.act === "in" || p.act === "out") return geo_(p);
   const f = getFile_();
-  return out_({ ok: true, events: read_(f), updated: f.getLastUpdated().getTime() });
+  return out_({ ok: true, server: SERVER_VERSION, events: read_(f), updated: f.getLastUpdated().getTime() });
 }
 
 function doPost(e) {
@@ -678,8 +836,8 @@ function doPost(e) {
   try {
     const f = getFile_();
     const merged = merge_(read_(f), body.events);
-    f.setContent(JSON.stringify({ app: "my-calendar", version: 3, updated: Date.now(), events: merged }));
-    return out_({ ok: true, events: merged });
+    write_(f, merged);
+    return out_({ ok: true, server: SERVER_VERSION, events: merged });
   } finally {
     lock.releaseLock();
   }
@@ -863,7 +1021,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.19-1';
+const APP_VERSION='2026.11.19-2';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -893,8 +1051,10 @@ let events=store.get('cal.events',null);
 let chat=store.get('cal.chat',null);
 if(!events){events=DEMO?demoEvents():[]}
 if(!chat){chat=DEMO?demoChat():[]}
-let settings=Object.assign({baseUrl:'https://api.deepseek.com',model:'deepseek-chat',apiKey:'',ghToken:'',gistId:'',autoSync:true,lastSync:0,remName:'加入提醒',remLead:15,brief:true,eve:true,syncMode:'',gdUrl:'',gdKey:''},store.get('cal.settings',{}));
+let settings=Object.assign({baseUrl:'https://api.deepseek.com',model:'deepseek-chat',apiKey:'',ghToken:'',gistId:'',autoSync:true,lastSync:0,remName:'加入提醒',remLead:15,brief:true,eve:true,syncMode:'',gdUrl:'',gdKey:'',places:[],geoAuto:true,geoOk:false,gdServer:0},store.get('cal.settings',{}));
 if(!settings.syncMode)settings.syncMode=settings.ghToken?'gist':'none';
+if(!Array.isArray(settings.places))settings.places=[];
+if(DEMO&&!settings.places.length)settings.places=[{id:'gym',name:'健身室',act:'健身',r:150,lat:22.1935,lng:113.539}];
 let view=store.get('cal.view','todo');
 if(!['todo','day','week','month','ai','stats'].includes(view))view='todo';
 let calSub=store.get('cal.sub','day')==='week'?'week':'day';
@@ -918,7 +1078,10 @@ function demoEvents(){
     [4,'遠足','08:00','11:00',3,'路環石排灣','',0],[5,'媽媽生日','','',2,'','訂蛋糕',0],[5,'家庭晚餐','18:30','20:30',2,'','',0],
     [8,'期中考','09:30','11:30',1,'教學樓 A201','',0],[10,'報名截止','','',1,'','',0],[12,'部門例會','09:30','10:30',0,'三樓會議室','',0],
   ];
-  return list.map(([o,title,s,e,c,loc,notes,done],i)=>({id:'demo'+i,title,date:d(o),start:s,end:e,allDay:!s,color:C(c),location:loc,notes,done:!!done,updatedAt:1}));
+  const out=list.map(([o,title,s,e,c,loc,notes,done],i)=>({id:'demo'+i,title,date:d(o),start:s,end:e,allDay:!s,color:C(c),location:loc,notes,done:!!done,updatedAt:1}));
+  [4,6,9,11,13,16,18,20,23,27,30,32,34,37,41,44,46,48,51].forEach((o,i)=>{const st=['18:20','18:45','19:05','07:30'][i%4],len=[62,75,55,80][i%3];out.push({id:'demogym'+i,title:'健身',date:d(-o),start:st,end:fromMin(toMin(st)+len),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:true,geo:'gym',geoOut:true,updatedAt:1})});
+  const gs=Math.max(0,nowMin()-42);out.push({id:'demogymlive',title:'健身',date:d(0),start:fromMin(gs),end:fromMin(Math.min(1439,gs+40)),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:false,geo:'gym',geoSeen:Date.now(),updatedAt:1});
+  return out;
 }
 function demoChat(){
   const ev=events.find(e=>e.title==='專題組會');if(!ev)return[];
@@ -1124,7 +1287,7 @@ function renderStats(s){
   const dl=`<section class="glass"><div class="ptitle">截止及考試<span>未來 30 日</span></div>`+(dues.length?dues.map(e=>{
     const diff=Math.round((parseYmd(e.date)-parseYmd(today))/864e5),over=diff<0;
     return `<div class="dl ${over?'overdue':''}" data-goto="${e.date}" style="--c:${e.color}" role="button" tabindex="0"><div class="cd"><b>${over?-diff:diff}</b><span>${over?'天前':diff===0?'今天':'天後'}</span></div><div class="b"><div class="ti">${esc(e.title)}</div><div class="meta">${fmtDate(e.date)}　${fmtTime(e)}${over?'　已逾期':''}</div></div><button class="chk" data-done="${e.id}" style="--c:${e.color}" aria-label="標記完成"></button></div>`}).join(''):'<div class="none">未來 30 日沒有截止事項。把行程分類設為「截止」就會顯示在這裡。</div>')+'</section>';
-  return `<div class="stats">${ring}${bars}${cats}${dl}</div>`;
+  return `<div class="stats">${ring}${habitCard(s)}${bars}${cats}${dl}</div>`;
 }
 function renderSyncStatus(){
   const el=$('#syncStatus');el.classList.toggle('err',!!syncError);
@@ -1162,6 +1325,8 @@ let lastTap=null,lastTapT=0;
 $('#main').addEventListener('click',e=>{
   const dn=e.target.closest('[data-done]');if(dn){e.stopPropagation();toggleDone(dn.dataset.done);return}
   if(e.target.closest('#qGo')){quickAdd();return}
+  const ge=e.target.closest('[data-gyend]');if(ge){geoEnd(ge.dataset.gyend);return}
+  if(e.target.closest('[data-gycheck]')){geoCheck(true);return}
   const mv=e.target.closest('[data-move]');if(mv){const[id,ds]=mv.dataset.move.split('|');moveTo([id],ds);return}
   const ma=e.target.closest('[data-moveall]');if(ma){moveTo(overdueList().map(x=>x.id),ma.dataset.moveall);return}
   if(e.target.closest('[data-futmore]')){futExpanded=true;const y=window.scrollY;render();window.scrollTo(0,y);return}
@@ -1434,7 +1599,7 @@ function greetWord(){const h=new Date().getHours();return h<5?'晚安':h<12?'早
 function overdueList(){const t=todayStr(),back=ymd(addDays(new Date(),-30));return live().filter(e=>!e.done&&e.date<t&&e.date>=back&&(e.allDay||!e.start||catIdx(e.color)===1)).sort((a,b)=>(a.date+sortKey(a)).localeCompare(b.date+sortKey(b)))}
 function nowNext(){
   const nm=nowMin();let cur=null,next=null;
-  for(const e of eventsOn(todayStr())){if(e.done||e.allDay||!e.start)continue;const[s,en]=spanOf(e);
+  for(const e of eventsOn(todayStr())){if(e.done||e.allDay||!e.start||(e.geo&&!e.geoOut))continue;const[s,en]=spanOf(e);
     if(s<=nm&&nm<en){if(!cur)cur=e}else if(s>nm&&!next)next=e}
   return{cur,next};
 }
@@ -1462,6 +1627,7 @@ function renderTodo(){
   else nx=`<div class="nextup"><small>今日</small><b>暫無安排，可於上方新增</b></div>`;
   let h=`<div class="narrow stack-v">`;
   h+=`<div><div class="qadd"><input id="qIn" placeholder="新增待辦事項，例如：星期五前提交報告" enterkeyhint="send" autocomplete="off"><button class="send" id="qGo" aria-label="加入"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="qhint">${aiReady()?'AI 將自動辨識日期與時間，例如「明天下午三點開會」「下星期五提交報告」':'尚未設定 AI：事項將直接加入今日。於設定填入 DeepSeek API Key 後即可自動辨識日期'}</div></div>`;
+  h+=gymCard();
   h+=`<section class="glass todaycard"><div class="ring sm"><svg viewBox="0 0 120 120"><defs><linearGradient id="rg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D6BFF"/><stop offset="1" stop-color="#4FE3FF"/></linearGradient></defs><circle cx="60" cy="60" r="48" fill="none" stroke="rgba(130,160,255,.12)" stroke-width="12"/><circle cx="60" cy="60" r="48" fill="none" stroke="url(#rg2)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${pct/100*C} ${C}" style="filter:drop-shadow(0 0 6px rgba(79,227,255,.6))"/></svg><div class="rv"><b>${today.length?pct:'—'}<small>${today.length?'%':''}</small></b></div></div><div class="tc-b"><div class="big">今日進度 <em>${done.length}</em> / ${today.length}</div>${nx}</div></section>`;
   if(od.length)h+=`<section class="glass sect warn"><div class="sh"><b>逾期事項</b><span class="cnt">${od.length}</span><button class="r" data-moveall="${t}">全部改至今日</button></div>${od.map(e=>tdRow(e,{showDate:true,act:`<button class="act" data-move="${e.id}|${t}">改至今日</button>`})).join('')}</section>`;
   h+=`<section class="glass sect"><div class="sh"><b>今日待辦</b><span class="cnt">${todo.length}</span><span class="sd">${md(t)}</span><button class="r" data-add="${t}">＋ 新增</button></div>`+
@@ -1551,6 +1717,7 @@ function fillSettings(){
   $('#sBase').value=settings.baseUrl;$('#sModel').value=settings.model;$('#sKey').value=settings.apiKey;
   $('#sGh').value=settings.ghToken;$('#sGist').value=settings.gistId;$('#sAuto').checked=settings.autoSync;
   $('#sMode').value=settings.syncMode;$('#sGdUrl').value=settings.gdUrl||'';$('#sGdKey').value=settings.gdKey||'';showSyncGroup();
+  $('#sGeoAuto').checked=settings.geoAuto!==false;renderPlaces();
   $('#sBrief').checked=settings.brief!==false;$('#sEve').checked=settings.eve!==false;
   $('#sRemName').value=settings.remName||'';$('#sRemLead').value=String(settings.remLead??15);
   const p=[...$('#sPreset').options].find(o=>o.value===settings.baseUrl+'|'+settings.model);$('#sPreset').value=p?p.value:'';
@@ -1563,7 +1730,7 @@ function readSettings(){
   settings.autoSync=$('#sAuto').checked;
   settings.syncMode=$('#sMode').value;settings.gdUrl=$('#sGdUrl').value.trim();settings.gdKey=$('#sGdKey').value.trim()||settings.gdKey;
   const km=settings.gdUrl.match(/[?&]key=([^&#\s]+)/);if(km){settings.gdKey=decodeURIComponent(km[1]);settings.gdUrl=settings.gdUrl.replace(/[?&]key=[^&#\s]*/,'').replace(/\?$/,'');$('#sGdUrl').value=settings.gdUrl;$('#sGdKey').value=settings.gdKey}
-  settings.brief=$('#sBrief').checked;settings.eve=$('#sEve').checked;
+  settings.brief=$('#sBrief').checked;settings.eve=$('#sEve').checked;settings.geoAuto=$('#sGeoAuto').checked;
   settings.remName=$('#sRemName').value.trim()||'加入提醒';settings.remLead=+$('#sRemLead').value||0;saveSettings();
 }
 $('#openSettings').onclick=()=>{fillSettings();openOv('#ovSet')};
@@ -1596,6 +1763,7 @@ async function syncDrive(){
   if(!r.ok)throw new Error('Google Drive 回應 '+r.status);
   let j;try{j=await r.json()}catch(e){throw new Error('未能讀取回應，請確認部署時「具有存取權的使用者」設為「所有人」')}
   if(!j.ok)throw new Error(j.error==='unauthorized'?'同步密碼不正確':'同步失敗：'+(j.error||'未知錯誤'));
+  settings.gdServer=j.server||1;
   return Array.isArray(j.events)?j.events:[];
 }
 async function sync(manual){
@@ -1604,8 +1772,8 @@ async function sync(manual){
   syncing=true;syncError='';renderSyncStatus();
   try{
     if(settings.syncMode==='gdrive'){
-      const remote=await syncDrive();const merged=merge(events,remote);const changedLocal=JSON.stringify(merged)!==JSON.stringify(events);
-      events=merged;persist();settings.lastSync=Date.now();saveSettings();
+      const remote=await syncDrive();const merged=merge(events,remote);const dd=geoDedupe(merged);const changedLocal=dd||JSON.stringify(merged)!==JSON.stringify(events);
+      events=merged;persist();settings.lastSync=Date.now();saveSettings();if(dd)syncAgain=true;
       if(changedLocal&&view!=='ai'){const y=window.scrollY;render();window.scrollTo(0,y)}
       if(manual)toast('已與 Google Drive 同步');
       return;
@@ -1634,7 +1802,7 @@ async function sync(manual){
   }catch(e){syncError=netErr(e.message);if(manual)toast(syncError,3500)}
   finally{syncing=false;renderSyncStatus();if(syncAgain){syncAgain=false;sync()}}
 }
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(selected<todayStr()&&view!=='month')selected=todayStr();if(view!=='ai'){const y=window.scrollY;render();window.scrollTo(0,y)}maybeBrief();checkUpdate();if(syncReady())sync()}});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(selected<todayStr()&&view!=='month')selected=todayStr();if(view!=='ai'){const y=window.scrollY;render();window.scrollTo(0,y)}maybeBrief();checkUpdate();if(syncReady())sync();geoAutoCheck()}});
 
 /* ---------- Google Drive、小工具及版本更新 ---------- */
 function genKey(){const a=new Uint8Array(12);crypto.getRandomValues(a);return Array.from(a,b=>'abcdefghijkmnpqrstuvwxyz23456789'[b%32]).join('')}
@@ -1738,12 +1906,168 @@ $('#impFile').onchange=async e=>{
 
 
 
+/* ---------- 地點打卡 ---------- */
+const GEO_MIN=10,GEO_DEF=60;
+let geoBusy=false;
+const hmNow=(d=new Date())=>pad(d.getHours())+':'+pad(d.getMinutes());
+function distM(a,b,c,d){const r=x=>x*Math.PI/180,h=Math.sin(r(c-a)/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(r(d-b)/2)**2;return 12742e3*Math.asin(Math.min(1,Math.sqrt(h)))}
+const fmtDist=m=>m<1000?Math.max(10,Math.round(m/10)*10)+' 米':(m/1000).toFixed(m<10000?1:0)+' 公里';
+function getPos(fresh){return new Promise((res,rej)=>{
+  if(!navigator.geolocation)return rej(new Error('此裝置不支援定位'));
+  navigator.geolocation.getCurrentPosition(p=>res(p.coords),e=>rej(new Error(e.code===1?'未允許使用位置。請於 iPhone「設定 → 私隱與保安 → 定位服務 → Safari 網站」選擇「使用 App 期間」':e.code===3?'定位逾時，請稍後再試':'未能取得目前位置')),
+    {enableHighAccuracy:true,timeout:15000,maximumAge:fresh?0:20000});
+})}
+async function geoPermitted(){if(settings.geoOk)return true;try{return (await navigator.permissions.query({name:'geolocation'})).state==='granted'}catch(e){return false}}
+const isWorkout=e=>!e.deleted&&catIdx(e.color)===3&&!!(e.geo||e.done);
+function geoActive(){const t=todayStr(),y=ymd(addDays(new Date(),-1));return live().filter(e=>e.geo&&!e.geoOut&&(e.date===t||e.date===y)).sort((a,b)=>(b.date+b.start).localeCompare(a.date+a.start))}
+const geoElapsed=e=>Math.max(0,(e.date===todayStr()?nowMin():toMin(e.end||e.start))-toMin(e.start));
+const geoFixEnd=e=>{if(toMin(e.end)<=toMin(e.start))e.end=fromMin(Math.min(toMin(e.start)+1,1439))};
+function geoStart(p,auto){
+  const d=new Date(),s=hmNow(d);
+  const ev={id:`geo-${todayStr()}-${p.id}-${s.replace(':','')}`,title:p.act||'健身',date:todayStr(),allDay:false,start:s,end:s,location:p.name,
+    notes:auto?'到達地點時自動記錄':'',color:colorFor('',p.act||'健身'),done:false,geo:p.id,geoSeen:+d,updatedAt:+d};
+  geoFixEnd(ev);events.push(ev);return ev;
+}
+function geoClose(e,how){
+  const now=Date.now(),startMs=parseYmd(e.date).getTime()+toMin(e.start)*60000;
+  e.geoOut=true;e.updatedAt=now;
+  if(how==='left'&&now-startMs<GEO_MIN*60000){e.deleted=true;return 'short'}
+  let endMs;
+  if(how==='manual'||now-(e.geoSeen||startMs)<=20*60000)endMs=now;
+  else{endMs=Math.min(now,Math.max(e.geoSeen||startMs,startMs+GEO_DEF*60000));if(!/估計/.test(e.notes||''))e.notes=[e.notes,'結束時間為估計，可自行修改'].filter(Boolean).join('　')}
+  const ed=new Date(endMs);e.end=ymd(ed)!==e.date?'23:59':hmNow(ed);geoFixEnd(e);e.done=true;return 'ok';
+}
+function geoEnd(id){
+  const e=events.find(x=>x.id===id&&!x.deleted);if(!e)return;
+  geoClose(e,'manual');persist();scheduleSync();const y=window.scrollY;render();window.scrollTo(0,y);
+  toast(`已結束${e.title}，共 ${durTxt(toMin(e.end)-toMin(e.start))}`);
+}
+async function geoCheck(manual){
+  const pl=settings.places||[];
+  if(!pl.length){if(manual){fillSettings();openOv('#ovSet');openPlace(null)}return}
+  if(DEMO){if(manual)toast('預覽版不會讀取位置，請在 iPhone 上的日曆 App 使用',3500);return}
+  if(geoBusy)return;geoBusy=true;
+  const btn=document.querySelector('[data-gycheck]');if(btn){btn.disabled=true;btn.textContent='偵測中…'}
+  try{
+    const c=await getPos(manual);
+    if(!settings.geoOk){settings.geoOk=true;saveSettings()}
+    let best=null;for(const p of pl){const d=distM(c.latitude,c.longitude,p.lat,p.lng);if(!best||d<best.d)best={p,d}}
+    const inside=!!best&&best.d<=best.p.r+Math.min(c.accuracy||0,100);
+    const now=Date.now(),t=todayStr();let msg='',changed=false;
+    for(const e of geoActive()){
+      if(inside&&e.geo===best.p.id&&e.date===t){e.end=hmNow();geoFixEnd(e);e.geoSeen=now;e.updatedAt=now;changed=true;if(manual)msg=`${e.title}進行中，已記錄至 ${e.end}`}
+      else{const r=geoClose(e,'left');changed=true;msg=r==='short'?`停留少於 ${GEO_MIN} 分鐘，未有記錄${e.title}`:`已結束${e.title}，共 ${durTxt(toMin(e.end)-toMin(e.start))}`}
+    }
+    if(inside&&!geoActive().some(e=>e.geo===best.p.id)){
+      const recent=live().some(e=>e.geo===best.p.id&&e.geoOut&&e.date===t&&nowMin()-toMin(e.end)<45);
+      if(manual||!recent){geoStart(best.p,!manual);changed=true;msg=`已到達${best.p.name}，開始記錄${best.p.act||'健身'}`}
+    }
+    if(!msg&&manual)msg=`目前不在已設定的地點（距離${best.p.name}約 ${fmtDist(best.d)}）`;
+    if(changed){persist();scheduleSync()}
+    if(msg)toast(msg,3500);
+  }catch(err){if(manual)toast(err.message,5000)}
+  finally{geoBusy=false;if(view==='todo'&&!document.querySelector('.overlay.show')){const y=window.scrollY;render();window.scrollTo(0,y)}}
+}
+async function geoAutoCheck(){
+  if(DEMO||settings.geoAuto===false||!(settings.places||[]).length||document.visibilityState!=='visible')return;
+  if(!(await geoPermitted()))return;
+  for(let i=0;i<40&&syncing;i++)await new Promise(r=>setTimeout(r,250));
+  geoCheck(false);
+}
+function geoDedupe(list){
+  const g={},now=Date.now();let ch=false;
+  for(const e of list){if(e.deleted||!e.geo)continue;(g[e.geo+'|'+e.date]=g[e.geo+'|'+e.date]||[]).push(e)}
+  for(const k in g){
+    const a=g[k].sort((x,y)=>x.start.localeCompare(y.start)||x.id.localeCompare(y.id));
+    for(let i=1;i<a.length;i++){
+      const p=a[i-1],q=a[i];
+      if(toMin(q.start)-toMin(p.end||p.start)>10)continue;
+      const keep=p.id<q.id?p:q,drop=keep===p?q:p;
+      Object.assign(keep,{start:p.start,end:fromMin(Math.max(toMin(p.end||p.start),toMin(q.end||q.start))),geoOut:!!(p.geoOut||q.geoOut),
+        done:!!(p.done||q.done||p.geoOut||q.geoOut),geoSeen:Math.max(p.geoSeen||0,q.geoSeen||0),updatedAt:now});
+      drop.deleted=true;drop.updatedAt=now;a[i]=keep;ch=true;
+    }
+  }
+  return ch;
+}
+setInterval(()=>{if(document.visibilityState==='visible')geoAutoCheck()},5*60*1000);
+setInterval(()=>{document.querySelectorAll('[data-gyel]').forEach(el=>{const e=events.find(x=>x.id===el.dataset.gyel);if(e)el.textContent=durTxt(geoElapsed(e))})},30000);
+
+function weekWorkouts(s){const a=ymd(s),b=ymd(addDays(s,6));return live().filter(e=>isWorkout(e)&&e.date>=a&&e.date<=b)}
+function gymCard(){
+  const pl=settings.places||[],act=geoActive()[0];
+  if(act)return `<section class="glass gycard live"><div class="gy-pin">${ICON_PIN}</div><div class="gy-b"><b>${esc(act.title)}中</b><span>已進行 <em data-gyel="${act.id}">${durTxt(geoElapsed(act))}</em></span><span>${act.start} 開始${act.location?'　'+esc(act.location):''}</span></div><button class="gy-go" data-gyend="${act.id}">結束</button></section>`;
+  if(!pl.length)return '';
+  const n=weekWorkouts(startOfWeek(new Date())).length;
+  return `<section class="glass gycard"><div class="gy-pin">${ICON_PIN}</div><div class="gy-b"><b>地點打卡</b><span>${esc(pl.map(p=>p.name).join('、'))}　本週已運動 <em>${n}</em> 次</span></div><button class="gy-go" data-gycheck ${geoBusy?'disabled':''}>${geoBusy?'偵測中…':'打卡'}</button></section>`;
+}
+function habitCard(s){
+  const W=[];for(let i=7;i>=0;i--){const ws=addDays(s,-7*i),l=weekWorkouts(ws);W.push({ws,n:l.length,h:l.reduce((x,e)=>x+hoursOf(e),0)})}
+  if(!(settings.places||[]).length&&!W.some(w=>w.n))return '';
+  const cur=W[7],max=Math.max(3,...W.map(w=>w.n));
+  let st=0;for(let i=7;i>=0;i--){if(W[i].n)st++;else if(i===7)continue;else break}
+  return `<section class="glass"><div class="ptitle">運動習慣<span>最近 8 週</span></div><div class="habit">
+    <div class="hk"><div><b>${cur.n}</b><span>本週次數</span></div><div><b>${fmtH(cur.h)}</b><span>本週時數</span></div><div><b>${st}</b><span>連續週數</span></div></div>
+    <div class="hbars">${W.map((w,i)=>`<i class="${w.n?'on':''} ${i===7?'cur':''}" style="height:${Math.max(6,w.n/max*100)}%" title="${w.n} 次"></i>`).join('')}</div>
+    <div class="hlbl">${W.map(w=>`<span>${w.ws.getMonth()+1}/${w.ws.getDate()}</span>`).join('')}</div></div></section>`;
+}
+
+/* 地點設定 */
+function renderPlaces(){
+  const pl=settings.places||[];
+  $('#placeList').innerHTML=pl.length?pl.map(p=>`<button class="plc" data-plc="${p.id}">${ICON_PIN}<div class="pb"><b>${esc(p.name)}</b><span>記錄為「${esc(p.act)}」　範圍 ${p.r} 米</span></div><span class="pe">編輯</span></button>`).join(''):'<p class="hint" style="margin:0 0 12px">尚未設定地點。</p>';
+}
+$('#placeList').onclick=e=>{const b=e.target.closest('[data-plc]');if(b)openPlace(settings.places.find(p=>p.id===b.dataset.plc))};
+let plEditing=null,plDelArmed=false;
+function openPlace(p){
+  plEditing=p||null;$('#plTitle').textContent=p?'編輯地點':'新增地點';
+  $('#plName').value=p?p.name:'健身室';$('#plAct').value=p?p.act:'健身';$('#plR').value=String(p?p.r:150);
+  $('#plPos').value=p?`${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}`:'';
+  $('#plInfo').textContent='身處該地點時點選「使用目前位置」。亦可在 Google 地圖長按該地點，複製座標後貼上。';
+  $('#plDel').style.display=p?'':'none';$('#plDel').textContent='刪除';plDelArmed=false;openOv('#ovPlace');
+}
+$('#placeAdd').onclick=()=>openPlace(null);
+$('#plHere').onclick=async()=>{
+  if(DEMO){$('#plInfo').textContent='預覽版不會讀取位置。';return}
+  const b=$('#plHere');b.disabled=true;b.innerHTML='<span class="spin"></span>正在取得位置';
+  try{const c=await getPos(true);$('#plPos').value=`${c.latitude.toFixed(6)}, ${c.longitude.toFixed(6)}`;
+    $('#plInfo').textContent=`已取得目前位置，誤差約 ${Math.round(c.accuracy)} 米。`;settings.geoOk=true;saveSettings()}
+  catch(err){$('#plInfo').textContent=err.message}
+  finally{b.disabled=false;b.textContent='使用目前位置'}
+};
+const parsePos=v=>{const m=String(v).match(/(-?\d{1,3}(?:\.\d+)?)\s*[,，\s]\s*(-?\d{1,3}(?:\.\d+)?)/);if(!m)return null;const lat=+m[1],lng=+m[2];return Math.abs(lat)<=90&&Math.abs(lng)<=180?{lat,lng}:null};
+$('#plSave').onclick=()=>{
+  const name=$('#plName').value.trim(),act=$('#plAct').value.trim()||'健身',pos=parsePos($('#plPos').value),r=+$('#plR').value||150;
+  if(!name){toast('請填寫地點名稱');$('#plName').focus();return}
+  if(!pos){toast('請點選「使用目前位置」或貼上座標',3000);return}
+  if(plEditing)Object.assign(plEditing,{name,act,r,...pos});else settings.places.push({id:'p'+uid().slice(-6),name,act,r,...pos});
+  saveSettings();renderPlaces();closeOv($('#ovPlace'));toast('已儲存地點');if(view==='todo'&&!$('#ovSet').classList.contains('show'))render();
+};
+$('#plDel').onclick=()=>{
+  if(!plEditing)return;
+  if(!plDelArmed){plDelArmed=true;$('#plDel').textContent='再按一次確認';setTimeout(()=>{plDelArmed=false;$('#plDel').textContent='刪除'},2500);return}
+  settings.places=settings.places.filter(p=>p!==plEditing);saveSettings();renderPlaces();closeOv($('#ovPlace'));toast('已刪除地點');
+};
+const geoUrl=(p,a)=>`${settings.gdUrl}?key=${encodeURIComponent(settings.gdKey)}&act=${a}&pid=${encodeURIComponent(p.id)}&place=${encodeURIComponent(p.name)}&title=${encodeURIComponent(p.act||'健身')}&color=${encodeURIComponent(colorFor('',p.act||'健身'))}&tz=${encodeURIComponent((Intl.DateTimeFormat().resolvedOptions().timeZone)||'Asia/Macau')}`;
+$('#geoHelp').onclick=()=>{
+  readSettings();const pl=settings.places||[];let h='';
+  if(settings.syncMode!=='gdrive'||!settings.gdUrl)h='<p class="hint" style="margin:6px 0 4px;color:var(--danger)">請先完成 Google Drive 同步設定。</p>';
+  else if(!pl.length)h='<p class="hint" style="margin:6px 0 4px;color:var(--danger)">請先新增地點。</p>';
+  else{
+    if((settings.gdServer||1)<2)h+='<p class="hint" style="margin:6px 0 4px;color:var(--danger)">你的 Google Drive 伺服器程式碼版本較舊，未能接收打卡記錄。請先於「Google Drive 設定教學」複製新版伺服器程式碼，貼到 Apps Script 後重新部署。</p>';
+    h+=pl.map(p=>`<div class="geourl"><b>${esc(p.name)}</b><div class="actions" style="margin:0"><button class="btn ghost" data-gu="${p.id}|in">複製「到達」網址</button><button class="btn ghost" data-gu="${p.id}|out">複製「離開」網址</button></div></div>`).join('');
+  }
+  $('#geoUrls').innerHTML=h;openOv('#ovGeo');
+};
+$('#geoUrls').onclick=e=>{const b=e.target.closest('[data-gu]');if(!b)return;const[id,a]=b.dataset.gu.split('|');const p=settings.places.find(x=>x.id===id);if(p)copyText(geoUrl(p,a),a==='in'?'「到達」網址':'「離開」網址')};
+
 autosize();
 render();
 setTimeout(maybeBrief,700);
 if(view==='ai')scrollChat(false);
 if(syncReady())sync();
 setTimeout(checkUpdate,2500);
+setTimeout(geoAutoCheck,1200);
 })();
 </script>
 </body>
