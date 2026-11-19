@@ -583,6 +583,41 @@ body.typing.ai .dock{display:none}
 .gcbox{margin-top:14px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
 .gcbox .field{margin:0}
 #gcStat{margin:8px 0 0}
+
+/* ---------- 清單 ---------- */
+.lscard{--c:#4FE3FF}
+.ls-chips{display:flex;gap:6px;overflow-x:auto;padding:0 16px 10px;scrollbar-width:none}
+.ls-chips::-webkit-scrollbar{display:none}
+.ls-chips button,.ls-tabs button{flex:none;display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:13px;color:var(--muted)}
+.ls-chips button.on,.ls-tabs button.on{color:var(--ink);border-color:rgba(79,227,255,.5);background:rgba(79,227,255,.09)}
+.ls-chips em{font-style:normal;font-family:var(--num);font-size:11.5px;color:var(--cyan)}
+.ls-prog{height:6px;margin:0 16px;border-radius:3px;background:rgba(130,160,255,.12);overflow:hidden}
+.ls-prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#3D6BFF,#4FE3FF);transition:width .4s}
+.ls-pt{font-size:12px;color:var(--muted);padding:6px 16px 10px;font-family:var(--num)}
+.ls-next{display:flex;align-items:center;gap:12px;margin:0 12px 10px;padding:14px;border-radius:16px;background:rgba(79,227,255,.07);border:1px solid rgba(79,227,255,.28)}
+.ls-next .chk{width:28px;height:28px}
+.ls-next .lb{flex:1;min-width:0;cursor:pointer}
+.ls-next small{display:block;font-size:11.5px;color:var(--cyan);margin-bottom:3px}
+.ls-next b{display:block;font-size:17px;font-weight:600;line-height:1.4;word-break:break-word}
+.ls-skip{flex:none;font-size:12.5px;padding:7px 11px;border-radius:10px;border:1px solid var(--line);color:var(--muted)}
+.lsrow{display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid var(--line);--c:#4FE3FF}
+.lsrow .lb{flex:1;min-width:0;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.lsrow .lb span{font-size:15px;line-height:1.45;word-break:break-word}
+.lsrow .lb small{flex-basis:100%;font-size:12px;color:var(--muted)}
+.lsrow.done .lb span{text-decoration:line-through;color:var(--faint)}
+.due{font-style:normal;font-size:11.5px;padding:1px 8px;border-radius:999px;background:rgba(255,255,255,.07);color:var(--muted);white-space:nowrap}
+.due.late{color:var(--danger);background:rgba(255,92,122,.12)}
+.ls-next .due{display:inline-block;margin-top:5px}
+.ls-alldone{padding:4px 16px 16px;color:var(--ok);font-size:14px}
+.ls-mv{display:flex;flex-direction:column;flex:none;gap:2px}
+.ls-mv button{width:30px;height:22px;display:grid;place-items:center;color:var(--faint);border-radius:6px}
+.ls-mv svg{width:15px;height:15px}
+.ls-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.ls-tabs button{font-size:13.5px;padding:7px 13px}
+.ls-tabs button.add{color:var(--cyan);border-style:dashed}
+#lsItems{margin-top:14px;border-radius:16px;border:1px solid var(--line);overflow:hidden}
+#lsItems .lsrow:first-child{border-top:0}
+#lsItems .sempty{padding:14px 16px}
 </style>
 </head>
 <body>
@@ -821,6 +856,27 @@ body.typing.ai .dock{display:none}
   <p class="hint" style="margin:0 0 12px">每行一個假期，日期在前、名稱在後。連續數日可用「至」連接；不寫年份的會每年重複。名稱含「補假」會設為補假，含「年假」「休假」會設為自訂假期。</p>
   <div class="field"><textarea id="hbText" style="min-height:180px;font-size:15px;line-height:1.6" placeholder="2026-12-25 聖誕節&#10;2027年2月6日 至 2027年2月8日 農曆新年&#10;10月1日 國慶日"></textarea></div>
   <div class="actions"><button class="btn ghost" data-close>取消</button><button class="btn primary" id="hbGo">加入</button></div>
+</div></div>
+
+<!-- Lists -->
+<div class="overlay" id="ovList"><div class="sheet" role="dialog" aria-label="清單">
+  <h3><span>清單</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div class="ls-tabs" id="lsTabs"></div>
+  <div class="field"><label for="lsName">清單名稱</label><input id="lsName" autocomplete="off" placeholder="例如：本週要做"></div>
+  <div class="field"><label for="lsBulk">加入事項</label><textarea id="lsBulk" style="min-height:96px;line-height:1.6" placeholder="每行一項，可一次貼上多行&#10;覆電郵&#10;交表格&#10;買文具"></textarea></div>
+  <button class="btn primary" id="lsAddGo" style="width:100%">加入清單</button>
+  <div id="lsItems"></div>
+  <div class="actions" style="margin-top:16px"><button class="btn danger" id="lsDel">刪除清單</button><button class="btn ghost" data-close>完成</button></div>
+</div></div>
+
+<!-- List item editor -->
+<div class="overlay" id="ovLi"><div class="sheet" role="dialog" aria-label="清單事項">
+  <h3><span>清單事項</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div class="field"><textarea id="liText" style="min-height:64px;font-size:17px;line-height:1.5" placeholder="事項內容"></textarea></div>
+  <div class="field"><label for="liDue">安排到日曆（可留空）</label><input id="liDue" type="date"></div>
+  <p class="hint" style="margin:-4px 0 14px">設定日期後，此事項會以全日事項出現在日曆，並同步到 Google 日曆。在任何一邊完成，另一邊亦會標記完成。</p>
+  <div class="field"><label for="liNote">備註</label><textarea id="liNote" style="min-height:60px"></textarea></div>
+  <div class="actions"><button class="btn danger" id="liDel">刪除</button><button class="btn ghost" id="liTop">移到最前</button><button class="btn primary" id="liSave">儲存</button></div>
 </div></div>
 
 <!-- Code viewer -->
@@ -1329,7 +1385,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.20-1';
+const APP_VERSION='2026.11.20-2';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -1390,6 +1446,8 @@ function demoEvents(){
   const dw=i=>{const lv=Math.floor((18-i)/6)*2.5,g=(n,b,inc,k)=>({n,s:Array.from({length:k},(_,j)=>({w:b+lv*(b>50?4:1)+inc*Math.min(j,2),r:12-j,t:1}))});return i%2?[g('哈克',60,10,4),g('腿推',100,20,3)]:[g('飛鳥',15,2.5,4),g('臥推',40,5,4)]};
   [4,6,9,11,13,16,18,20,23,27,30,32,34,37,41,44,46,48,51].forEach((o,i)=>{const st=['18:20','18:45','19:05','07:30'][i%4],len=[62,75,55,80][i%3];out.push({id:'demogym'+i,title:'健身',date:d(-o),start:st,end:fromMin(toMin(st)+len),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:true,geo:'gym',geoOut:true,wk:dw(i),updatedAt:1})});
   const gs=Math.max(0,nowMin()-42);out.push({id:'demogymlive',title:'健身',date:d(0),start:fromMin(gs),end:fromMin(Math.min(1439,gs+40)),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:false,geo:'gym',geoSeen:Date.now(),wk:[{n:'飛鳥',s:[{w:20,r:12,t:Date.now()-900000},{w:22.5,r:10,t:Date.now()-500000}]},{n:'哈克',s:[]}],updatedAt:1});
+  out.push({id:'ls-demo',cfg:'list',name:'本週要做',created:1,order:1,updatedAt:1});
+  ['覆核年度預算表','回覆陳主任電郵','預約汽車驗車','整理報稅文件','買打印機墨盒','預備開考公文練習'].forEach((t,i)=>out.push({id:'li-demo'+i,cfg:'li',list:'ls-demo',text:t,done:i<2,doneAt:i<2?1:0,due:i===3?d(2):'',note:i===2?'需攜帶行車證':'',order:i+1,updatedAt:1}));
   out.push({id:'cfg-holidays',cfg:'holidays',list:[{id:'hd1',name:'元旦',date:'2026-01-01',yearly:true,type:'ph'},{id:'hd2',name:'澳門特別行政區成立紀念日',date:'2026-12-20',yearly:true,type:'ph'},{id:'hd3',name:'聖誕節',date:'2026-12-25',yearly:true,type:'ph'},{id:'hd4',name:'年假',date:d(9),end:d(10),type:'own'}],updatedAt:1});
   return out;
 }
@@ -1418,6 +1476,7 @@ function toast(msg,ms=2200){const t=$('#toast');t.textContent=msg;t.classList.ad
 /* ---------- render ---------- */
 let slideDir='';
 function render(){
+  if(listReconcile()){persist();scheduleSync()}
   document.body.classList.toggle('ai',view==='ai');
   document.body.classList.toggle('todo',view==='todo');
   document.body.classList.toggle('cal',view==='day'||view==='week');
@@ -1640,6 +1699,10 @@ $('#main').addEventListener('click',e=>{
   if(e.target.closest('#qGo')){quickAdd();return}
   const ge=e.target.closest('[data-gyend]');if(ge){geoEnd(ge.dataset.gyend);return}
   if(e.target.closest('[data-gycheck]')){geoCheck(true);return}
+  if(lsClick(e))return;
+  const lsw=e.target.closest('[data-lssw]');if(lsw){settings.activeList=lsw.dataset.lssw;saveSettings();lsRerender();return}
+  const lso=e.target.closest('[data-lsopen]');if(lso){openList(lso.dataset.lsopen);return}
+  if(e.target.closest('[data-lsnew]')){const l=lsNew('我的清單');openList(l.id);setTimeout(()=>$('#lsBulk').focus(),300);return}
   const he=e.target.closest('[data-holedit]');if(he){openHol(holList().find(x=>x.id===he.dataset.holedit));return}
   const hn=e.target.closest('[data-holnew]');if(hn){openHol(null,hn.dataset.holnew);return}
   const wo=e.target.closest('[data-wkopen]');if(wo){openWk(wo.dataset.wkopen);return}
@@ -1953,6 +2016,7 @@ function renderTodo(){
   h+=`<div><div class="qadd"><input id="qIn" placeholder="新增待辦事項，例如：星期五前提交報告" enterkeyhint="send" autocomplete="off"><button class="send" id="qGo" aria-label="加入"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="qhint">${aiReady()?'AI 將自動辨識日期與時間，例如「明天下午三點開會」「下星期五提交報告」':'尚未設定 AI：事項將直接加入今日。於設定填入 DeepSeek API Key 後即可自動辨識日期'}</div></div>`;
   h+=gymCard();
   h+=`<section class="glass todaycard"><div class="ring sm"><svg viewBox="0 0 120 120"><defs><linearGradient id="rg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D6BFF"/><stop offset="1" stop-color="#4FE3FF"/></linearGradient></defs><circle cx="60" cy="60" r="48" fill="none" stroke="rgba(130,160,255,.12)" stroke-width="12"/><circle cx="60" cy="60" r="48" fill="none" stroke="url(#rg2)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${pct/100*C} ${C}" style="filter:drop-shadow(0 0 6px rgba(79,227,255,.6))"/></svg><div class="rv"><b>${today.length?pct:'—'}<small>${today.length?'%':''}</small></b></div></div><div class="tc-b"><div class="big">今日進度 <em>${done.length}</em> / ${today.length}</div>${nx}</div></section>`;
+  h+=listCard();
   if(od.length)h+=`<section class="glass sect warn"><div class="sh"><b>逾期事項</b><span class="cnt">${od.length}</span><button class="r" data-moveall="${t}">全部改至今日</button></div>${od.map(e=>tdRow(e,{showDate:true,act:`<button class="act" data-move="${e.id}|${t}">改至今日</button>`})).join('')}</section>`;
   h+=`<section class="glass sect"><div class="sh"><b>今日待辦</b><span class="cnt">${todo.length}</span><span class="sd">${md(t)}</span><button class="r" data-add="${t}">＋ 新增</button></div>`+
     (todo.length?todo.map(e=>tdRow(e,{now:cur&&e.id===cur.id})).join(''):`<div class="sempty">${today.length?'今日待辦已全部完成。':'今日暫無待辦事項。'}</div>`)+
@@ -2632,6 +2696,126 @@ $('#sGcal').onchange=()=>{
   const on=$('#sGcal').checked;
   if(on&&!(settings.syncMode==='gdrive'&&settings.gdUrl)){toast('請先連接 Google Drive');$('#sGcal').checked=false;return}
   gcSet(on);gcForce=on;renderGcStatus();if(syncReady())sync(true).then(renderGcStatus);
+};
+
+/* ---------- 清單 ---------- */
+const lsLists=()=>events.filter(e=>e.cfg==='list'&&!e.deleted).sort((a,b)=>(a.order||0)-(b.order||0));
+const lsItems=id=>events.filter(e=>e.cfg==='li'&&!e.deleted&&e.list===id).sort((a,b)=>(a.order||0)-(b.order||0));
+const lsById=id=>events.find(e=>e.id===id&&!e.deleted);
+let lsCur=null,liEditing=null,liDelArmed=false,lsDelArmed=false;
+const lsActive=()=>{const L=lsLists();return L.find(l=>l.id===settings.activeList)||L[0]||null};
+const lsRerender=()=>{const y=window.scrollY;render();window.scrollTo(0,y);if($('#ovList').classList.contains('show'))renderListSheet()};
+function lsNew(name){
+  const n=lsLists().length,l={id:'ls-'+uid().slice(-8),cfg:'list',name:n?`${name} ${n+1}`:name,created:Date.now(),order:Date.now(),updatedAt:Date.now()};
+  events.push(l);settings.activeList=l.id;saveSettings();persist();scheduleSync();return l;
+}
+function lsAddItems(l,text){
+  const its=lsItems(l.id),now=Date.now();let o=its.length?Math.max(...its.map(x=>x.order||0)):0,n=0;
+  for(const raw of String(text).split(/\r?\n/)){
+    const t=raw.replace(/^\s*(?:[-*•・●○□☐✓✔]|\d+[.)、]|[（(]\d+[）)])\s*/,'').trim().slice(0,100);if(!t)continue;
+    events.push({id:'li-'+uid().slice(-9),cfg:'li',list:l.id,text:t,done:false,doneAt:0,due:'',note:'',order:++o,updatedAt:now+n});n++;
+  }
+  if(n){persist();scheduleSync()}return n;
+}
+function lsToggle(it){
+  it.done=!it.done;it.doneAt=it.done?Date.now():0;it.updatedAt=Date.now();persist();scheduleSync();
+  if(it.done){const left=lsItems(it.list).filter(x=>!x.done).length;toast(left?`已完成「${it.text}」，尚餘 ${left} 項`:'清單已全部完成')}
+}
+function lsMove(it,dir){
+  const todo=lsItems(it.list).filter(x=>!x.done),i=todo.findIndex(x=>x.id===it.id),j=i+dir;if(i<0||j<0||j>=todo.length)return;
+  const o=todo[j].order;todo[j].order=it.order;it.order=o;todo[j].updatedAt=it.updatedAt=Date.now();persist();scheduleSync();
+}
+function lsClick(e){
+  let b=e.target.closest('[data-lsdone]');if(b){const it=lsById(b.dataset.lsdone);if(it){lsToggle(it);lsRerender()}return true}
+  b=e.target.closest('[data-lsskip]');if(b){const it=lsById(b.dataset.lsskip);if(it){it.order=Math.max(...lsItems(it.list).map(x=>x.order||0))+1;it.updatedAt=Date.now();persist();scheduleSync();lsRerender()}return true}
+  b=e.target.closest('[data-lsitem]');if(b){openLi(b.dataset.lsitem);return true}
+  b=e.target.closest('[data-lsmv]');if(b){const[id,d]=b.dataset.lsmv.split('|'),it=lsById(id);if(it){lsMove(it,+d);lsRerender()}return true}
+  b=e.target.closest('[data-lsclear]');if(b){for(const x of lsItems(b.dataset.lsclear).filter(x=>x.done)){x.deleted=true;x.updatedAt=Date.now()}persist();scheduleSync();lsRerender();toast('已清除已完成事項');return true}
+  return false;
+}
+function listReconcile(){
+  let ch=false;const now=Date.now(),items=new Map(events.filter(e=>e.cfg==='li').map(e=>[e.id,e]));
+  for(const ev of events){
+    if(!ev.li||ev.cfg)continue;const it=items.get(ev.li);
+    if(ev.deleted){if(it&&!it.deleted&&it.due===ev.date&&(ev.updatedAt||0)>(it.updatedAt||0)){it.due='';it.updatedAt=now;ch=true}continue}
+    if(!it||it.deleted||!it.due){ev.deleted=true;ev.updatedAt=now;ch=true;continue}
+    if(!!ev.done!==!!it.done||ev.date!==it.due||ev.title!==it.text){
+      if((ev.updatedAt||0)>(it.updatedAt||0)){it.done=!!ev.done;it.doneAt=ev.done?(it.doneAt||now):0;it.due=ev.date;it.text=ev.title;it.updatedAt=now}
+      else{ev.done=!!it.done;ev.date=it.due;ev.title=it.text;ev.updatedAt=now}
+      ch=true;
+    }
+  }
+  const linked=new Set(events.filter(e=>e.li&&!e.deleted&&!e.cfg).map(e=>e.li));
+  for(const it of items.values()){
+    if(it.deleted||!it.due||linked.has(it.id))continue;
+    const l=lsById(it.list),data={title:it.text,date:it.due,allDay:true,start:'',end:'',location:'',notes:l?`來自清單「${l.name}」`:'',done:!!it.done,li:it.id,deleted:false,updatedAt:now};
+    const old=events.find(e=>e.id==='ev-'+it.id);
+    if(old)Object.assign(old,data);else events.push({id:'ev-'+it.id,color:colorFor('',it.text),...data});
+    ch=true;
+  }
+  return ch;
+}
+function lsRow(x,manage){
+  return `<div class="lsrow ${x.done?'done':''}"><button class="chk ${x.done?'on':''}" data-lsdone="${x.id}" aria-label="${x.done?'標記未完成':'標記完成'}"></button><div class="lb" data-lsitem="${x.id}"><span>${esc(x.text)}</span>${x.due?`<em class="due ${!x.done&&x.due<todayStr()?'late':''}">${relLabel(x.due)}</em>`:''}${x.note?`<small>${esc(x.note)}</small>`:''}</div>`+
+    (manage&&!x.done?`<div class="ls-mv"><button data-lsmv="${x.id}|-1" aria-label="上移"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button><button data-lsmv="${x.id}|1" aria-label="下移"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div>`:'')+`</div>`;
+}
+function listCard(){
+  const l=lsActive();
+  if(!l)return `<section class="glass sect lscard"><div class="sh"><b>清單</b><button class="r" data-lsnew>＋ 建立清單</button></div><div class="sempty">把未做的事列成清單，逐項完成。可以一次貼上多行。</div></section>`;
+  const its=lsItems(l.id),todo=its.filter(x=>!x.done),dn=its.length-todo.length,L=lsLists(),pct=its.length?Math.round(dn/its.length*100):0;
+  let h=`<section class="glass sect lscard"><div class="sh"><b>清單</b><span class="cnt">${todo.length}</span><span class="sd">${esc(l.name)}</span><button class="r" data-lsopen="${l.id}">管理</button></div>`;
+  if(L.length>1)h+=`<div class="ls-chips">${L.map(x=>`<button class="${x.id===l.id?'on':''}" data-lssw="${x.id}">${esc(x.name)}<em>${lsItems(x.id).filter(i=>!i.done).length}</em></button>`).join('')}</div>`;
+  if(its.length)h+=`<div class="ls-prog"><i style="width:${pct}%"></i></div><div class="ls-pt">已完成 ${dn} / ${its.length} 項</div>`;
+  if(!its.length)h+=`<div class="sempty">清單暫無事項。點選「管理」加入。</div>`;
+  else if(!todo.length)h+=`<div class="ls-alldone">清單已全部完成。</div>`;
+  else{
+    const[f,...rest]=todo;
+    h+=`<div class="ls-next"><button class="chk" data-lsdone="${f.id}" aria-label="完成「${esc(f.text)}」"></button><div class="lb" data-lsitem="${f.id}"><small>下一項</small><b>${esc(f.text)}</b>${f.due?`<span class="due ${f.due<todayStr()?'late':''}">${relLabel(f.due)}</span>`:''}</div>${rest.length?`<button class="ls-skip" data-lsskip="${f.id}">稍後</button>`:''}</div>`;
+    h+=rest.slice(0,3).map(x=>lsRow(x)).join('');
+    if(rest.length>3)h+=`<button class="more-btn" data-lsopen="${l.id}">查看其餘 ${rest.length-3} 項</button>`;
+  }
+  return h+`</section>`;
+}
+function openList(id){lsCur=id||(lsActive()&&lsActive().id);lsDelArmed=false;$('#lsDel').textContent='刪除清單';$('#lsBulk').value='';renderListSheet();openOv('#ovList')}
+function renderListSheet(){
+  const L=lsLists(),l=lsById(lsCur)||lsActive();lsCur=l&&l.id;
+  $('#lsTabs').innerHTML=L.map(x=>`<button class="${l&&x.id===l.id?'on':''}" data-lst="${x.id}">${esc(x.name)}</button>`).join('')+`<button class="add" data-lst="new">＋ 新清單</button>`;
+  if(!l){$('#lsName').value='';$('#lsItems').innerHTML='<div class="sempty">尚未建立清單。</div>';return}
+  if(document.activeElement!==$('#lsName'))$('#lsName').value=l.name;
+  const its=lsItems(l.id),todo=its.filter(x=>!x.done),dn=its.filter(x=>x.done);
+  $('#lsItems').innerHTML=(todo.length?todo.map(x=>lsRow(x,true)).join(''):'<div class="sempty">暫無未完成事項。</div>')+
+    (dn.length?`<details class="donefold"><summary>已完成 ${dn.length} 項</summary>${dn.map(x=>lsRow(x,true)).join('')}<button class="more-btn" data-lsclear="${l.id}">清除已完成事項</button></details>`:'');
+}
+$('#lsTabs').onclick=e=>{const b=e.target.closest('[data-lst]');if(!b)return;
+  if(b.dataset.lst==='new'){const l=lsNew('我的清單');lsCur=l.id;renderListSheet();lsRerender();setTimeout(()=>{$('#lsName').focus();$('#lsName').select()},50);return}
+  lsCur=b.dataset.lst;settings.activeList=lsCur;saveSettings();renderListSheet();lsRerender()};
+$('#lsName').onchange=()=>{const l=lsById(lsCur);const v=$('#lsName').value.trim().slice(0,30);if(l&&v&&v!==l.name){l.name=v;l.updatedAt=Date.now();persist();scheduleSync();renderListSheet();lsRerender()}};
+$('#lsAddGo').onclick=()=>{
+  let l=lsById(lsCur);if(!l){l=lsNew($('#lsName').value.trim()||'我的清單');lsCur=l.id}
+  const n=lsAddItems(l,$('#lsBulk').value);if(!n){toast('請輸入事項，每行一項');$('#lsBulk').focus();return}
+  $('#lsBulk').value='';settings.activeList=l.id;saveSettings();renderListSheet();lsRerender();toast(`已加入 ${n} 項`);
+};
+$('#lsItems').onclick=e=>{if(lsClick(e))return};
+$('#lsDel').onclick=()=>{
+  const l=lsById(lsCur);if(!l)return;
+  if(!lsDelArmed){lsDelArmed=true;$('#lsDel').textContent='再按一次確認';setTimeout(()=>{lsDelArmed=false;$('#lsDel').textContent='刪除清單'},2500);return}
+  const now=Date.now();l.deleted=true;l.updatedAt=now;for(const x of events.filter(e=>e.cfg==='li'&&e.list===l.id&&!e.deleted)){x.deleted=true;x.updatedAt=now}
+  persist();scheduleSync();lsCur=null;settings.activeList='';saveSettings();closeOv($('#ovList'));lsRerender();toast('已刪除清單');
+};
+function openLi(id){
+  const it=lsById(id);if(!it)return;liEditing=it;liDelArmed=false;$('#liDel').textContent='刪除';
+  $('#liText').value=it.text;$('#liDue').value=it.due||'';$('#liNote').value=it.note||'';openOv('#ovLi');
+}
+$('#liSave').onclick=()=>{
+  const it=liEditing;if(!it)return;const t=$('#liText').value.trim().slice(0,100);if(!t){toast('請填寫事項內容');return}
+  it.text=t;it.due=okDate($('#liDue').value)?$('#liDue').value:'';it.note=$('#liNote').value.trim().slice(0,300);it.updatedAt=Date.now();
+  persist();scheduleSync();closeOv($('#ovLi'));lsRerender();toast(it.due?`已儲存，並安排到 ${md(it.due)}`:'已儲存');
+};
+$('#liTop').onclick=()=>{const it=liEditing;if(!it)return;it.order=Math.min(...lsItems(it.list).map(x=>x.order||0))-1;it.updatedAt=Date.now();persist();scheduleSync();closeOv($('#ovLi'));lsRerender();toast('已移到最前')};
+$('#liDel').onclick=()=>{
+  const it=liEditing;if(!it)return;
+  if(!liDelArmed){liDelArmed=true;$('#liDel').textContent='再按一次確認';setTimeout(()=>{liDelArmed=false;$('#liDel').textContent='刪除'},2500);return}
+  it.deleted=true;it.updatedAt=Date.now();persist();scheduleSync();closeOv($('#ovLi'));lsRerender();toast('已刪除');
 };
 
 autosize();
