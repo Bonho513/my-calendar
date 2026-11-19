@@ -514,6 +514,71 @@ body.typing.ai .dock{display:none}
 .trn-r em{font-style:normal;font-family:var(--num);color:var(--ok);font-weight:600;font-size:14px;text-align:right}
 .trn-r small{font-family:var(--num);font-size:13px;text-align:right}
 .trn-l{font-size:12px;color:var(--muted);padding:2px 0 10px}
+
+/* ---------- 週末及假期 ---------- */
+:root{--sat:#8FB4FF;--sun:#FF7B8E;--leave:#FFA36B}
+.dow .sat{color:var(--sat);opacity:1}
+.dow .sun{color:var(--sun);opacity:1}
+.cell.sat{background-image:linear-gradient(rgba(143,180,255,.07),rgba(143,180,255,.07)),linear-gradient(rgba(61,107,255,var(--heat)),rgba(61,107,255,var(--heat)))}
+.cell.leave{background-image:linear-gradient(rgba(255,163,107,.08),rgba(255,163,107,.08)),linear-gradient(rgba(61,107,255,var(--heat)),rgba(61,107,255,var(--heat)))}
+.cell.sun,.cell.hol{background-image:linear-gradient(rgba(255,123,142,.08),rgba(255,123,142,.08)),linear-gradient(rgba(61,107,255,var(--heat)),rgba(61,107,255,var(--heat)))}
+.cell.sat .n{color:var(--sat)}
+.cell.leave .n{color:var(--leave)}
+.cell.sun .n,.cell.hol .n{color:var(--sun);font-weight:600}
+.cell.today .n{color:#fff}
+.cell .hn{font-size:10px;line-height:1.3;color:var(--sun);text-align:center;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-all;padding:0 2px}
+.hero-bar .tbtn{white-space:nowrap;flex:none}
+.hero-bar .sync{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cell .hn.leave{color:var(--leave)}
+.pill.sat small,.pill.sat b{color:var(--sat)}
+.pill.leave small,.pill.leave b{color:var(--leave)}
+.pill.sun small,.pill.sun b,.pill.hol small,.pill.hol b{color:var(--sun)}
+.pill.today:not(.sel) b,.pill.today:not(.sel) small{color:var(--cyan)}
+.pill.sel b{color:#fff}.pill.sel small{color:rgba(255,255,255,.82)}
+.wrow.sat,.wrow.sun,.wrow.hol,.wrow.leave{margin:0 -16px;padding-left:16px;padding-right:16px}
+.wrow.sat{background:linear-gradient(90deg,rgba(143,180,255,.09),transparent 70%)}
+.wrow.leave{background:linear-gradient(90deg,rgba(255,163,107,.09),transparent 70%)}
+.wrow.sun,.wrow.hol{background:linear-gradient(90deg,rgba(255,123,142,.1),transparent 70%)}
+.wrow.sat .wd small,.wrow.sat .wd .num{color:var(--sat)}
+.wrow.leave .wd small,.wrow.leave .wd .num{color:var(--leave)}
+.wrow.sun .wd small,.wrow.sun .wd .num,.wrow.hol .wd small,.wrow.hol .wd .num{color:var(--sun)}
+.wrow.today .wd .num{color:#fff}
+.holtag{display:inline-flex;align-items:center;font-size:12px;padding:3px 10px;border-radius:999px;color:var(--sun);background:rgba(255,123,142,.12);border:1px solid rgba(255,123,142,.3);margin:2px 6px 6px 0;cursor:pointer}
+.holtag.leave{color:var(--leave);background:rgba(255,163,107,.12);border-color:rgba(255,163,107,.3)}
+.bcol.sat small{color:var(--sat)}
+.bcol.leave small{color:var(--leave)}
+.bcol.sun small,.bcol.hol small{color:var(--sun)}
+.bcol.today small{color:var(--cyan)}
+.daymeta b.sat,.bignum.sat{color:var(--sat)}
+.daymeta b.leave,.bignum.leave{color:var(--leave)}
+.daymeta b.sun,.daymeta b.hol,.bignum.sun,.bignum.hol{color:var(--sun)}
+.hlink{font-size:12px;color:var(--faint);margin-left:8px;padding:2px 0;text-decoration:underline;text-underline-offset:3px}
+.holbar{display:flex;align-items:center;gap:8px;width:100%;margin:10px 0 2px;padding:9px 12px;border-radius:12px;background:rgba(255,123,142,.1);border:1px solid rgba(255,123,142,.28);color:var(--sun);font-size:13.5px;text-align:left}
+.holbar small{margin-left:auto;font-size:12px;opacity:.8}
+.holbar.leave{background:rgba(255,163,107,.1);border-color:rgba(255,163,107,.28);color:var(--leave)}
+.greet .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.daytag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.03)}
+.daytag.sat{color:var(--sat);border-color:rgba(143,180,255,.35);background:rgba(143,180,255,.08)}
+.daytag.sun,.daytag.hol{color:var(--sun);border-color:rgba(255,123,142,.35);background:rgba(255,123,142,.1)}
+.daytag.leave{color:var(--leave);border-color:rgba(255,163,107,.35);background:rgba(255,163,107,.1)}
+.dgroup.sat{color:var(--sat)}
+.dgroup.leave{color:var(--leave)}
+.dgroup.sun,.dgroup.hol{color:var(--sun)}
+.dgroup .dh{margin-left:auto;font-size:12px}
+.hol-yr{font-size:12px;color:var(--faint);margin:14px 0 6px}
+.hol-row{display:flex;align-items:center;gap:12px;width:100%;padding:10px 14px;margin-bottom:8px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);text-align:left;color:var(--ink)}
+.hol-row .hd{width:46px;flex:none;text-align:center;line-height:1.15}
+.hol-row .hd b{display:block;font-family:var(--num);font-size:17px;font-weight:600;color:var(--sun)}
+.hol-row .hd small{font-size:11px;color:var(--muted)}
+.hol-row.leave .hd b{color:var(--leave)}
+.hol-row .hb{flex:1;min-width:0}
+.hol-row .hb b{display:block;font-size:15px;font-weight:600}
+.hol-row .hb span{font-size:12px;color:var(--muted)}
+.hol-row.past{opacity:.45}
+.htype{display:flex;gap:6px}
+.htype button{flex:1;padding:10px 6px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:14px;color:var(--ink)}
+.htype button.on{border-color:rgba(255,123,142,.6);color:var(--sun);background:rgba(255,123,142,.1)}
+.htype button.on[data-t="own"]{border-color:rgba(255,163,107,.6);color:var(--leave);background:rgba(255,163,107,.1)}
 </style>
 </head>
 <body>
@@ -641,6 +706,12 @@ body.typing.ai .dock{display:none}
     <button class="btn ghost" id="geoHelp" style="width:100%">設定自動打卡捷徑</button>
   </div>
   <div class="sec">
+    <h4>假期</h4>
+    <p class="hint" style="margin:0 0 12px">公眾假期及補假以紅色標示，自訂假期（例如年假）以橙色標示，並在月曆顯示名稱。假期會經 Google Drive 同步至所有裝置。</p>
+    <div id="holList"></div>
+    <div class="actions"><button class="btn ghost" id="holAdd">＋ 新增假期</button><button class="btn ghost" id="holBulk">批量加入</button></div>
+  </div>
+  <div class="sec">
     <h4>匯入及匯出</h4>
     <div class="actions">
       <button class="btn ghost" id="expIcs">匯出 .ics</button>
@@ -722,6 +793,28 @@ body.typing.ai .dock{display:none}
   <h3><span>健身紀錄</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
   <div id="wkBody"></div>
   <div class="actions" style="margin-top:16px"><button class="btn ghost" data-close>完成</button><button class="btn primary" id="wkEnd">結束健身</button></div>
+</div></div>
+
+<!-- Holiday editor -->
+<div class="overlay" id="ovHol"><div class="sheet" role="dialog" aria-label="假期">
+  <h3><span id="hlTitle">新增假期</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div class="field"><label for="hlName">名稱</label><input id="hlName" placeholder="例如：聖誕節" autocomplete="off"></div>
+  <div class="field"><label>類型</label><div class="htype" id="hlType"><button data-t="ph">公眾假期</button><button data-t="comp">補假</button><button data-t="own">自訂假期</button></div></div>
+  <div class="row">
+    <div class="field"><label for="hlDate">開始日期</label><input id="hlDate" type="date"></div>
+    <div class="field"><label for="hlEnd">結束日期（可留空）</label><input id="hlEnd" type="date"></div>
+  </div>
+  <div class="field"><label class="toggle">每年同一日子重複<input type="checkbox" id="hlYearly"></label></div>
+  <p class="hint" style="margin:-4px 0 16px">農曆新年、中秋節等農曆假期每年日子不同，請逐年加入，不要選擇每年重複。</p>
+  <div class="actions"><button class="btn danger" id="hlDel">刪除</button><button class="btn primary" id="hlSave">儲存</button></div>
+</div></div>
+
+<!-- Holiday bulk add -->
+<div class="overlay" id="ovHolBulk"><div class="sheet" role="dialog" aria-label="批量加入假期">
+  <h3><span>批量加入假期</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <p class="hint" style="margin:0 0 12px">每行一個假期，日期在前、名稱在後。連續數日可用「至」連接；不寫年份的會每年重複。名稱含「補假」會設為補假，含「年假」「休假」會設為自訂假期。</p>
+  <div class="field"><textarea id="hbText" style="min-height:180px;font-size:15px;line-height:1.6" placeholder="2026-12-25 聖誕節&#10;2027年2月6日 至 2027年2月8日 農曆新年&#10;10月1日 國慶日"></textarea></div>
+  <div class="actions"><button class="btn ghost" data-close>取消</button><button class="btn primary" id="hbGo">加入</button></div>
 </div></div>
 
 <!-- Code viewer -->
@@ -950,6 +1043,15 @@ const todo = on(T).filter(e => !e.done);
 const tmr = on(TM).filter(e => !e.done);
 const overdue = live.filter(e => !e.done && e.date < T && e.date >= BACK && (e.allDay || !e.start || e.color === "#FFC94D"));
 const fam = config.widgetFamily || "large";
+const HCFG = data.events.find(e => e && e.id === "cfg-holidays" && !e.deleted);
+const HOL = (HCFG && Array.isArray(HCFG.list) ? HCFG.list : []).filter(h => {
+  if (!h || !h.date) return false;
+  const a = h.date, b = h.end && h.end >= h.date ? h.end : h.date;
+  if (h.yearly) { const md = T.slice(5), am = a.slice(5), bm = b.slice(5); return am <= bm ? (md >= am && md <= bm) : (md >= am || md <= bm); }
+  return T >= a && T <= b;
+});
+const RED_DAY = now.getDay() === 0 || HOL.some(h => h.type !== "own");
+const DAY_COLOR = RED_DAY ? new Color("#FF7B8E") : HOL.length ? new Color("#FFA36B") : now.getDay() === 6 ? new Color("#8FB4FF") : null;
 
 function accessory() {
   const lw = new ListWidget();
@@ -980,13 +1082,14 @@ function main() {
   head.centerAlignContent();
   const day = head.addText(String(now.getDate()));
   day.font = Font.boldSystemFont(fam === "small" ? 30 : 28);
-  day.textColor = C.ink;
+  day.textColor = DAY_COLOR || C.ink;
   head.addSpacer(7);
   const hv = head.addStack();
   hv.layoutVertically();
-  const t1 = hv.addText((now.getMonth() + 1) + "月　星期" + WK[now.getDay()]);
+  const t1 = hv.addText((now.getMonth() + 1) + "月　" + (HOL.length ? HOL[0].name : "星期" + WK[now.getDay()]));
   t1.font = Font.mediumSystemFont(11);
-  t1.textColor = C.muted;
+  t1.textColor = DAY_COLOR || C.muted;
+  t1.lineLimit = 1;
   const t2 = hv.addText(todo.length ? "今日 " + todo.length + " 項待辦" : "今日暫無待辦");
   t2.font = Font.boldSystemFont(12);
   t2.textColor = C.cyan;
@@ -1080,7 +1183,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.19-3';
+const APP_VERSION='2026.11.19-4';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -1141,6 +1244,7 @@ function demoEvents(){
   const dw=i=>{const lv=Math.floor((18-i)/6)*2.5,g=(n,b,inc,k)=>({n,s:Array.from({length:k},(_,j)=>({w:b+lv*(b>50?4:1)+inc*Math.min(j,2),r:12-j,t:1}))});return i%2?[g('哈克',60,10,4),g('腿推',100,20,3)]:[g('飛鳥',15,2.5,4),g('臥推',40,5,4)]};
   [4,6,9,11,13,16,18,20,23,27,30,32,34,37,41,44,46,48,51].forEach((o,i)=>{const st=['18:20','18:45','19:05','07:30'][i%4],len=[62,75,55,80][i%3];out.push({id:'demogym'+i,title:'健身',date:d(-o),start:st,end:fromMin(toMin(st)+len),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:true,geo:'gym',geoOut:true,wk:dw(i),updatedAt:1})});
   const gs=Math.max(0,nowMin()-42);out.push({id:'demogymlive',title:'健身',date:d(0),start:fromMin(gs),end:fromMin(Math.min(1439,gs+40)),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:false,geo:'gym',geoSeen:Date.now(),wk:[{n:'飛鳥',s:[{w:20,r:12,t:Date.now()-900000},{w:22.5,r:10,t:Date.now()-500000}]},{n:'哈克',s:[]}],updatedAt:1});
+  out.push({id:'cfg-holidays',cfg:'holidays',list:[{id:'hd1',name:'元旦',date:'2026-01-01',yearly:true,type:'ph'},{id:'hd2',name:'澳門特別行政區成立紀念日',date:'2026-12-20',yearly:true,type:'ph'},{id:'hd3',name:'聖誕節',date:'2026-12-25',yearly:true,type:'ph'},{id:'hd4',name:'年假',date:d(9),end:d(10),type:'own'}],updatedAt:1});
   return out;
 }
 function demoChat(){
@@ -1152,7 +1256,7 @@ function demoChat(){
 const persist=()=>store.set('cal.events',events);
 const saveChat=()=>{if(chat.length>60)chat=chat.slice(-60);store.set('cal.chat',chat)};
 const saveSettings=()=>store.set('cal.settings',settings);
-const live=()=>events.filter(e=>!e.deleted);
+const live=()=>events.filter(e=>!e.deleted&&!e.cfg);
 const sortKey=e=>e.allDay?'00:00':(e.start||'23:59');
 const eventsOn=ds=>live().filter(e=>e.date===ds).sort((a,b)=>sortKey(a).localeCompare(sortKey(b)));
 const fmtDate=ds=>{const d=parseYmd(ds);return `${d.getMonth()+1}月${d.getDate()}日 星期${WK[d.getDay()]}`};
@@ -1210,7 +1314,7 @@ function renderStrip(){
   let h='<section class="glass strip">';
   for(let i=0;i<7;i++){
     const d=addDays(s,i),ds=ymd(d),load=loadOf(ds);
-    h+=`<div class="pill ${ds===today?'today':''} ${ds===selected?'sel':''}" data-pick="${ds}" role="button" tabindex="0" aria-label="${d.getMonth()+1}月${d.getDate()}日，約 ${fmtH(load)} 小時"><small>${WK[d.getDay()]}</small><b>${d.getDate()}</b><span class="load"><i style="width:${Math.min(100,load/8*100)}%"></i></span></div>`;
+    h+=`<div class="pill ${dayCls(ds)} ${ds===today?'today':''} ${ds===selected?'sel':''}" data-pick="${ds}" role="button" tabindex="0" aria-label="${d.getMonth()+1}月${d.getDate()}日，約 ${fmtH(load)} 小時"><small>${WK[d.getDay()]}</small><b>${d.getDate()}</b><span class="load"><i style="width:${Math.min(100,load/8*100)}%"></i></span></div>`;
   }
   return h+'</section>';
 }
@@ -1248,7 +1352,8 @@ function renderTimeline(ds){
   const sh=Math.min(7,Math.floor(minS/60)),eh=Math.max(23,Math.min(24,Math.ceil(maxE/60)));
   const y=m=>(m-sh*60)/60*H;
   let h='<section class="glass tlwrap">';
-  if(allday.length)h+=`<div class="allday" style="position:relative"><span class="lbl">全日</span>${allday.map(e=>`<span class="adchip ${e.done?'done':''}" data-id="${e.id}" style="--c:${e.color||COLORS[0]}">${esc(e.title)}</span>`).join('')}</div>`;
+  const hsd=holOn(ds);
+  if(allday.length||hsd.length)h+=`<div class="allday" style="position:relative"><span class="lbl">全日</span>${hsd.map(x=>`<span class="holtag ${x.type==='own'?'leave':''}" data-holedit="${x.id}">${esc(x.name)}</span>`).join('')}${allday.map(e=>`<span class="adchip ${e.done?'done':''}" data-id="${e.id}" style="--c:${e.color||COLORS[0]}">${esc(e.title)}</span>`).join('')}</div>`;
   h+=`<div class="tl" style="height:${(eh-sh)*H+8}px">`;
   const nmk=ds===todayStr()?nowMin():-999;
   for(let k=sh;k<=eh;k++){h+=`<div class="hr" style="top:${y(k*60)}px"><span>${Math.abs(k*60-nmk)<18?'':pad(k)+':00'}</span></div>`;if(k<eh)h+=`<div class="hr half" style="top:${y(k*60+30)}px"></div>`}
@@ -1268,11 +1373,11 @@ function renderMonth(){
   const first=new Date(cursor.getFullYear(),cursor.getMonth(),1);
   const start=startOfWeek(first),today=todayStr();
   const rows=addDays(start,35).getMonth()===cursor.getMonth()?6:5;
-  let h='<div class="dow">'+['一','二','三','四','五','六','日'].map((x,i)=>`<div class="${i>4?'we':''}">${x}</div>`).join('')+'</div><div class="grid">';
+  let h='<div class="dow">'+['一','二','三','四','五','六','日'].map((x,i)=>`<div class="${['','','','','','we sat','we sun'][i]}">${x}</div>`).join('')+'</div><div class="grid">';
   for(let i=0;i<rows*7;i++){
     const d=addDays(start,i),ds=ymd(d),evs=eventsOn(ds),lv=heatLevel(loadOf(ds));
-    const cls=['cell',d.getMonth()!==cursor.getMonth()?'out':'',ds===today?'today':'',ds===selected?'sel':''].join(' ');
-    h+=`<div class="${cls}" data-day="${ds}" role="button" tabindex="0" style="--heat:${HEAT[lv]}" aria-label="${d.getMonth()+1}月${d.getDate()}日，${evs.length} 個行程"><div class="n">${d.getDate()}</div>`;
+    const hs=holOn(ds),cls=['cell',dayCls(ds),d.getMonth()!==cursor.getMonth()?'out':'',ds===today?'today':'',ds===selected?'sel':''].join(' ');
+    h+=`<div class="${cls}" data-day="${ds}" role="button" tabindex="0" style="--heat:${HEAT[lv]}" aria-label="${d.getMonth()+1}月${d.getDate()}日${hs.length?'，'+hs.map(x=>x.name).join('、'):''}，${evs.length} 個行程"><div class="n">${d.getDate()}</div>${hs.length?`<div class="hn ${hs.every(x=>x.type==='own')?'leave':''}">${esc(hs[0].name)}</div>`:''}`;
     evs.slice(0,2).forEach(e=>h+=`<div class="chip ${e.done?'done':''}" style="--c:${e.color||COLORS[0]}">${esc(e.title)}</div>`);
     if(evs.length>2)h+=`<div class="more">另有 ${evs.length-2} 項</div>`;
     h+='</div>';
@@ -1296,7 +1401,8 @@ function relLabel(ds){
 }
 function renderAgenda(ds){
   const d=parseYmd(ds),evs=eventsOn(ds);
-  return `<section class="glass agenda"><div class="dayhead"><div class="bignum">${d.getDate()}</div><div class="daymeta"><b>星期${WK[d.getDay()]}</b><span>${d.getMonth()+1}月<span class="rel">${relLabel(ds)}</span></span></div><button class="addc" data-add="${ds}" aria-label="在當日新增">${ICON_PLUS}</button></div>`+
+  return `<section class="glass agenda"><div class="dayhead"><div class="bignum ${dayCls(ds)}">${d.getDate()}</div><div class="daymeta"><b class="${dayCls(ds)}">星期${WK[d.getDay()]}</b><span>${d.getMonth()+1}月<span class="rel">${relLabel(ds)}</span></span>${holOn(ds).length?'':`<button class="hlink" data-holnew="${ds}">設為假期</button>`}</div><button class="addc" data-add="${ds}" aria-label="在當日新增">${ICON_PLUS}</button></div>`+
+    holOn(ds).map(x=>`<button class="holbar ${x.type==='own'?'leave':''}" data-holedit="${x.id}"><b>${esc(x.name)}</b><small>${HOL_T[x.type]||'公眾假期'}</small></button>`).join('')+
     (evs.length?evs.map(evRow).join(''):`<div class="empty"><p>當日暫無安排</p><button class="linkbtn" data-askai="${ds}">${ICON_SPARK}交由 AI 安排</button></div>`)+'</section>';
 }
 
@@ -1309,14 +1415,15 @@ function renderBars(s,maxPx=110){
   return '<div class="bars">'+days.map(({ds,cats})=>{
     const tot=cats.reduce((a,b)=>a+b,0),d=parseYmd(ds);
     const segs=cats.map((h,i)=>h>0?`<i style="height:${h/scale*maxPx}px;background:${COLORS[i]}"></i>`:'').join('');
-    return `<div class="bcol ${ds===today?'today':''}" data-pick="${ds}" role="button" tabindex="0" aria-label="${d.getMonth()+1}月${d.getDate()}日 ${fmtH(tot)} 小時"><span class="hv">${tot?fmtH(tot)+'h':''}</span><div class="bstack" style="height:${Math.max(4,tot/scale*maxPx)}px">${segs}</div><small>${WK[d.getDay()]}</small></div>`;
+    return `<div class="bcol ${dayCls(ds)} ${ds===today?'today':''}" data-pick="${ds}" role="button" tabindex="0" aria-label="${d.getMonth()+1}月${d.getDate()}日 ${fmtH(tot)} 小時"><span class="hv">${tot?fmtH(tot)+'h':''}</span><div class="bstack" style="height:${Math.max(4,tot/scale*maxPx)}px">${segs}</div><small>${WK[d.getDay()]}</small></div>`;
   }).join('')+'</div>';
 }
 function renderWeek(s){
   const today=todayStr();let h='';
   for(let i=0;i<7;i++){
     const d=addDays(s,i),ds=ymd(d),evs=eventsOn(ds);
-    h+=`<div class="wrow ${ds===today?'today':''}"><div class="wd" data-pick="${ds}" role="button" tabindex="0" aria-label="開啟${d.getMonth()+1}月${d.getDate()}日時間軸"><small>星期${WK[d.getDay()]}</small><div class="num">${d.getDate()}</div></div><div class="wevs">`+
+    const hs=holOn(ds);
+    h+=`<div class="wrow ${dayCls(ds)} ${ds===today?'today':''}"><div class="wd" data-pick="${ds}" role="button" tabindex="0" aria-label="開啟${d.getMonth()+1}月${d.getDate()}日時間軸"><small>星期${WK[d.getDay()]}</small><div class="num">${d.getDate()}</div></div><div class="wevs">`+hs.map(x=>`<span class="holtag ${x.type==='own'?'leave':''}" data-holedit="${x.id}">${esc(x.name)}</span>`).join('')+
       (evs.length?evs.map(evRow).join(''):`<div class="wnone" data-add="${ds}"></div>`)+'</div></div>';
   }
   return h;
@@ -1387,6 +1494,8 @@ $('#main').addEventListener('click',e=>{
   if(e.target.closest('#qGo')){quickAdd();return}
   const ge=e.target.closest('[data-gyend]');if(ge){geoEnd(ge.dataset.gyend);return}
   if(e.target.closest('[data-gycheck]')){geoCheck(true);return}
+  const he=e.target.closest('[data-holedit]');if(he){openHol(holList().find(x=>x.id===he.dataset.holedit));return}
+  const hn=e.target.closest('[data-holnew]');if(hn){openHol(null,hn.dataset.holnew);return}
   const wo=e.target.closest('[data-wkopen]');if(wo){openWk(wo.dataset.wkopen);return}
   if(e.target.closest('[data-wkstart]')){wkStart();return}
   const mv=e.target.closest('[data-move]');if(mv){const[id,ds]=mv.dataset.move.split('|');moveTo([id],ds);return}
@@ -1511,6 +1620,7 @@ function chatPrompt(){
   return `你是「我的日曆」App 內的 AI 助手，負責理解使用者的指示（繁體中文、廣東話、普通話或英文），並直接管理行事曆。
 現在：${ymd(n)} ${pad(n.getHours())}:${pad(n.getMinutes())}，星期${WK[n.getDay()]}。一週由星期一開始。
 預設日期：${def}（星期${WK[parseYmd(def).getDay()]}）。使用者沒有提到任何日期時，用這個日期。
+假期（未來 120 日）：${holUpcoming(120).map(x=>x.ds+' '+x.names).join('；')||'無'}。
 分類只可以是：${CATS.map(c=>c[0]).join('、')}。
 現有行程（id 用來修改或刪除）：
 ${JSON.stringify(list)}
@@ -1674,7 +1784,11 @@ function tdRow(e,o={}){
 function greetHTML(){
   const t=todayStr(),todo=eventsOn(t).filter(e=>!e.done),od=overdueList(),all=eventsOn(t);
   const line=todo.length?`今日共有 ${todo.length} 項待辦`:all.length?'今日待辦已全部完成':'今日暫無安排';
-  return `<div class="greet"><b>${greetWord()}，${line}</b><span>${md(t)}${od.length?`　另有 ${od.length} 項逾期事項`:''}</span></div>`;
+  const wd=parseYmd(t).getDay(),hs=holOn(t),nx=holNext(t,90);
+  let tags=hs.map(x=>`<span class="daytag ${x.type==='own'?'leave':'hol'}">${HOL_T[x.type]||'公眾假期'}：${esc(x.name)}</span>`).join('');
+  if(!hs.length&&(wd===0||wd===6))tags+=`<span class="daytag ${wd===6?'sat':'sun'}">週末</span>`;
+  if(nx)tags+=`<span class="daytag">下個假期：${md(nx.ds).replace(/ 星期.$/,'')} ${esc(nx.hs.map(x=>x.name).join('、'))}（${Math.round((parseYmd(nx.ds)-parseYmd(t))/864e5)} 天後）</span>`;
+  return `<div class="greet"><b>${greetWord()}，${line}</b><span>${md(t)}${od.length?`　另有 ${od.length} 項逾期事項`:''}</span>${tags?`<div class="tags">${tags}</div>`:''}</div>`;
 }
 function renderTodo(){
   const t=todayStr(),tm=ymd(addDays(new Date(),1)),evening=new Date().getHours()>=18;
@@ -1705,7 +1819,7 @@ function renderTodo(){
   h+=`<section class="glass sect"><div class="sh"><b>後續待辦</b><span class="cnt">${fut.length}</span><span class="sd">未來 60 日</span></div>`;
   if(!fut.length)h+=`<div class="sempty">暫無後續安排。事項將於前一日自動移至「明日待辦」。</div>`;
   let lastD='';
-  for(const e of shown){if(e.date!==lastD){lastD=e.date;h+=`<div class="dgroup"><b>${relLabel(e.date)}</b>${md(e.date)}</div>`}h+=tdRow(e)}
+  for(const e of shown){if(e.date!==lastD){lastD=e.date;const hs=holOn(e.date);h+=`<div class="dgroup ${dayCls(e.date)}"><b>${relLabel(e.date)}</b>${md(e.date)}${hs.length?`<span class="dh">${esc(hs.map(x=>x.name).join('、'))}</span>`:''}</div>`}h+=tdRow(e)}
   if(fut.length>shown.length)h+=`<button class="more-btn" data-futmore>顯示全部 ${fut.length} 項</button>`;
   h+=`</section></div>`;
   return h;
@@ -1779,7 +1893,7 @@ function fillSettings(){
   $('#sBase').value=settings.baseUrl;$('#sModel').value=settings.model;$('#sKey').value=settings.apiKey;
   $('#sGh').value=settings.ghToken;$('#sGist').value=settings.gistId;$('#sAuto').checked=settings.autoSync;
   $('#sMode').value=settings.syncMode;$('#sGdUrl').value=settings.gdUrl||'';$('#sGdKey').value=settings.gdKey||'';showSyncGroup();
-  $('#sGeoAuto').checked=settings.geoAuto!==false;renderPlaces();
+  $('#sGeoAuto').checked=settings.geoAuto!==false;renderPlaces();renderHolList();
   $('#sBrief').checked=settings.brief!==false;$('#sEve').checked=settings.eve!==false;
   $('#sRemName').value=settings.remName||'';$('#sRemLead').value=String(settings.remLead??15);
   const p=[...$('#sPreset').options].find(o=>o.value===settings.baseUrl+'|'+settings.model);$('#sPreset').value=p?p.value:'';
@@ -1964,7 +2078,7 @@ $('#impBtn').onclick=()=>$('#impFile').click();
 $('#impFile').onchange=async e=>{
   const f=e.target.files[0];if(!f)return;
   try{const t=await f.text();let list;
-    if(/BEGIN:VCALENDAR/.test(t))list=parseICS(t);else{const j=JSON.parse(t);list=(j.events||j).filter(x=>x&&x.id&&x.date)}
+    if(/BEGIN:VCALENDAR/.test(t))list=parseICS(t);else{const j=JSON.parse(t);list=(j.events||j).filter(x=>x&&x.id&&(x.date||x.cfg))}
     events=merge(events,list);persist();render();toast(`已匯入 ${list.length} 個行程`);scheduleSync();
   }catch(err){toast('匯入失敗：'+err.message,3500)}
   e.target.value='';
@@ -2245,6 +2359,106 @@ function trainCard(s){
     rows.slice(0,10).map(o=>`<div class="trn-r"><b>${esc(o.n)}</b><span class="spk" aria-label="最近 8 週：${o.w.join('、')} 組">${o.w.map((v,i)=>`<i class="${i===7?'cur':''}" style="height:${v?Math.max(16,v/mx*100):8}%;opacity:${v?1:.25}"></i>`).join('')}</span><em>${o.w[7]} 組</em><small>${o.best?fmtW(o.best):'自重'}</small></div><div class="trn-l">上次 ${mdShort(o.last.date)}：${o.last.n} 組，最重 ${fmtSet(o.last.top)}</div>`).join('')+
     `</div></section>`;
 }
+
+/* ---------- 假期 ---------- */
+const HOL_T={ph:'公眾假期',comp:'補假',own:'自訂假期'};
+const holCfg=()=>events.find(e=>e.id==='cfg-holidays'&&!e.deleted);
+function holList(){const c=holCfg();return c&&Array.isArray(c.list)?c.list:[]}
+function holSave(list){
+  let c=events.find(e=>e.id==='cfg-holidays');
+  if(!c){c={id:'cfg-holidays',cfg:'holidays',list:[]};events.push(c)}
+  c.deleted=false;c.list=list;c.updatedAt=Date.now();persist();scheduleSync();
+}
+const holEnd=h=>h.end&&h.end>=h.date?h.end:h.date;
+function holOn(ds){
+  const out=[],md_=ds.slice(5);
+  for(const h of holList()){
+    if(!h||!okDate(h.date))continue;const a=h.date,b=holEnd(h);
+    if(h.yearly){const am=a.slice(5),bm=b.slice(5);if(am<=bm?(md_>=am&&md_<=bm):(md_>=am||md_<=bm))out.push(h)}
+    else if(ds>=a&&ds<=b)out.push(h);
+  }
+  return out;
+}
+function dayCls(ds){
+  const w=parseYmd(ds).getDay(),hs=holOn(ds),c=[];
+  if(w===6)c.push('sat');if(w===0)c.push('sun');
+  if(hs.some(x=>x.type!=='own'))c.push('hol');else if(hs.length)c.push('leave');
+  return c.join(' ');
+}
+function holNext(from,days){for(let i=1;i<=days;i++){const ds=ymd(addDays(parseYmd(from),i)),hs=holOn(ds);if(hs.length)return{ds,hs}}return null}
+function holUpcoming(days){const out=[],t=new Date();for(let i=0;i<=days;i++){const ds=ymd(addDays(t,i)),hs=holOn(ds);if(hs.length)out.push({ds,names:hs.map(x=>x.name).join('、')})}return out}
+function holNextOcc(h){
+  const t=todayStr();if(!h.yearly)return{s:h.date,e:holEnd(h)};
+  const len=Math.round((parseYmd(holEnd(h))-parseYmd(h.date))/864e5);
+  for(let y=+t.slice(0,4)-1;y<=+t.slice(0,4)+1;y++){const s=y+h.date.slice(4),e=ymd(addDays(parseYmd(s),len));if(e>=t)return{s,e}}
+  return{s:h.date,e:holEnd(h)};
+}
+function renderHolList(){
+  const el=$('#holList');if(!el)return;const t=todayStr();
+  const rows=holList().map(h=>({h,...holNextOcc(h)})).sort((a,b)=>a.s.localeCompare(b.s));
+  const up=rows.filter(r=>r.e>=t),past=rows.filter(r=>r.e<t).reverse();
+  const row=r=>{const d=parseYmd(r.s),span=r.e!==r.s?`至 ${mdShort(r.e)}　`:'';
+    return `<button class="hol-row ${r.h.type==='own'?'leave':''} ${r.e<t?'past':''}" data-holid="${r.h.id}"><div class="hd"><b>${d.getMonth()+1}/${d.getDate()}</b><small>星期${WK[d.getDay()]}</small></div><div class="hb"><b>${esc(r.h.name)}</b><span>${HOL_T[r.h.type]||'公眾假期'}　${span}${r.h.yearly?'每年重複':r.s.slice(0,4)+' 年'}</span></div></button>`};
+  let h='',yr='';
+  for(const r of up){const y=r.s.slice(0,4);if(y!==yr){yr=y;h+=`<div class="hol-yr">${y} 年</div>`}h+=row(r)}
+  if(past.length)h+=`<details class="donefold"><summary>已過去的假期 ${past.length} 項</summary>${past.map(row).join('')}</details>`;
+  el.innerHTML=h||'<p class="hint" style="margin:0 0 12px">尚未加入假期。</p>';
+}
+$('#holList').onclick=e=>{const b=e.target.closest('[data-holid]');if(b)openHol(holList().find(x=>x.id===b.dataset.holid))};
+let hlEditing=null,hlType='ph',hlDelArmed=false;
+const paintHlType=()=>document.querySelectorAll('#hlType button').forEach(b=>b.classList.toggle('on',b.dataset.t===hlType));
+$('#hlType').onclick=e=>{const b=e.target.closest('[data-t]');if(b){hlType=b.dataset.t;paintHlType()}};
+function openHol(h,ds){
+  hlEditing=h||null;hlType=h?h.type||'ph':'ph';hlDelArmed=false;
+  $('#hlTitle').textContent=h?'編輯假期':'新增假期';$('#hlName').value=h?h.name:'';
+  $('#hlDate').value=h?holNextOcc(h).s:(ds||selected||todayStr());$('#hlEnd').value=h&&h.end&&h.end!==h.date?holNextOcc(h).e:'';
+  $('#hlYearly').checked=!!(h&&h.yearly);$('#hlDel').style.display=h?'':'none';$('#hlDel').textContent='刪除';
+  paintHlType();openOv('#ovHol');if(!h)setTimeout(()=>$('#hlName').focus(),260);
+}
+$('#holAdd').onclick=()=>openHol(null,todayStr());
+$('#hlSave').onclick=()=>{
+  const name=$('#hlName').value.trim().slice(0,30),date=$('#hlDate').value;let end=$('#hlEnd').value;
+  if(!name){toast('請填寫假期名稱');$('#hlName').focus();return}
+  if(!okDate(date)){toast('請選擇開始日期');return}
+  if(end&&end<date){toast('結束日期不可早於開始日期');return}
+  if(end===date)end='';
+  const rec={name,date,type:hlType,yearly:$('#hlYearly').checked};if(end)rec.end=end;
+  const list=holList().slice();
+  if(hlEditing){const i=list.findIndex(x=>x.id===hlEditing.id);list[i>=0?i:list.length]={id:hlEditing.id,...rec}}
+  else list.push({id:'h'+uid().slice(-7),...rec});
+  holSave(list);closeOv($('#ovHol'));renderHolList();const y=window.scrollY;render();window.scrollTo(0,y);toast('已儲存假期');
+};
+$('#hlDel').onclick=()=>{
+  if(!hlEditing)return;
+  if(!hlDelArmed){hlDelArmed=true;$('#hlDel').textContent='再按一次確認';setTimeout(()=>{hlDelArmed=false;$('#hlDel').textContent='刪除'},2500);return}
+  holSave(holList().filter(x=>x.id!==hlEditing.id));closeOv($('#ovHol'));renderHolList();render();toast('已刪除假期');
+};
+function parseHolLines(txt){
+  const D=String.raw`(?:(\d{4})\s*[-/.年]\s*)?(\d{1,2})\s*[-/.月]\s*(\d{1,2})\s*日?`;
+  const re=new RegExp(String.raw`^\s*`+D+String.raw`(?:\s*(?:[（(][^）)]*[）)])?\s*(?:至|到|~|～|–|—|-)\s*`+D+String.raw`)?\s*(?:[（(][^）)]*[）)])?[\s,，、:：]*(.+?)\s*$`);
+  const cy=new Date().getFullYear(),ok=[],bad=[];
+  for(const raw of String(txt).split(/\r?\n/)){
+    const line=raw.trim();if(!line)continue;const m=line.match(re);
+    if(!m){bad.push(line);continue}
+    const yearly=!m[1],y=+(m[1]||cy),date=`${y}-${pad(+m[2])}-${pad(+m[3])}`;
+    let end='';if(m[5]){let y2=+(m[4]||y);end=`${y2}-${pad(+m[5])}-${pad(+m[6])}`;if(end<date&&!m[4])end=`${y2+1}-${pad(+m[5])}-${pad(+m[6])}`}
+    const name=m[7].replace(/^[（(][^）)]*[）)]\s*/,'').trim().slice(0,30);
+    const valid=s=>{const[a,b,c]=s.split('-').map(Number),dt=new Date(a,b-1,c);return dt.getMonth()===b-1&&dt.getDate()===c};
+    if(!name||!valid(date)||(end&&!valid(end))){bad.push(line);continue}
+    const type=/補假/.test(name)?'comp':/年假|休假|請假|私人|自訂/.test(name)?'own':'ph';
+    const rec={name,date,type,yearly};if(end&&end>date)rec.end=end;ok.push(rec);
+  }
+  return{ok,bad};
+}
+$('#holBulk').onclick=()=>{$('#hbText').value='';openOv('#ovHolBulk');setTimeout(()=>$('#hbText').focus(),260)};
+$('#hbGo').onclick=()=>{
+  const{ok,bad}=parseHolLines($('#hbText').value);
+  if(!ok.length){toast(bad.length?'未能辨識日期，請以「2026-12-25 聖誕節」格式輸入':'請輸入假期',3500);return}
+  const list=holList().slice();let n=0;
+  for(const r of ok){if(list.some(x=>x.date===r.date&&x.name===r.name))continue;list.push({id:'h'+uid().slice(-7),...r});n++}
+  holSave(list);closeOv($('#ovHolBulk'));renderHolList();render();
+  toast(`已加入 ${n} 項假期${bad.length?`，${bad.length} 行未能辨識`:''}`,3500);
+};
 
 autosize();
 render();
