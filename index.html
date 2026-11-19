@@ -430,7 +430,8 @@ body.typing.ai .dock{display:none}
 @media (prefers-reduced-motion:reduce){.slide-l,.slide-r{animation:none}}
 
 /* ---------- 地點打卡 ---------- */
-.gycard{display:flex;align-items:center;gap:14px;padding:14px 16px}
+.gycard{padding:14px 16px}
+.gy-top{display:flex;align-items:center;gap:12px}
 .gycard.live{border-color:rgba(63,224,165,.45);background:linear-gradient(120deg,rgba(63,224,165,.17),rgba(20,30,70,.52) 62%)}
 .gy-pin{position:relative;width:44px;height:44px;border-radius:15px;display:grid;place-items:center;flex:none;color:var(--ok);background:rgba(63,224,165,.12);border:1px solid rgba(63,224,165,.3)}
 .gy-pin svg{width:22px;height:22px}
@@ -441,7 +442,12 @@ body.typing.ai .dock{display:none}
 .gy-b span{display:block;font-size:13px;color:var(--muted);margin-top:3px;line-height:1.45}
 .gy-b em{font-style:normal;font-family:var(--num);color:var(--ok);font-weight:600}
 .gy-go{flex:none;font-size:13.5px;padding:9px 14px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink)}
-.gycard.live .gy-go{background:var(--ok);color:#04261A;border-color:transparent;font-weight:700}
+.gy-go.pri{background:var(--ok);color:#04261A;border-color:transparent;font-weight:700}
+.gy-sum{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05);font-size:13.5px;line-height:1.55}
+.gy-sum em{font-style:normal;font-family:var(--num);color:var(--ok);font-weight:600}
+.gy-acts{display:flex;gap:8px;margin-top:10px}
+.gy-acts .gy-go{flex:1;padding:12px;display:flex;align-items:center;justify-content:center;gap:6px}
+.gy-acts .gy-go svg{width:18px;height:18px}
 .gy-go:disabled{opacity:.6}
 @media (prefers-reduced-motion:reduce){.gycard.live .gy-pin::after{animation:none;opacity:.5}}
 .plc{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;margin-bottom:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);text-align:left;color:var(--ink)}
@@ -463,6 +469,51 @@ body.typing.ai .dock{display:none}
 .hbars i.cur{outline:1.5px solid var(--ok);outline-offset:2px}
 .hlbl{display:flex;gap:6px;margin-top:7px}
 .hlbl span{flex:1;text-align:center;font-size:10.5px;color:var(--faint);font-family:var(--num)}
+
+/* ---------- 健身紀錄 ---------- */
+.wk-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:linear-gradient(120deg,rgba(63,224,165,.16),rgba(255,255,255,.03));border:1px solid rgba(63,224,165,.3);margin-bottom:14px}
+.wk-head .wh{flex:1;min-width:0}
+.wk-head .wh b{display:block;font-size:16px;font-weight:700}
+.wk-head .wh span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.wk-tot{text-align:right;padding-left:12px;border-left:1px solid var(--line)}
+.wk-tot b{display:block;font-family:var(--num);font-size:20px;font-weight:600;color:var(--ok);line-height:1.15}
+.wk-tot span{font-size:11px;color:var(--muted)}
+.wkx{padding:14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--line);margin-bottom:12px}
+.wkx-h{display:flex;align-items:baseline;gap:8px}
+.wkx-h b{font-size:17px;font-weight:700}
+.wkx-h span{flex:1;font-size:12.5px;color:var(--muted)}
+.wkx-rm{font-size:12.5px;color:var(--danger);padding:2px 4px}
+.wkx-last{font-size:12.5px;color:var(--faint);margin-top:3px}
+.wkx-sets{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.wkx-sets button{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;background:rgba(63,224,165,.1);border:1px solid rgba(63,224,165,.25);font-family:var(--num);font-size:13px;color:var(--ink)}
+.wkx-sets button i{font-style:normal;font-size:11px;color:var(--ok)}
+.wkx-sets button.arm{background:rgba(255,92,122,.15);border-color:rgba(255,92,122,.5);color:var(--danger)}
+.wkx-ctl{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stp{display:flex;align-items:center;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line);overflow:hidden}
+.stp button{width:42px;height:46px;font-size:21px;color:var(--cyan);flex:none}
+.stp input{flex:1;min-width:0;width:40px;text-align:center;border:0;background:none;padding:0;font-family:var(--num);font-size:18px;font-weight:600;border-radius:0}
+.stp input:focus{box-shadow:none}
+.stp small{font-size:11.5px;color:var(--muted)}
+.wkx-go{grid-column:1/-1;padding:13px;border-radius:14px;background:var(--ok);color:#04261A;font-weight:700;font-size:15px}
+.wk-lbl{font-size:13px;color:var(--muted);margin:6px 0 8px}
+.wk-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.wk-chips button{padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:13.5px;color:var(--ink)}
+.wk-chips button.used{border-color:rgba(63,224,165,.45)}
+.wk-cus{display:flex;gap:8px}
+.wk-cus button{flex:none;padding:0 18px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-weight:700}
+.wk-empty{padding:16px;border-radius:16px;border:1px dashed var(--line-hi);color:var(--muted);font-size:14px;text-align:center;margin-bottom:12px;line-height:1.55}
+.trn{padding:6px 16px 12px}
+.trn-h,.trn-r{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) 50px 64px;gap:10px;align-items:center}
+.trn-h{font-size:11.5px;color:var(--faint);padding:6px 0}
+.trn-h span:nth-child(n+3){text-align:right}
+.trn-r{padding:10px 0 2px;border-top:1px solid var(--line)}
+.trn-r b{font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spk{display:flex;align-items:flex-end;gap:3px;height:26px}
+.spk i{flex:1;border-radius:3px;background:var(--ok)}
+.spk i.cur{outline:1.5px solid var(--ink);outline-offset:1px}
+.trn-r em{font-style:normal;font-family:var(--num);color:var(--ok);font-weight:600;font-size:14px;text-align:right}
+.trn-r small{font-family:var(--num);font-size:13px;text-align:right}
+.trn-l{font-size:12px;color:var(--muted);padding:2px 0 10px}
 </style>
 </head>
 <body>
@@ -518,6 +569,7 @@ body.typing.ai .dock{display:none}
   <div class="field"><label for="fLoc">地點</label><input id="fLoc" placeholder="可留空"></div>
   <div class="field"><label for="fNotes">備註</label><textarea id="fNotes" placeholder="可留空" style="min-height:70px;resize:vertical"></textarea></div>
   <div class="field" id="doneRow"><label class="toggle">已完成<input type="checkbox" id="fDone"></label></div>
+  <button class="btn ghost rem" id="wkOpenEd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg>健身紀錄</button>
   <button class="btn ghost rem" id="remOne"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>加入 iPhone 提醒事項</button>
   <div class="actions">
     <button class="btn danger" id="delBtn">刪除</button>
@@ -663,6 +715,13 @@ body.typing.ai .dock{display:none}
     <li>重複以上步驟，建立 <b>離開</b> 自動化<span class="sub">網址改為貼上「離開」網址。停留少於 10 分鐘（例如路過）不會留下記錄。</span></li>
   </ol>
   <div class="actions" style="margin-top:14px"><button class="btn ghost" data-close>完成</button></div>
+</div></div>
+
+<!-- Workout log -->
+<div class="overlay" id="ovWk"><div class="sheet" role="dialog" aria-label="健身紀錄">
+  <h3><span>健身紀錄</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div id="wkBody"></div>
+  <div class="actions" style="margin-top:16px"><button class="btn ghost" data-close>完成</button><button class="btn primary" id="wkEnd">結束健身</button></div>
 </div></div>
 
 <!-- Code viewer -->
@@ -1021,7 +1080,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.19-2';
+const APP_VERSION='2026.11.19-3';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -1079,8 +1138,9 @@ function demoEvents(){
     [8,'期中考','09:30','11:30',1,'教學樓 A201','',0],[10,'報名截止','','',1,'','',0],[12,'部門例會','09:30','10:30',0,'三樓會議室','',0],
   ];
   const out=list.map(([o,title,s,e,c,loc,notes,done],i)=>({id:'demo'+i,title,date:d(o),start:s,end:e,allDay:!s,color:C(c),location:loc,notes,done:!!done,updatedAt:1}));
-  [4,6,9,11,13,16,18,20,23,27,30,32,34,37,41,44,46,48,51].forEach((o,i)=>{const st=['18:20','18:45','19:05','07:30'][i%4],len=[62,75,55,80][i%3];out.push({id:'demogym'+i,title:'健身',date:d(-o),start:st,end:fromMin(toMin(st)+len),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:true,geo:'gym',geoOut:true,updatedAt:1})});
-  const gs=Math.max(0,nowMin()-42);out.push({id:'demogymlive',title:'健身',date:d(0),start:fromMin(gs),end:fromMin(Math.min(1439,gs+40)),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:false,geo:'gym',geoSeen:Date.now(),updatedAt:1});
+  const dw=i=>{const lv=Math.floor((18-i)/6)*2.5,g=(n,b,inc,k)=>({n,s:Array.from({length:k},(_,j)=>({w:b+lv*(b>50?4:1)+inc*Math.min(j,2),r:12-j,t:1}))});return i%2?[g('哈克',60,10,4),g('腿推',100,20,3)]:[g('飛鳥',15,2.5,4),g('臥推',40,5,4)]};
+  [4,6,9,11,13,16,18,20,23,27,30,32,34,37,41,44,46,48,51].forEach((o,i)=>{const st=['18:20','18:45','19:05','07:30'][i%4],len=[62,75,55,80][i%3];out.push({id:'demogym'+i,title:'健身',date:d(-o),start:st,end:fromMin(toMin(st)+len),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:true,geo:'gym',geoOut:true,wk:dw(i),updatedAt:1})});
+  const gs=Math.max(0,nowMin()-42);out.push({id:'demogymlive',title:'健身',date:d(0),start:fromMin(gs),end:fromMin(Math.min(1439,gs+40)),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:false,geo:'gym',geoSeen:Date.now(),wk:[{n:'飛鳥',s:[{w:20,r:12,t:Date.now()-900000},{w:22.5,r:10,t:Date.now()-500000}]},{n:'哈克',s:[]}],updatedAt:1});
   return out;
 }
 function demoChat(){
@@ -1287,7 +1347,7 @@ function renderStats(s){
   const dl=`<section class="glass"><div class="ptitle">截止及考試<span>未來 30 日</span></div>`+(dues.length?dues.map(e=>{
     const diff=Math.round((parseYmd(e.date)-parseYmd(today))/864e5),over=diff<0;
     return `<div class="dl ${over?'overdue':''}" data-goto="${e.date}" style="--c:${e.color}" role="button" tabindex="0"><div class="cd"><b>${over?-diff:diff}</b><span>${over?'天前':diff===0?'今天':'天後'}</span></div><div class="b"><div class="ti">${esc(e.title)}</div><div class="meta">${fmtDate(e.date)}　${fmtTime(e)}${over?'　已逾期':''}</div></div><button class="chk" data-done="${e.id}" style="--c:${e.color}" aria-label="標記完成"></button></div>`}).join(''):'<div class="none">未來 30 日沒有截止事項。把行程分類設為「截止」就會顯示在這裡。</div>')+'</section>';
-  return `<div class="stats">${ring}${habitCard(s)}${bars}${cats}${dl}</div>`;
+  return `<div class="stats">${ring}${habitCard(s)}${trainCard(s)}${bars}${cats}${dl}</div>`;
 }
 function renderSyncStatus(){
   const el=$('#syncStatus');el.classList.toggle('err',!!syncError);
@@ -1327,6 +1387,8 @@ $('#main').addEventListener('click',e=>{
   if(e.target.closest('#qGo')){quickAdd();return}
   const ge=e.target.closest('[data-gyend]');if(ge){geoEnd(ge.dataset.gyend);return}
   if(e.target.closest('[data-gycheck]')){geoCheck(true);return}
+  const wo=e.target.closest('[data-wkopen]');if(wo){openWk(wo.dataset.wkopen);return}
+  if(e.target.closest('[data-wkstart]')){wkStart();return}
   const mv=e.target.closest('[data-move]');if(mv){const[id,ds]=mv.dataset.move.split('|');moveTo([id],ds);return}
   const ma=e.target.closest('[data-moveall]');if(ma){moveTo(overdueList().map(x=>x.id),ma.dataset.moveall);return}
   if(e.target.closest('[data-futmore]')){futExpanded=true;const y=window.scrollY;render();window.scrollTo(0,y);return}
@@ -1380,7 +1442,7 @@ function openEditor(ev,date,preset){
   editColor=COLORS.includes(src.color)?src.color:COLORS[0];paintCats();
   $('#timeRow').style.display=src.allDay?'none':'flex';
   $('#delBtn').style.display=ev?'block':'none';$('#doneRow').style.display=ev?'block':'none';
-  $('#remOne').style.display=ev?'flex':'none';
+  $('#remOne').style.display=ev?'flex':'none';$('#wkOpenEd').style.display=ev&&catIdx(src.color)===3?'flex':'none';
   openOv('#ovEdit');
   if(!ev)setTimeout(()=>$('#fTitle').focus(),260);
 }
@@ -1606,7 +1668,7 @@ function nowNext(){
 function tdRow(e,o={}){
   const tm=o.showDate?`<div class="tm">${parseYmd(e.date).getDate()}日<small>${relLabel(e.date)}</small></div>`
     :e.allDay?`<div class="tm"><span class="ad">全日</span></div>`:`<div class="tm">${e.start||''}<small>${e.end||''}</small></div>`;
-  const meta=[o.showDate?fmtTime(e):'',e.location,e.notes].filter(Boolean).join('　');
+  const meta=[o.showDate?fmtTime(e):'',e.location,wkSummary(e)||e.notes].filter(Boolean).join('　');
   return `<div class="td ${e.done?'done':''} ${o.now?'now':''}" data-id="${e.id}" style="--c:${e.color||COLORS[0]}" tabindex="0"><button class="chk ${e.done?'on':''}" data-done="${e.id}" aria-label="標記完成"></button>${tm}<div class="bar"></div><div class="b"><div class="ti">${esc(e.title)}</div>${meta?`<div class="meta">${esc(meta)}</div>`:''}</div>${o.act||''}</div>`;
 }
 function greetHTML(){
@@ -1751,9 +1813,13 @@ async function gh(path,opt={}){
   if(!r.ok)throw new Error(r.status===401?'GitHub Token 不正確':r.status===404?'找不到這個 Gist，請檢查 ID 和 Token 權限':'GitHub 回應 '+r.status);
   return r.json();
 }
+const evSig=l=>l.map(e=>e.id+':'+(e.updatedAt||0)).sort().join('|');
 function merge(a,b){
   const m=new Map();
-  for(const e of [...a,...b]){const o=m.get(e.id);if(!o||(e.updatedAt||0)>(o.updatedAt||0))m.set(e.id,e)}
+  for(const e of [...a,...b]){const o=m.get(e.id);if(!o){m.set(e.id,e);continue}
+    let w=(e.updatedAt||0)>(o.updatedAt||0)?e:o;const l=w===e?o:e;
+    if(!w.deleted&&(l.wkAt||0)>(w.wkAt||0))w={...w,wk:l.wk,wkAt:l.wkAt,updatedAt:Math.max(w.updatedAt||0,l.updatedAt||0)+1};
+    m.set(e.id,w)}
   const cutoff=Date.now()-90*864e5;
   return [...m.values()].filter(e=>!(e.deleted&&(e.updatedAt||0)<cutoff));
 }
@@ -1773,7 +1839,7 @@ async function sync(manual){
   try{
     if(settings.syncMode==='gdrive'){
       const remote=await syncDrive();const merged=merge(events,remote);const dd=geoDedupe(merged);const changedLocal=dd||JSON.stringify(merged)!==JSON.stringify(events);
-      events=merged;persist();settings.lastSync=Date.now();saveSettings();if(dd)syncAgain=true;
+      events=merged;persist();settings.lastSync=Date.now();saveSettings();if(dd||evSig(merged)!==evSig(remote))syncAgain=true;
       if(changedLocal&&view!=='ai'){const y=window.scrollY;render();window.scrollTo(0,y)}
       if(manual)toast('已與 Google Drive 同步');
       return;
@@ -1918,8 +1984,8 @@ function getPos(fresh){return new Promise((res,rej)=>{
     {enableHighAccuracy:true,timeout:15000,maximumAge:fresh?0:20000});
 })}
 async function geoPermitted(){if(settings.geoOk)return true;try{return (await navigator.permissions.query({name:'geolocation'})).state==='granted'}catch(e){return false}}
-const isWorkout=e=>!e.deleted&&catIdx(e.color)===3&&!!(e.geo||e.done);
-function geoActive(){const t=todayStr(),y=ymd(addDays(new Date(),-1));return live().filter(e=>e.geo&&!e.geoOut&&(e.date===t||e.date===y)).sort((a,b)=>(b.date+b.start).localeCompare(a.date+a.start))}
+const isWorkout=e=>!e.deleted&&catIdx(e.color)===3&&!!(e.geo||e.wkLive||e.done||(e.wk&&e.wk.length));
+function geoActive(){const t=todayStr(),y=ymd(addDays(new Date(),-1));return live().filter(e=>(e.geo||e.wkLive)&&!e.geoOut&&(e.date===t||e.date===y)).sort((a,b)=>(b.date+b.start).localeCompare(a.date+a.start))}
 const geoElapsed=e=>Math.max(0,(e.date===todayStr()?nowMin():toMin(e.end||e.start))-toMin(e.start));
 const geoFixEnd=e=>{if(toMin(e.end)<=toMin(e.start))e.end=fromMin(Math.min(toMin(e.start)+1,1439))};
 function geoStart(p,auto){
@@ -1940,7 +2006,7 @@ function geoClose(e,how){
 function geoEnd(id){
   const e=events.find(x=>x.id===id&&!x.deleted);if(!e)return;
   geoClose(e,'manual');persist();scheduleSync();const y=window.scrollY;render();window.scrollTo(0,y);
-  toast(`已結束${e.title}，共 ${durTxt(toMin(e.end)-toMin(e.start))}`);
+  const n=wkSets(e);toast(`已結束${e.title}，共 ${durTxt(toMin(e.end)-toMin(e.start))}${n?`，完成 ${n} 組`:''}`,3500);
 }
 async function geoCheck(manual){
   const pl=settings.places||[];
@@ -1954,7 +2020,7 @@ async function geoCheck(manual){
     let best=null;for(const p of pl){const d=distM(c.latitude,c.longitude,p.lat,p.lng);if(!best||d<best.d)best={p,d}}
     const inside=!!best&&best.d<=best.p.r+Math.min(c.accuracy||0,100);
     const now=Date.now(),t=todayStr();let msg='',changed=false;
-    for(const e of geoActive()){
+    for(const e of geoActive().filter(x=>x.geo)){
       if(inside&&e.geo===best.p.id&&e.date===t){e.end=hmNow();geoFixEnd(e);e.geoSeen=now;e.updatedAt=now;changed=true;if(manual)msg=`${e.title}進行中，已記錄至 ${e.end}`}
       else{const r=geoClose(e,'left');changed=true;msg=r==='short'?`停留少於 ${GEO_MIN} 分鐘，未有記錄${e.title}`:`已結束${e.title}，共 ${durTxt(toMin(e.end)-toMin(e.start))}`}
     }
@@ -1962,11 +2028,11 @@ async function geoCheck(manual){
       const recent=live().some(e=>e.geo===best.p.id&&e.geoOut&&e.date===t&&nowMin()-toMin(e.end)<45);
       if(manual||!recent){geoStart(best.p,!manual);changed=true;msg=`已到達${best.p.name}，開始記錄${best.p.act||'健身'}`}
     }
-    if(!msg&&manual)msg=`目前不在已設定的地點（距離${best.p.name}約 ${fmtDist(best.d)}）`;
+    if(!msg&&manual){msg=`目前不在已設定的地點（距離${best.p.name}約 ${fmtDist(best.d)}）`;geoMissAt=Date.now()}
     if(changed){persist();scheduleSync()}
     if(msg)toast(msg,3500);
-  }catch(err){if(manual)toast(err.message,5000)}
-  finally{geoBusy=false;if(view==='todo'&&!document.querySelector('.overlay.show')){const y=window.scrollY;render();window.scrollTo(0,y)}}
+  }catch(err){if(manual){toast(err.message,5000);geoMissAt=Date.now()}}
+  finally{geoBusy=false;if(view==='todo'&&!document.querySelector('.overlay.show')){const y=window.scrollY;render();window.scrollTo(0,y)}maybeWkPrompt()}
 }
 async function geoAutoCheck(){
   if(DEMO||settings.geoAuto===false||!(settings.places||[]).length||document.visibilityState!=='visible')return;
@@ -1995,11 +2061,17 @@ setInterval(()=>{document.querySelectorAll('[data-gyel]').forEach(el=>{const e=e
 
 function weekWorkouts(s){const a=ymd(s),b=ymd(addDays(s,6));return live().filter(e=>isWorkout(e)&&e.date>=a&&e.date<=b)}
 function gymCard(){
-  const pl=settings.places||[],act=geoActive()[0];
-  if(act)return `<section class="glass gycard live"><div class="gy-pin">${ICON_PIN}</div><div class="gy-b"><b>${esc(act.title)}中</b><span>已進行 <em data-gyel="${act.id}">${durTxt(geoElapsed(act))}</em></span><span>${act.start} 開始${act.location?'　'+esc(act.location):''}</span></div><button class="gy-go" data-gyend="${act.id}">結束</button></section>`;
+  const pl=settings.places||[],act=geoActive()[0],t=todayStr();
+  if(act){const n=wkSets(act);
+    return `<section class="glass gycard live"><div class="gy-top"><div class="gy-pin">${ICON_PIN}</div><div class="gy-b"><b>${esc(act.title)}中</b><span>已進行 <em data-gyel="${act.id}">${durTxt(geoElapsed(act))}</em>　${act.start} 開始${act.location?'　'+esc(act.location):''}</span></div></div>
+      <div class="gy-sum">${n?`${esc(wkSummary(act))}　共 <em>${n}</em> 組`:'尚未記錄動作。點選「健身紀錄」，逐組記下重量及次數。'}</div>
+      <div class="gy-acts"><button class="gy-go pri" data-wkopen="${act.id}">${DUMB}健身紀錄</button><button class="gy-go" data-gyend="${act.id}">結束健身</button></div></section>`}
+  const fin=live().filter(e=>e.date===t&&catIdx(e.color)===3&&((e.geo||e.wkLive)?e.geoOut:wkSets(e)>0)).sort((a,b)=>b.start.localeCompare(a.start))[0];
+  if(fin){const n=wkSets(fin),mins=toMin(fin.end||fin.start)-toMin(fin.start);
+    return `<section class="glass gycard"><div class="gy-top"><div class="gy-pin">${DUMB}</div><div class="gy-b"><b>今日${esc(fin.title)}已完成</b><span>${mins>0?durTxt(mins):''}${n?`　共 <em>${n}</em> 組`:''}${fin.location?'　'+esc(fin.location):''}</span></div><button class="gy-go" data-wkopen="${fin.id}">查看紀錄</button></div>${n?`<div class="gy-sum">${esc(wkSummary(fin))}</div>`:''}</section>`}
   if(!pl.length)return '';
-  const n=weekWorkouts(startOfWeek(new Date())).length;
-  return `<section class="glass gycard"><div class="gy-pin">${ICON_PIN}</div><div class="gy-b"><b>地點打卡</b><span>${esc(pl.map(p=>p.name).join('、'))}　本週已運動 <em>${n}</em> 次</span></div><button class="gy-go" data-gycheck ${geoBusy?'disabled':''}>${geoBusy?'偵測中…':'打卡'}</button></section>`;
+  const n=weekWorkouts(startOfWeek(new Date())).length,miss=Date.now()-geoMissAt<180000;
+  return `<section class="glass gycard"><div class="gy-top"><div class="gy-pin">${ICON_PIN}</div><div class="gy-b"><b>地點打卡</b><span>${esc(pl.map(p=>p.name).join('、'))}　本週已運動 <em>${n}</em> 次</span></div>${miss?'<button class="gy-go" data-wkstart>仍然開始</button>':''}<button class="gy-go" data-gycheck ${geoBusy?'disabled':''}>${geoBusy?'偵測中…':'打卡'}</button></div></section>`;
 }
 function habitCard(s){
   const W=[];for(let i=7;i>=0;i--){const ws=addDays(s,-7*i),l=weekWorkouts(ws);W.push({ws,n:l.length,h:l.reduce((x,e)=>x+hoursOf(e),0)})}
@@ -2061,6 +2133,119 @@ $('#geoHelp').onclick=()=>{
 };
 $('#geoUrls').onclick=e=>{const b=e.target.closest('[data-gu]');if(!b)return;const[id,a]=b.dataset.gu.split('|');const p=settings.places.find(x=>x.id===id);if(p)copyText(geoUrl(p,a),a==='in'?'「到達」網址':'「離開」網址')};
 
+/* ---------- 健身紀錄 ---------- */
+const DUMB='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg>';
+const WK_PRESET=['飛鳥','哈克','臥推','上斜臥推','深蹲','腿推','腿屈伸','腿彎舉','硬拉','羅馬尼亞硬拉','引體上升','高位下拉','坐姿划船','肩推','側平舉','面拉','二頭彎舉','三頭下壓','臀推','卷腹'];
+const WK_BODY=/引體|卷腹|掌上壓|伏地挺身|平板|雙槓/;
+let wkId=null,wkDraft={},wkArm='',wkArmT=null,wkTimer=null,geoMissAt=0;
+const wkSets=e=>(e&&e.wk||[]).reduce((a,x)=>a+x.s.length,0);
+const wkVol=e=>(e&&e.wk||[]).reduce((a,x)=>a+x.s.reduce((b,s)=>b+(+s.w||0)*(+s.r||0),0),0);
+const fmtW=w=>+w?`${+(+w).toFixed(2)}kg`:'自重';
+const fmtSet=s=>`${fmtW(s.w)} × ${s.r}`;
+const mdShort=ds=>{const d=parseYmd(ds);return `${d.getMonth()+1}月${d.getDate()}日`};
+const mmss=ms=>{const s=Math.max(0,Math.floor(ms/1000));return Math.floor(s/60)+':'+pad(s%60)};
+function wkSummary(e){return e&&e.wk?e.wk.filter(x=>x.s.length).map(x=>`${x.n} ${x.s.length} 組`).join('、'):''}
+function wkLast(name,exceptId){let b=null;for(const e of live()){if(e.id===exceptId||!e.wk)continue;const x=e.wk.find(y=>y.n===name&&y.s.length);if(x&&(!b||(e.date+e.start)>(b.e.date+b.e.start)))b={e,x}}return b}
+function wkUsage(){const c={};for(const e of live())for(const x of e.wk||[])c[x.n]=(c[x.n]||0)+x.s.length;return c}
+const wkEvent=()=>events.find(e=>e.id===wkId&&!e.deleted);
+function wkTouch(e){e.wkAt=Date.now();e.updatedAt=e.wkAt;persist();scheduleSync()}
+function wkDef(e,x){
+  if(wkDraft[x.n])return wkDraft[x.n];
+  const s=x.s[x.s.length-1]||(()=>{const h=wkLast(x.n,e.id);return h&&h.x.s[h.x.s.length-1]})();
+  return wkDraft[x.n]=s?{w:+s.w||0,r:+s.r||10}:{w:WK_BODY.test(x.n)?0:20,r:10};
+}
+function wkStart(){
+  const p=(settings.places||[])[0],d=new Date(),s=hmNow(d);
+  const ev={id:`wk-${todayStr()}-${s.replace(':','')}`,title:p?p.act||'健身':'健身',date:todayStr(),allDay:false,start:s,end:s,location:p?p.name:'',notes:'',
+    color:colorFor('',p?p.act||'健身':'健身'),done:false,wkLive:true,wk:[],updatedAt:+d};
+  geoFixEnd(ev);events.push(ev);persist();scheduleSync();geoMissAt=0;render();store.set('cal.wkPrompted',ev.id);openWk(ev.id);
+}
+function maybeWkPrompt(){
+  if(DEMO||document.visibilityState!=='visible')return;
+  const a=geoActive()[0];if(!a||store.get('cal.wkPrompted','')===a.id)return;
+  const o=document.querySelector('.overlay.show');if(o&&o.id!=='ovBrief')return;if(o)closeOv(o);
+  store.set('cal.wkPrompted',a.id);openWk(a.id);
+}
+function openWk(id){
+  wkId=id;wkDraft={};wkArm='';if(!wkEvent())return;
+  renderWk();openOv('#ovWk');clearInterval(wkTimer);
+  wkTimer=setInterval(()=>{if(!$('#ovWk').classList.contains('show')){clearInterval(wkTimer);return}wkClock()},1000);
+}
+function wkClock(){
+  const e=wkEvent(),el=document.getElementById('wkClock');if(!e||!el)return;
+  const on=(e.geo||e.wkLive)&&!e.geoOut;
+  if(!on){el.textContent=`${fmtTime(e)}${e.location?'　'+e.location:''}`;return}
+  const last=Math.max(0,...(e.wk||[]).flatMap(x=>x.s.map(s=>s.t||0)));
+  el.textContent=`已進行 ${durTxt(geoElapsed(e))}`+(last&&Date.now()-last<3*3600e3?`　距上一組 ${mmss(Date.now()-last)}`:'');
+}
+function renderWk(){
+  const e=wkEvent();if(!e){closeOv($('#ovWk'));return}
+  const on=(e.geo||e.wkLive)&&!e.geoOut,list=e.wk||[],vol=wkVol(e);
+  let h=`<div class="wk-head"><div class="wh"><b>${on?esc(e.title)+'中':esc(e.title)+'　'+mdShort(e.date)}</b><span id="wkClock"></span></div><div class="wk-tot"><b>${wkSets(e)}</b><span>組</span></div><div class="wk-tot"><b>${vol>=10000?(vol/1000).toFixed(1)+'k':Math.round(vol)}</b><span>總重量 kg</span></div></div>`;
+  if(!list.length)h+=`<div class="wk-empty">從下方選擇動作開始記錄。每做完一組，按一下「記錄」即可。</div>`;
+  list.forEach((x,i)=>{
+    const d=wkDef(e,x),best=x.s.reduce((p,q)=>(+q.w||0)>(+p.w||0)?q:p,x.s[0]),last=wkLast(x.n,e.id);
+    h+=`<div class="wkx" data-i="${i}"><div class="wkx-h"><b>${esc(x.n)}</b><span>${x.s.length?`${x.s.length} 組　最重 ${fmtSet(best)}`:'未有紀錄'}</span>${x.s.length?'':`<button class="wkx-rm" data-wkrm="${i}">移除</button>`}</div>`+
+      (last?`<div class="wkx-last">上次 ${mdShort(last.e.date)}：${last.x.s.map(s=>fmtSet(s)).slice(0,4).join('、')}${last.x.s.length>4?' …':''}</div>`:'')+
+      `<div class="wkx-sets">${x.s.map((s,j)=>`<button class="${wkArm===i+'|'+j?'arm':''}" data-wkdel="${i}|${j}" aria-label="第 ${j+1} 組，點兩下刪除">${wkArm===i+'|'+j?'再按刪除':`<i>${j+1}</i>${fmtSet(s)}`}</button>`).join('')}</div>`+
+      `<div class="wkx-ctl"><div class="stp"><button data-wkstep="${i}|w|-1" aria-label="減重量">−</button><input data-wkin="${i}|w" inputmode="decimal" value="${d.w}" aria-label="重量"><small>kg</small><button data-wkstep="${i}|w|1" aria-label="加重量">＋</button></div>`+
+      `<div class="stp"><button data-wkstep="${i}|r|-1" aria-label="減次數">−</button><input data-wkin="${i}|r" inputmode="numeric" value="${d.r}" aria-label="次數"><small>次</small><button data-wkstep="${i}|r|1" aria-label="加次數">＋</button></div>`+
+      `<button class="wkx-go" data-wkadd="${i}">記錄第 ${x.s.length+1} 組</button></div></div>`;
+  });
+  const have=new Set(list.map(x=>x.n)),use=wkUsage();
+  const opts=[...new Set([...Object.keys(use).sort((a,b)=>use[b]-use[a]),...WK_PRESET])].filter(n=>!have.has(n)).slice(0,14);
+  h+=`<div class="wk-lbl">加入動作</div><div class="wk-chips">${opts.map(n=>`<button class="${use[n]?'used':''}" data-wkp="${esc(n)}">${esc(n)}</button>`).join('')}</div>`+
+    `<div class="wk-cus"><input id="wkCustom" placeholder="其他動作，例如：器械划船" enterkeyhint="done" autocomplete="off"><button id="wkCustomGo" aria-label="加入動作">＋</button></div>`;
+  $('#wkBody').innerHTML=h;$('#wkEnd').style.display=on?'':'none';wkClock();
+}
+function wkAddEx(name){
+  const e=wkEvent();name=String(name||'').trim().slice(0,30);if(!e||!name)return;
+  e.wk=e.wk||[];let i=e.wk.findIndex(x=>x.n===name);
+  if(i<0){e.wk.push({n:name,s:[]});i=e.wk.length-1;wkTouch(e)}
+  renderWk();const b=document.querySelector(`#wkBody .wkx[data-i="${i}"]`);if(b)b.scrollIntoView({behavior:'smooth',block:'center'});
+}
+$('#wkBody').addEventListener('click',ev=>{
+  const e=wkEvent();if(!e)return;const T=s=>ev.target.closest(s);let b;
+  if(b=T('[data-wkp]')){wkAddEx(b.dataset.wkp);return}
+  if(T('#wkCustomGo')){wkAddEx($('#wkCustom').value);return}
+  if(b=T('[data-wkstep]')){const[i,k,dir]=b.dataset.wkstep.split('|'),x=e.wk[+i],d=wkDef(e,x);
+    d[k]=k==='w'?Math.max(0,Math.round((+d[k]+dir*2.5)*100)/100):Math.max(1,+d[k]+ +dir);
+    const inp=document.querySelector(`[data-wkin="${i}|${k}"]`);if(inp)inp.value=d[k];return}
+  if(b=T('[data-wkadd]')){const i=+b.dataset.wkadd,x=e.wk[i],d=wkDef(e,x);
+    x.s.push({w:+d.w||0,r:Math.max(1,Math.round(+d.r||1)),t:Date.now()});wkTouch(e);wkArm='';renderWk();
+    try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}
+    if(view==='todo'){const y=window.scrollY;render();window.scrollTo(0,y)}return}
+  if(b=T('[data-wkdel]')){const k=b.dataset.wkdel;
+    if(wkArm===k){const[i,j]=k.split('|').map(Number);e.wk[i].s.splice(j,1);wkArm='';wkTouch(e);renderWk();if(view==='todo')render();return}
+    wkArm=k;renderWk();clearTimeout(wkArmT);wkArmT=setTimeout(()=>{if(wkArm===k){wkArm='';renderWk()}},2500);return}
+  if(b=T('[data-wkrm]')){e.wk.splice(+b.dataset.wkrm,1);wkTouch(e);renderWk();return}
+});
+$('#wkBody').addEventListener('input',ev=>{
+  const t=ev.target.closest('[data-wkin]');if(!t)return;const e=wkEvent();if(!e)return;
+  const[i,k]=t.dataset.wkin.split('|'),d=wkDef(e,e.wk[+i]),v=parseFloat(t.value);if(!isNaN(v))d[k]=v;
+});
+$('#wkBody').addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.id==='wkCustom'){ev.preventDefault();wkAddEx(ev.target.value)}});
+$('#wkEnd').onclick=()=>{const id=wkId;closeOv($('#ovWk'));geoEnd(id)};
+$('#wkOpenEd').onclick=()=>{const ev=editing;if(!ev)return;closeOv($('#ovEdit'));openWk(ev.id)};
+function trainCard(s){
+  const W=[];for(let i=7;i>=0;i--)W.push([ymd(addDays(s,-7*i)),ymd(addDays(s,-7*i+6))]);
+  const m={};
+  for(const e of live()){
+    if(!e.wk||e.date<W[0][0]||e.date>W[7][1])continue;const wi=W.findIndex(([a,b])=>e.date>=a&&e.date<=b);
+    for(const x of e.wk){if(!x.s.length)continue;
+      const o=m[x.n]=m[x.n]||{n:x.n,w:Array(8).fill(0),best:0,last:null};o.w[wi]+=x.s.length;
+      for(const st of x.s)o.best=Math.max(o.best,+st.w||0);
+      if(!o.last||(e.date+e.start)>o.last.k)o.last={k:e.date+e.start,date:e.date,top:x.s.reduce((p,q)=>(+q.w||0)>(+p.w||0)?q:p,x.s[0]),n:x.s.length};
+    }
+  }
+  const sum=o=>o.w.reduce((a,b)=>a+b,0),rows=Object.values(m).sort((a,b)=>b.w[7]-a.w[7]||sum(b)-sum(a));
+  if(!rows.length)return '';
+  const tot=rows.reduce((a,o)=>a+o.w[7],0),mx=Math.max(1,...rows.flatMap(o=>o.w));
+  return `<section class="glass"><div class="ptitle">訓練統計<span>本週共 ${tot} 組</span></div><div class="trn"><div class="trn-h"><span>動作</span><span>最近 8 週組數</span><span>本週</span><span>最重</span></div>`+
+    rows.slice(0,10).map(o=>`<div class="trn-r"><b>${esc(o.n)}</b><span class="spk" aria-label="最近 8 週：${o.w.join('、')} 組">${o.w.map((v,i)=>`<i class="${i===7?'cur':''}" style="height:${v?Math.max(16,v/mx*100):8}%;opacity:${v?1:.25}"></i>`).join('')}</span><em>${o.w[7]} 組</em><small>${o.best?fmtW(o.best):'自重'}</small></div><div class="trn-l">上次 ${mdShort(o.last.date)}：${o.last.n} 組，最重 ${fmtSet(o.last.top)}</div>`).join('')+
+    `</div></section>`;
+}
+
 autosize();
 render();
 setTimeout(maybeBrief,700);
@@ -2068,6 +2253,7 @@ if(view==='ai')scrollChat(false);
 if(syncReady())sync();
 setTimeout(checkUpdate,2500);
 setTimeout(geoAutoCheck,1200);
+setTimeout(maybeWkPrompt,3500);
 })();
 </script>
 </body>
