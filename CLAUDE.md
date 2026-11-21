@@ -33,6 +33,7 @@
 設定紀錄（有 `cfg` 欄位，會經雲端同步，但不顯示於日曆，亦不推送到 Google）：
 - `cfg-holidays`：`{cfg:'holidays', list:[{id, name, date, end?, yearly, type:'ph'|'comp'|'own'}]}`
 - `cfg-gcal`：`{cfg:'gcal', on, tz}`
+- `cfg-prefs`：可跨裝置同步的設定（健身地點 `places`、每日簡報、提醒、AI 模型），由 `prefsReconcile()` 處理；API Key、Apps Script 網址及同步密碼不會放入。新裝置未同步前不會用預設值覆蓋雲端設定。
 - 清單：`{id:'ls-…', cfg:'list', name, order, updatedAt}`
 - 清單事項：`{id:'li-…', cfg:'li', list, text, cat, catSrc, done, doneAt, due, note, order, updatedAt}`（用 `due` 而非 `date`，小工具會忽略）。`cat` 是 `CATS` 的索引（0–6），`catSrc` 為 `'auto'`（關鍵字判斷）、`'ai'`（AI 判斷）或 `'user'`（使用者指定，永不自動覆蓋）。`listReconcile()` 在每次 `render()` 開頭，按 `updatedAt` 較新者雙向同步清單事項與日曆事項（包括分類顏色；日曆事項的 `licat` 記錄顏色來自哪個分類）。
 
@@ -57,6 +58,7 @@
 
 ### 同步
 
+- 換機碼：`MYCAL1-` 加 base64url 的 `{u, k, a, b, m}`（Apps Script 網址、同步密碼、AI 金鑰、AI 網址、模型），只在使用者裝置產生及輸入（`swMake()` / `swParse()`），不可記錄在任何地方。未設定同步時，今日頁會顯示 `cloudCard()` 提示。
 - Google Drive：App 以 `text/plain` POST `{key, events, calForce}` 到 Apps Script；伺服器以 `updatedAt` 較新者合併（墓碑 90 日後清除），寫入 Drive 的 `my-calendar-data.json`，回傳 `{ok, events, more, calErr}`。
 - Google 日曆（伺服器 v3）：推送 App 事項到預設日曆，每 90 秒（或手動同步時）拉取 −30 至 +365 日的事項。
 - 另有舊的 GitHub Gist 同步模式。
