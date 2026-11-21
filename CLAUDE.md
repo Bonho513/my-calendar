@@ -15,7 +15,9 @@
 ## 架構
 
 - 狀態：`events`（陣列，`localStorage` 鍵 `cal.events`）與 `settings`（`cal.settings`）。`persist()` 儲存事項，`saveSettings()` 儲存設定，`scheduleSync()` 排程同步。
-- `render()` 依 `view` 重繪；今日頁由 `renderTodo()` 組成（進度卡 → 健身卡 → 清單卡 → 逾期 → 今日 / 明日 / 後續待辦）。
+- `render()` 依 `view` 重繪；今日頁由 `renderTodo()` 組成（進度卡 → 健身卡 → 清單卡 → 逾期 → 今日 / 明日 / 後續待辦）；`renderChat()` 繪畫 AI 頁。
+- 記事及優惠券：今日頁 `noteCard()`、底部表單 `#ovNotes`（列表、搜尋、篩選）及 `#ovNote`（編輯）。點擊由 document 層的 `data-nt*` 處理器統一處理。
+- 健身日曆：底部表單 `#ovFit`，`openFit()` / `renderFit()`，由今日頁健身卡及概覽「運動習慣」的 `data-fitcal` 按鈕開啟。是否算作健身由 `isWorkout(e)` 判斷（運動分類，並且有打卡、已完成或有動作紀錄）；顏色深淺按組數或時數。
 - 點擊以主委派處理器（`data-*` 屬性）分派；底部表單為 `.overlay > .sheet`，以 `openOv('#id')` / `closeOv(el)` 開關。
 - 新功能慣例：CSS 區塊加在 `</style>` 前；HTML 表單加在 `<!-- Code viewer -->` 前；JS 區塊加在檔尾 `autosize();\nrender();` 前，並以 `/* ---------- 名稱 ---------- */` 標示。
 
@@ -32,7 +34,24 @@
 - `cfg-holidays`：`{cfg:'holidays', list:[{id, name, date, end?, yearly, type:'ph'|'comp'|'own'}]}`
 - `cfg-gcal`：`{cfg:'gcal', on, tz}`
 - 清單：`{id:'ls-…', cfg:'list', name, order, updatedAt}`
-- 清單事項：`{id:'li-…', cfg:'li', list, text, done, doneAt, due, note, order, updatedAt}`（用 `due` 而非 `date`，小工具會忽略）。`listReconcile()` 在每次 `render()` 開頭，按 `updatedAt` 較新者雙向同步清單事項與日曆事項。
+- 清單事項：`{id:'li-…', cfg:'li', list, text, cat, catSrc, done, doneAt, due, note, order, updatedAt}`（用 `due` 而非 `date`，小工具會忽略）。`cat` 是 `CATS` 的索引（0–6），`catSrc` 為 `'auto'`（關鍵字判斷）、`'ai'`（AI 判斷）或 `'user'`（使用者指定，永不自動覆蓋）。`listReconcile()` 在每次 `render()` 開頭，按 `updatedAt` 較新者雙向同步清單事項與日曆事項（包括分類顏色；日曆事項的 `licat` 記錄顏色來自哪個分類）。
+
+### 自動分類
+
+- `classify(text)` 以關鍵字規則（優先次序：截止 → 健康 → 運動 → 學習 → 工作 → 生活）即時判斷，找不到回傳 -1。
+- `aiClassify()` 在背景以 AI 修正：清單事項中 `catSrc` 不是 `'ai'`/`'user'` 的，以及帶 `cq:1`（新增時關鍵字判斷不到）的日曆事項。AI 回答「其他」時不會覆蓋關鍵字已判斷的結果。
+- 新增行程的編輯器在使用者未手動選分類前，會隨輸入自動選分類（`catAuto`）。
+
+### AI 助手
+
+- `chatPrompt()` 提供行程及清單內容；AI 回傳 `{reply, actions}`，動作有 `add`、`update`、`delete`、`todo`（加入清單）、`todo_done`（完成清單事項）。`applyActions()` 執行並回傳結果，`undo()` 可撤銷。
+- 介面：`aiHead()`（連接狀態）、`aiWelcome()`（今日概況及建議）、`resCard()`（結果卡片）。
+
+### 記事及優惠券
+
+- 記事紀錄：`{id:'nt-…', cfg:'note', kind:'coupon'|'note', title, value, code, exp, body, pin, cal, used, usedAt, created, updatedAt}`（用 `exp` 而非 `date`）。
+- `cal` 為真且有 `exp` 的優惠券，會由 `ntReconcile()` 建立全日事項 `'ev-' + 記事 id`（欄位 `nt`，生活分類），完成狀態與 `used` 雙向同步；這類事項不會列入逾期。
+- 「貼上文字自動填寫」先用 AI（`ntParseAI`），失敗時用 `ntParseLocal()` 的規則。AI 對話動作另有 `note` 及 `note_used`。
 
 刪除一律用墓碑（`deleted:true` 並更新 `updatedAt`），不可直接從陣列移除，否則同步會把它帶回來。
 
