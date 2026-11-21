@@ -1451,7 +1451,7 @@ const sk = e => (e.allDay || !e.start) ? "00:00" : e.start;
 const on = ds => live.filter(e => e.date === ds).sort((a, b) => sk(a).localeCompare(sk(b)));
 const todo = on(T).filter(e => !e.done);
 const tmr = on(TM).filter(e => !e.done);
-const overdue = live.filter(e => !e.done && e.date < T && e.date >= BACK && (e.allDay || !e.start || e.color === "#FFC94D"));
+const overdue = live.filter(e => !e.done && !e.nt && e.src !== "gcal" && e.date < T && e.date >= BACK && (e.allDay || !e.start || e.color === "#FFC94D"));
 const fam = config.widgetFamily || "large";
 const HCFG = data.events.find(e => e && e.id === "cfg-holidays" && !e.deleted);
 const HOL = (HCFG && Array.isArray(HCFG.list) ? HCFG.list : []).filter(h => {
@@ -1593,7 +1593,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.21-2';
+const APP_VERSION='2026.11.21-3';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
