@@ -766,6 +766,22 @@ body.typing.ai .dock{display:none}
 .ntbrief{display:block;width:100%;text-align:left;margin:0 0 12px;padding:10px 14px;border-radius:14px;background:rgba(255,158,94,.1);border:1px solid rgba(255,158,94,.3);font-size:13.5px;line-height:1.6;color:var(--ink)}
 .ntbrief b{color:#FF9E5E;margin-right:6px}
 .tk .dt b.sm{font-size:14px;line-height:1.25;padding:0 6px;text-align:center}
+
+/* ---------- 雲端及換機 ---------- */
+.cloudcard{padding:14px 16px;border-color:rgba(255,201,77,.35);background:linear-gradient(120deg,rgba(255,201,77,.1),rgba(20,30,70,.52) 60%)}
+.cloudcard .cc-t{display:flex;align-items:center;gap:12px}
+.cloudcard .cc-ic{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;flex:none;color:#FFC94D;background:rgba(255,201,77,.12);border:1px solid rgba(255,201,77,.3)}
+.cloudcard .cc-ic svg{width:22px;height:22px}
+.cloudcard b{display:block;font-size:15.5px}
+.cloudcard span{display:block;font-size:13px;color:var(--muted);margin-top:3px;line-height:1.5}
+.cloudcard .cc-a{display:flex;gap:8px;margin-top:12px}
+.cloudcard .cc-a button{flex:1;padding:10px;border-radius:12px;font-size:13.5px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
+.cloudcard .cc-a button.pri{background:#FFC94D;color:#2A1A00;border-color:transparent;font-weight:700}
+.swbox{margin-top:14px;padding:12px 14px;border-radius:14px;border:1px dashed rgba(255,201,77,.4)}
+.swbox h5{margin:0 0 8px;font-size:14px}
+.swbox .actions{margin:0}
+.swbox .hint{margin:8px 0 0}
+#swIn{min-height:96px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
 </style>
 </head>
 <body>
@@ -873,6 +889,7 @@ body.typing.ai .dock{display:none}
       <div class="field"><label for="sGdKey">同步密碼</label><input id="sGdKey" autocomplete="off" spellcheck="false"></div>
       <div class="actions"><button class="btn primary" id="gdConnect">連接 Google Drive</button><button class="btn ghost" id="gdHelp">設定教學</button></div>
       <p class="hint">資料儲存於你 Google Drive 的「my-calendar-data.json」。於其他裝置填入同一網址及同步密碼，即可同步同一份日曆。</p>
+      <div class="swbox"><h5>換機</h5><div class="actions"><button class="btn ghost" id="swCopy">複製換機碼</button><button class="btn ghost" data-swopen>輸入換機碼</button></div><p class="hint">換機碼包含 Apps Script 網址、同步密碼及 AI 金鑰。請存放在安全地方（例如 iPhone「密碼」App 的備註），切勿傳給他人。新手機輸入一次，即可還原所有紀錄及設定。</p></div>
       <div class="gcbox"><div class="field"><label class="toggle">與 Google 日曆雙向同步<input type="checkbox" id="sGcal"></label></div><p class="hint" style="margin:8px 0 0">開啟後，日曆 App 的行程會寫入你的 Google 主要日曆，Google 日曆的行程亦會顯示在 App。任何一邊新增、修改或刪除，另一邊都會跟着更改。同步範圍為過去 30 日至未來 1 年。在 iPhone「設定 → App → 日曆 → 日曆帳號」加入同一個 Google 帳戶，即可使用 iPhone 內置的日曆小工具。</p><p class="hint" id="gcStat"></p></div>
     </div>
     <div class="syncgrp" data-mode="gist">
@@ -1059,6 +1076,15 @@ body.typing.ai .dock{display:none}
   <div class="field"><label for="ntBody" id="ntBodyL">使用條件及備註</label><textarea id="ntBody" style="min-height:72px"></textarea></div>
   <div class="field"><label class="toggle">置頂於今日頁<input type="checkbox" id="ntPin"></label></div>
   <div class="actions"><button class="btn danger" id="ntDel">刪除</button><button class="btn ghost" id="ntUse">標記已使用</button><button class="btn primary" id="ntSave">儲存</button></div>
+</div></div>
+
+<!-- Restore with transfer code -->
+<div class="overlay" id="ovSwap"><div class="sheet" role="dialog" aria-label="輸入換機碼">
+  <h3><span>輸入換機碼</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <p class="hint" style="margin:-6px 0 14px">在舊手機打開「設定 → 跨裝置同步 → 複製換機碼」，再貼在下面。還原後，所有紀錄會從你的 Google Drive 下載。</p>
+  <div class="field"><textarea id="swIn" placeholder="MYCAL1-…" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea></div>
+  <button class="btn primary" id="swGo" style="width:100%">還原</button>
+  <p class="hint" style="margin-top:14px">未有換機碼？可在「設定 → 跨裝置同步」選擇 Google Drive，按「設定教學」建立雲端儲存。</p>
 </div></div>
 
 <!-- Code viewer -->
@@ -1567,7 +1593,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.21-1';
+const APP_VERSION='2026.11.21-2';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -1664,7 +1690,7 @@ function toast(msg,ms=2200){const t=$('#toast');t.textContent=msg;t.classList.ad
 /* ---------- render ---------- */
 let slideDir='';
 function render(){
-  if(listReconcile()|ntReconcile()){persist();scheduleSync()}
+  if(listReconcile()|ntReconcile()|prefsReconcile()){persist();scheduleSync()}
   document.body.classList.toggle('ai',view==='ai');
   document.body.classList.toggle('todo',view==='todo');
   document.body.classList.toggle('cal',view==='day'||view==='week');
@@ -2237,6 +2263,7 @@ function renderTodo(){
   else nx=`<div class="nextup"><small>今日</small><b>暫無安排，可於上方新增</b></div>`;
   let h=`<div class="narrow stack-v">`;
   h+=`<div><div class="qadd"><input id="qIn" placeholder="新增待辦事項，例如：星期五前提交報告" enterkeyhint="send" autocomplete="off"><button class="send" id="qGo" aria-label="加入"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="qhint">${aiReady()?'AI 將自動辨識日期與時間，例如「明天下午三點開會」「下星期五提交報告」':'尚未設定 AI：事項將直接加入今日。於設定填入 DeepSeek API Key 後即可自動辨識日期'}</div></div>`;
+  h+=cloudCard();
   h+=gymCard();
   h+=`<section class="glass todaycard"><div class="ring sm"><svg viewBox="0 0 120 120"><defs><linearGradient id="rg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D6BFF"/><stop offset="1" stop-color="#4FE3FF"/></linearGradient></defs><circle cx="60" cy="60" r="48" fill="none" stroke="rgba(130,160,255,.12)" stroke-width="12"/><circle cx="60" cy="60" r="48" fill="none" stroke="url(#rg2)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${pct/100*C} ${C}" style="filter:drop-shadow(0 0 6px rgba(79,227,255,.6))"/></svg><div class="rv"><b>${today.length?pct:'—'}<small>${today.length?'%':''}</small></b></div></div><div class="tc-b"><div class="big">今日進度 <em>${done.length}</em> / ${today.length}</div>${nx}</div></section>`;
   h+=listCard();
@@ -3376,6 +3403,45 @@ document.addEventListener('click',e=>{
   b=e.target.closest('[data-ntitem]');if(b){openNote(b.dataset.ntitem);return}
   b=e.target.closest('[data-ntopen]');if(b){const ov=b.closest('.overlay');if(ov)closeOv(ov);openNotes();return}
   b=e.target.closest('[data-ntf]');if(b){ntFilt=b.dataset.ntf;renderNotes()}
+});
+/* ---------- 雲端設定同步及換機碼 ---------- */
+const prefsPick=s=>({places:Array.isArray(s.places)?s.places:[],brief:s.brief!==false,eve:s.eve!==false,geoAuto:s.geoAuto!==false,remName:s.remName||'加入提醒',remLead:Number.isFinite(+s.remLead)?+s.remLead:15,baseUrl:s.baseUrl||'',model:s.model||''});
+const prefsDefault=p=>!p.places.length&&p.brief&&p.eve;
+function prefsReconcile(){
+  const r=events.find(e=>e.id==='cfg-prefs'&&!e.deleted),cur=prefsPick(settings),cj=JSON.stringify(cur);
+  if(r&&(r.updatedAt||0)>(settings.prefsAt||0)){
+    const p=prefsPick(r),pj=JSON.stringify(p);settings.prefsAt=r.updatedAt;settings.prefsLast=pj;
+    if(pj!==cj){Object.assign(settings,p);if(typeof renderPlaces==='function')renderPlaces()}
+    saveSettings();return 0;
+  }
+  const changed=settings.prefsLast?cj!==settings.prefsLast:(!r&&!prefsDefault(cur));
+  if(!changed)return 0;
+  const now=Date.now();
+  if(r)Object.assign(r,cur,{updatedAt:now});else events.push({id:'cfg-prefs',cfg:'prefs',...cur,updatedAt:now});
+  settings.prefsAt=now;settings.prefsLast=cj;saveSettings();return 1;
+}
+function cloudCard(){
+  if(DEMO||syncReady())return '';
+  const n=live().length;
+  return `<section class="glass cloudcard"><div class="cc-t"><div class="cc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18h10a4 4 0 0 0 .7-7.94A6 6 0 0 0 6.1 9.2 4.5 4.5 0 0 0 7 18z"/><path d="M12 11v5M9.8 13.2 12 11l2.2 2.2"/></svg></div><div><b>${n?'紀錄只儲存在這部手機':'已在其他手機使用？'}</b><span>${n?'換機或清除 Safari 資料便會遺失。開啟 Google Drive 同步，紀錄就會儲存在雲端。':'輸入換機碼，即可從 Google Drive 還原所有紀錄及設定。'}</span></div></div><div class="cc-a"><button class="${n?'pri':''}" data-cloudset>設定雲端同步</button><button class="${n?'':'pri'}" data-swopen>輸入換機碼</button></div></section>`;
+}
+const b64u=s=>btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const unb64u=s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return atob(s)};
+function swMake(){const o={u:settings.gdUrl,k:settings.gdKey};if(settings.apiKey)o.a=settings.apiKey;if(settings.baseUrl)o.b=settings.baseUrl;if(settings.model)o.m=settings.model;return 'MYCAL1-'+b64u(JSON.stringify(o))}
+function swParse(t){
+  const m=String(t||'').replace(/\s+/g,'').match(/MYCAL1-([A-Za-z0-9_\-]+)/);if(!m)return null;
+  try{const o=JSON.parse(unb64u(m[1]));return o&&/^https:\/\/script\.google\.com\//.test(o.u||'')&&o.k?o:null}catch(e){return null}
+}
+$('#swCopy').onclick=()=>{readSettings();if(settings.syncMode!=='gdrive'||!syncReady()){toast('請先設定並連接 Google Drive 同步',3000);return}copyText(swMake(),'換機碼')};
+$('#swGo').onclick=()=>{
+  const o=swParse($('#swIn').value);if(!o){toast('換機碼不正確，請確認已完整貼上',3200);$('#swIn').focus();return}
+  settings.syncMode='gdrive';settings.gdUrl=o.u;settings.gdKey=o.k;if(o.a)settings.apiKey=o.a;if(o.b)settings.baseUrl=o.b;if(o.m)settings.model=o.m;
+  settings.lastSync=0;saveSettings();$('#swIn').value='';closeOv($('#ovSwap'));if($('#ovSet').classList.contains('show'))fillSettings();
+  toast('已連接雲端，正在下載紀錄…',3000);render();sync(true);
+};
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-swopen]')){const ov=e.target.closest('.overlay');if(ov&&ov.id!=='ovSet')closeOv(ov);$('#swIn').value='';openOv('#ovSwap');setTimeout(()=>$('#swIn').focus(),300);return}
+  if(e.target.closest('[data-cloudset]')){fillSettings();$('#sMode').value='gdrive';showSyncGroup();openOv('#ovSet');setTimeout(()=>{const g=document.querySelector('.syncgrp[data-mode="gdrive"]');if(g)g.scrollIntoView({block:'center',behavior:'smooth'})},350)}
 });
 
 autosize();
