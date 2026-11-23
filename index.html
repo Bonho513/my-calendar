@@ -2163,7 +2163,7 @@ Script.complete();
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.22-1';
+const APP_VERSION='2026.11.23-1';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -3061,7 +3061,7 @@ if(!settings.gdKey){settings.gdKey=genKey();saveSettings()}
 const APP_HOME=/github\.io$/.test(location.hostname)?location.origin+location.pathname:'https://bonho513.github.io/my-calendar/';
 const tplText=id=>document.getElementById(id).textContent.replace(/^\n/,'');
 const serverCode=()=>tplText('tplServer').replace('"__KEY__"',JSON.stringify(settings.gdKey));
-const widgetCode=()=>tplText('tplWidget').replace('"__URL__"',JSON.stringify(settings.gdUrl)).replace('"__KEY__"',JSON.stringify(settings.gdKey)).replace('"__APP__"',JSON.stringify(APP_HOME));
+const widgetCode=()=>tplText('tplWidget').replace('"__URL__"',JSON.stringify(settings.gdUrl)).replace('"__KEY__"',JSON.stringify(settings.gdKey)).replace('"__APP__"',JSON.stringify(APP_HOME+'#sw='+swLite()));
 function showSyncGroup(){const m=$('#sMode').value;document.querySelectorAll('.syncgrp').forEach(g=>g.classList.toggle('show',g.dataset.mode===m))}
 $('#sMode').onchange=showSyncGroup;
 function showCode(t,label){$('#codeTitle').textContent=label;$('#codeBox').value=t;openOv('#ovCode')}
@@ -4049,6 +4049,16 @@ $('#swGo').onclick=()=>{
   settings.lastSync=0;saveSettings();$('#swIn').value='';closeOv($('#ovSwap'));if($('#ovSet').classList.contains('show'))fillSettings();
   toast('已連接雲端，正在下載紀錄…',3000);render();sync(true);
 };
+function swLite(){return 'MYCAL1-'+b64u(JSON.stringify({u:settings.gdUrl,k:settings.gdKey}))}
+/* 由小工具開啟：網址帶 #sw=換機碼 → 自動連接雲端，隨即從網址列移除 */
+(function(){
+  const h=location.hash||'';if(DEMO||!/^#sw=MYCAL1-/.test(h))return;
+  try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
+  const o=swParse(h.slice(4));if(!o)return;
+  if(settings.syncMode==='gdrive'&&settings.gdUrl)return;
+  settings.syncMode='gdrive';settings.gdUrl=o.u;settings.gdKey=o.k;settings.lastSync=0;saveSettings();
+  setTimeout(()=>{toast('已連接雲端，正在下載紀錄…',3000);sync(true)},400);
+})();
 document.addEventListener('click',e=>{
   if(e.target.closest('[data-swopen]')){const ov=e.target.closest('.overlay');if(ov&&ov.id!=='ovSet')closeOv(ov);$('#swIn').value='';openOv('#ovSwap');setTimeout(()=>$('#swIn').focus(),300);return}
   if(e.target.closest('[data-cloudset]')){fillSettings();$('#sMode').value='gdrive';showSyncGroup();openOv('#ovSet');setTimeout(()=>{const g=document.querySelector('.syncgrp[data-mode="gdrive"]');if(g)g.scrollIntoView({block:'center',behavior:'smooth'})},350)}
