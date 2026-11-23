@@ -782,6 +782,133 @@ body.typing.ai .dock{display:none}
 .swbox .actions{margin:0}
 .swbox .hint{margin:8px 0 0}
 #swIn{min-height:96px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+
+/* ---------- 優惠券全 App ---------- */
+.chip.tkt{border-left:2px dashed #FF9E5E;background:rgba(255,158,94,.16);color:#FFD9BF}
+.adchip.tkt{border:1px dashed rgba(255,158,94,.6);background:rgba(255,158,94,.12)}
+.ev.ntev{background:linear-gradient(90deg,rgba(255,158,94,.09),transparent 70%)}
+.ev.ntev .bar,.td.ntev .bar{background:repeating-linear-gradient(180deg,#FF9E5E 0 5px,transparent 5px 9px)}
+.ad.tkt{color:#FF9E5E;border-color:rgba(255,158,94,.45);background:rgba(255,158,94,.1)}
+.ntv{font-style:normal;font-size:12px;font-weight:700;margin-left:8px;padding:1px 8px;border-radius:999px;color:#3A1600;background:linear-gradient(150deg,#FFC94D,#FF8A5B);vertical-align:2px;white-space:nowrap}
+.ntsub{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+.ntcode{display:inline-flex;align-items:center;gap:5px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;padding:2px 8px;border-radius:8px;border:1px dashed rgba(255,201,77,.55);color:#FFE3A3}
+.ntcode svg{width:12px;height:12px}
+.ntchip{display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-size:11.5px;font-weight:600;padding:2px 9px 2px 7px;border-radius:999px;color:#FFB78A;background:rgba(255,158,94,.12);border:1px dashed rgba(255,158,94,.5);white-space:nowrap}
+.ntchip svg{width:13px;height:13px}
+.lsrow .lb .ntchip,.ls-next .nm .ntchip{margin-top:0}
+.fcoup:empty{display:none}
+.fcoup{display:flex;flex-direction:column;gap:8px;margin:-4px 0 14px}
+.fcoup-h{display:flex;align-items:center;gap:6px;font-size:13px;color:#FF9E5E}
+.fcoup-h svg{width:15px;height:15px}
+.ntstat{cursor:pointer}
+.nts-g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px}
+.nts-g div{padding:10px 4px;border-radius:14px;background:rgba(255,158,94,.07);border:1px solid rgba(255,158,94,.18);text-align:center}
+.nts-g b{display:block;font-family:var(--num);font-size:19px;line-height:1.3}
+.nts-g span{font-size:11px;color:var(--muted)}
+.nts-g .hot b{color:#FF9E5E}
+.nts-s{margin:10px 2px 0;font-size:13px;color:var(--muted);line-height:1.6}
+.nts-s:empty{display:none}
+
+/* ---------- 人生規劃及備忘錄 ---------- */
+.tiles2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:14px 14px 13px;border-radius:20px;background:var(--glass);border:1px solid var(--line);text-align:left;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);min-width:0;transition:transform .12s}
+.tile:active{transform:scale(.98)}
+.tile i{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;margin-bottom:8px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 32%,transparent)}
+.tile i svg{width:19px;height:19px}
+.tile b{font-size:15px}
+.tile span{font-size:12px;color:var(--muted);line-height:1.45;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vt-lock{display:flex;flex-direction:column;align-items:center;text-align:center;padding:4px 2px 2px}
+.vt-ic{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;color:var(--cyan);background:radial-gradient(circle at 30% 25%,rgba(79,227,255,.28),rgba(61,107,255,.12));border:1px solid rgba(79,227,255,.35);box-shadow:0 0 28px -6px rgba(79,227,255,.55);margin-bottom:14px}
+.vt-ic svg{width:30px;height:30px}
+.vt-lock h4{margin:0 0 6px;font-size:17px}
+.vt-lock p{margin:0 0 16px;color:var(--muted);font-size:13.5px;line-height:1.6}
+.vt-lock .field{width:100%;text-align:left}
+.vt-err{color:var(--danger);font-size:13px;min-height:18px;margin:-4px 0 8px;width:100%;text-align:left}
+.vt-warn{display:flex;gap:10px;align-items:flex-start;text-align:left;font-size:13px;line-height:1.55;color:#FFD9A0;background:rgba(255,201,77,.08);border:1px solid rgba(255,201,77,.3);border-radius:14px;padding:10px 12px;margin-bottom:12px;width:100%}
+.vt-warn input{width:20px;height:20px;flex:none;margin-top:1px;padding:0;accent-color:var(--cobalt)}
+.vt-bar{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:12.5px;color:var(--muted)}
+.vt-bar .st{display:inline-flex;align-items:center;gap:6px;color:var(--ok);font-weight:700}
+.vt-bar .st i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.vt-bar button{margin-left:auto;font-size:12.5px;padding:6px 11px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink)}
+.vt-top{display:flex;gap:8px;margin-bottom:12px}
+.vt-top input{flex:1;min-width:0}
+.vt-top .btn{padding:10px 12px;font-size:14px;white-space:nowrap}
+.vt-list{display:flex;flex-direction:column;gap:8px}
+.vt-row{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line);text-align:left;width:100%;cursor:pointer}
+.vt-row .ic{width:36px;height:36px;border-radius:11px;flex:none;display:grid;place-items:center;font-weight:800;font-size:15px;color:#061032;background:var(--c)}
+.vt-row .ic svg{width:18px;height:18px}
+.vt-row .tx{flex:1;min-width:0}
+.vt-row .tx b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vt-row .tx span{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vt-cp{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:7px 10px;border-radius:10px;background:rgba(79,227,255,.1);border:1px solid rgba(79,227,255,.3);color:var(--cyan)}
+.vt-cp svg{width:14px;height:14px}
+.vt-row.bad{opacity:.65}
+.vt-row.bad .ic{background:rgba(255,255,255,.12);color:var(--muted)}
+.vt-empty{padding:18px 6px;text-align:center;color:var(--muted);font-size:13.5px;line-height:1.6}
+.vt-foot{display:flex;justify-content:center;gap:18px;margin-top:16px}
+.vt-foot button{font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.vt-pw{display:flex;gap:6px}
+.vt-pw input{flex:1;min-width:0;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.02em}
+.vt-pw button{flex:none;padding:0 12px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:13px}
+#ovVi.note .vi-acct{display:none}
+.lf-year{padding:16px;border-radius:20px;background:linear-gradient(140deg,rgba(169,139,255,.2),rgba(61,107,255,.1) 60%,rgba(79,227,255,.08));border:1px solid rgba(169,139,255,.32);margin-bottom:14px}
+.lf-yt{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:9px}
+.lf-yt b{font-family:var(--num);font-size:26px;font-weight:800;letter-spacing:-.01em}
+.lf-yt span{font-size:12.5px;color:var(--muted)}
+.lf-ybar{height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+.lf-ybar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#A98BFF,#4FE3FF)}
+.lf-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.lf-stats div{text-align:center}
+.lf-stats b{display:block;font-family:var(--num);font-size:20px;line-height:1.3}
+.lf-stats span{font-size:11.5px;color:var(--muted)}
+.lf-act{display:flex;gap:8px;margin:0 0 14px}
+.lf-act .btn{flex:1;padding:11px;font-size:14px}
+.lf-grp{margin-bottom:16px}
+.lf-grp h5{display:flex;align-items:center;gap:8px;margin:0 2px 8px;font-size:14px;color:var(--muted);font-weight:700}
+.lf-grp h5 em{font-style:normal;font-family:var(--num);font-size:11.5px;padding:0 7px;border-radius:999px;background:rgba(255,255,255,.08)}
+.lf-goal{display:block;width:100%;text-align:left;padding:13px 14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-left:3px solid var(--c);margin-bottom:8px}
+.lf-gt{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.lf-area{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--c)}
+.lf-area i{width:7px;height:7px;border-radius:50%;background:var(--c)}
+.lf-due{font-size:12px;color:var(--muted)}
+.lf-due.late{color:var(--danger)}
+.lf-goal>b{display:block;font-size:15.5px;line-height:1.4}
+.lf-prog{height:5px;border-radius:3px;background:rgba(255,255,255,.07);margin:10px 0 7px;overflow:hidden}
+.lf-prog i{display:block;height:100%;border-radius:3px;background:var(--c)}
+.lf-gs{display:flex;gap:10px;font-size:12px;color:var(--muted)}
+.lf-gs .nx{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.lf-ex{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;justify-content:center}
+.lf-ex button{font-size:12.5px;padding:6px 11px;border-radius:999px;background:rgba(169,139,255,.1);border:1px solid rgba(169,139,255,.3)}
+.lf-yr{display:flex;align-items:baseline;gap:8px;margin:4px 0 12px}
+.lf-yr b{font-family:var(--num);font-size:20px}
+.lf-yr span{font-size:12px;color:var(--muted)}
+.lf-yg{margin-bottom:8px}
+.lf-ach{display:flex;gap:12px;width:100%;text-align:left;padding:0 0 14px;position:relative}
+.lf-ach::before{content:"";position:absolute;left:23px;top:50px;bottom:4px;width:1px;background:var(--line-hi)}
+.lf-ach:last-child::before{display:none}
+.lf-dt{width:46px;height:46px;flex:none;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 38%,transparent)}
+.lf-dt b{font-family:var(--num);font-size:17px;line-height:1.1}
+.lf-dt span{font-size:10.5px;color:var(--muted)}
+.lf-ab{flex:1;min-width:0;padding-top:2px}
+.lf-ab>b{display:block;font-size:15px;line-height:1.4}
+.lf-ab .tags{display:flex;gap:8px;align-items:center;margin-top:3px;flex-wrap:wrap}
+.lf-tag{font-size:11px;padding:1px 8px;border-radius:999px;color:#061032;background:linear-gradient(120deg,#A98BFF,#4FE3FF);font-weight:700}
+.lf-ab p{margin:5px 0 0;font-size:13px;color:var(--muted);line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.lf-areas{display:flex;flex-wrap:wrap;gap:6px}
+.lf-areas button{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:6px 11px;border-radius:999px;border:1px solid color-mix(in srgb,var(--c) 30%,transparent);background:color-mix(in srgb,var(--c) 7%,transparent)}
+.lf-areas button i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.lf-areas button.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 24%,transparent)}
+.lf-step{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line)}
+.lf-step input[type=checkbox]{width:20px;height:20px;flex:none;padding:0;accent-color:var(--cobalt)}
+.lf-step span{flex:1;font-size:14.5px;overflow-wrap:anywhere}
+.lf-step.done span{color:var(--muted);text-decoration:line-through}
+.lf-step button{color:var(--muted);font-size:13px;padding:4px 6px}
+.lf-addstep{display:flex;gap:8px;margin-top:10px}
+.lf-addstep input{flex:1;min-width:0}
+.lf-addstep .btn{padding:10px 14px}
+.lf-done{margin-top:4px}
+.lf-done summary{font-size:13px;color:var(--muted);cursor:pointer;padding:6px 2px 10px}
+.lf-empty{text-align:center;padding:14px 8px 6px;color:var(--muted);font-size:13.5px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -830,6 +957,7 @@ body.typing.ai .dock{display:none}
   <h3><span id="edTitle">新行程</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
   <p class="hint" id="gcNote" style="display:none;margin:0 0 12px;color:#FFC94D"></p>
   <div class="field"><input id="fTitle" placeholder="事項名稱" style="font-size:19px;font-weight:500"></div>
+  <div class="fcoup" id="fCoupons"></div>
   <div class="field"><label>分類<span class="autocat" id="fAuto"></span></label><div class="cats" id="fCats"></div></div>
   <div class="field"><label for="fDate">日期</label><input id="fDate" type="date"></div>
   <div class="field"><label class="toggle">全日<input type="checkbox" id="fAll"></label></div>
@@ -902,7 +1030,7 @@ body.typing.ai .dock{display:none}
   </div>
   <div class="sec">
     <h4>iPhone 主畫面小工具</h4>
-    <p class="hint" style="margin:0 0 12px">透過免費 App「Scriptable」，在主畫面或智慧堆疊顯示今日及明日待辦。須先完成 Google Drive 同步設定。</p>
+    <p class="hint" style="margin:0 0 12px">透過免費 App「Scriptable」，在主畫面顯示月曆、待辦及即將到期的優惠券。細尺寸顯示待辦及概覽；中尺寸加入月曆；大尺寸是全覽：月曆、未來 7 天、清單進度、優惠券及本週健身。清單、優惠券及健身只在有資料時才顯示，並會按手機尺寸自動調整。須先完成 Google Drive 同步設定。</p>
     <div class="actions"><button class="btn ghost" id="wgCopy">複製小工具程式碼</button><button class="btn ghost" id="wgHelp">設定教學</button></div>
   </div>
   <div class="sec">
@@ -960,7 +1088,7 @@ body.typing.ai .dock{display:none}
     <li>在 App Store 安裝免費 App <b>Scriptable</b></li>
     <li>在 iPhone 開啟本日曆 App，於設定點選 <b>複製小工具程式碼</b><span class="sub">程式碼已包含你的同步網址及密碼。</span></li>
     <li>開啟 Scriptable，點選右上角「＋」，貼上程式碼<span class="sub">點選頂部標題改名為「日曆小工具」，再點選右下角 ▶ 預覽。</span></li>
-    <li>返回主畫面，長按空白處 → <b>編輯 → 加入小工具</b><span class="sub">搜尋「Scriptable」，選擇中或大尺寸，點選「加入小工具」。</span></li>
+    <li>返回主畫面，長按空白處 → <b>編輯 → 加入小工具</b><span class="sub">搜尋「Scriptable」。中尺寸顯示月曆及今日待辦；大尺寸另有每日行程圓點及優惠券。選好後點選「加入小工具」。</span></li>
     <li>長按小工具 → <b>編輯小工具</b>，Script 選擇「日曆小工具」</li>
     <li>如要組成<b>智慧堆疊</b>，把另一個相同尺寸的小工具拖到這個小工具上即可<span class="sub">小工具的更新頻率由 iOS 決定，約 15 分鐘至 1 小時；點選小工具會以 Safari 開啟日曆。</span></li>
   </ol>
@@ -1076,6 +1204,48 @@ body.typing.ai .dock{display:none}
   <div class="field"><label for="ntBody" id="ntBodyL">使用條件及備註</label><textarea id="ntBody" style="min-height:72px"></textarea></div>
   <div class="field"><label class="toggle">置頂於今日頁<input type="checkbox" id="ntPin"></label></div>
   <div class="actions"><button class="btn danger" id="ntDel">刪除</button><button class="btn ghost" id="ntUse">標記已使用</button><button class="btn primary" id="ntSave">儲存</button></div>
+</div></div>
+
+<!-- Life planning -->
+<div class="overlay" id="ovLife"><div class="sheet" role="dialog" aria-label="人生規劃">
+  <h3><span>人生規劃</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div id="lfBody"></div>
+</div></div>
+<div class="overlay" id="ovGoal"><div class="sheet" role="dialog" aria-label="目標">
+  <h3><span id="glHead">新目標</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div class="field"><label for="glTitle">目標</label><input id="glTitle" placeholder="例如：考取專業證書" autocomplete="off"></div>
+  <div class="field"><label>範疇</label><div class="lf-areas" id="glArea"></div></div>
+  <div class="field"><label>時間</label><div class="ntseg" id="glHz" style="margin:0"></div></div>
+  <div class="field"><label for="glDue">目標日期（可留空）</label><input id="glDue" type="date"></div>
+  <div class="field"><label for="glWhy">為甚麼重要</label><textarea id="glWhy" style="min-height:64px" placeholder="寫下動機，提醒自己"></textarea></div>
+  <div class="field"><label>步驟</label><div id="glSteps"></div><div class="lf-addstep"><input id="glStepIn" placeholder="加入步驟，例如：報名考試" enterkeyhint="done" autocomplete="off"><button class="btn ghost" id="glStepAdd">加入</button></div></div>
+  <div class="actions"><button class="btn danger" id="glDel">刪除</button><button class="btn ghost" id="glDone">標記達成</button><button class="btn primary" id="glSave">儲存</button></div>
+</div></div>
+<div class="overlay" id="ovAch"><div class="sheet" role="dialog" aria-label="成就">
+  <h3><span id="acHead">記錄成就</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div class="field"><label for="acTitle">完成了甚麼</label><input id="acTitle" placeholder="例如：完成第一次 10 公里跑" autocomplete="off"></div>
+  <div class="field"><label for="acDate">日期</label><input id="acDate" type="date"></div>
+  <div class="field"><label>範疇</label><div class="lf-areas" id="acArea"></div></div>
+  <div class="field"><label for="acNote">感想（可留空）</label><textarea id="acNote" style="min-height:72px"></textarea></div>
+  <div class="actions"><button class="btn danger" id="acDel">刪除</button><button class="btn primary" id="acSave">儲存</button></div>
+</div></div>
+
+<!-- Encrypted memo -->
+<div class="overlay" id="ovVault"><div class="sheet" role="dialog" aria-label="備忘錄">
+  <h3><span>備忘錄</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div id="vtBody"></div>
+</div></div>
+<div class="overlay" id="ovVi"><div class="sheet" role="dialog" aria-label="備忘錄項目">
+  <h3><span id="viHead">新增密碼</span><button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+  <div class="ntseg" id="viKind"><button data-k="acct">帳戶密碼</button><button data-k="note">安全備忘</button></div>
+  <div class="field"><label for="viTitle">名稱</label><input id="viTitle" autocomplete="off" placeholder="例如：Gmail、網上銀行"></div>
+  <div class="vi-acct">
+    <div class="field"><label for="viUser">帳號或電郵</label><div class="vt-pw"><input id="viUser" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" data-1p-ignore><button data-vicp="viUser">複製</button></div></div>
+    <div class="field"><label for="viPw">密碼</label><div class="vt-pw"><input id="viPw" type="password" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" data-1p-ignore><button id="viShow">顯示</button><button id="viGen">產生</button><button data-vicp="viPw">複製</button></div></div>
+    <div class="field"><label for="viUrl">網址（可留空）</label><input id="viUrl" autocomplete="off" autocapitalize="none" autocorrect="off" inputmode="url" spellcheck="false"></div>
+  </div>
+  <div class="field"><label for="viNote" id="viNoteL">備註</label><textarea id="viNote" style="min-height:84px" autocapitalize="none" autocorrect="off" spellcheck="false"></textarea></div>
+  <div class="actions"><button class="btn danger" id="viDel">刪除</button><button class="btn primary" id="viSave">儲存</button></div>
 </div></div>
 
 <!-- Restore with transfer code -->
@@ -1408,6 +1578,8 @@ function doPost(e) {
 <script type="text/plain" id="tplWidget">
 // 我的日曆：iPhone 主畫面小工具（Scriptable）
 // 由日曆 App 自動產生，已包含你的同步網址及密碼。
+// 細：待辦＋概覽　中：月曆＋待辦＋概覽　大（全覽）：月曆＋未來 7 天＋清單＋優惠券＋健身
+// 清單、優惠券、健身只在有資料時才顯示
 const SYNC_URL = "__URL__";
 const SYNC_KEY = "__KEY__";
 const APP_URL = "__APP__";
@@ -1417,12 +1589,28 @@ const C = {
   muted: new Color("#8B96C2"),
   faint: new Color("#56628F"),
   cyan: new Color("#4FE3FF"),
-  red: new Color("#FF5C7A")
+  red: new Color("#FF5C7A"),
+  orange: new Color("#FF9E5E"),
+  yellow: new Color("#FFC94D"),
+  green: new Color("#3FE0A5"),
+  sat: new Color("#8FB4FF"),
+  sun: new Color("#FF7B8E"),
+  leave: new Color("#FFA36B"),
+  dark: new Color("#061032"),
+  week: new Color("#7FD8FF", 0.08)
 };
 const WK = ["日", "一", "二", "三", "四", "五", "六"];
 const pad = n => String(n).padStart(2, "0");
 const ymd = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
 const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+
+// 按手機螢幕估算小工具尺寸（寧小勿大，避免右邊被裁走）
+const SCR = Device.screenSize();
+const sw = Math.min(SCR.width, SCR.height), sh = Math.max(SCR.width, SCR.height);
+const SZ = sw >= 428 ? [170, 364, 382] : sw >= 414 ? (sh >= 890 ? [169, 360, 379] : [159, 348, 357])
+  : sw >= 390 ? [158, 338, 354] : sw >= 375 ? (sh >= 800 ? [155, 329, 345] : [148, 321, 324])
+  : sw >= 360 ? [155, 329, 345] : [141, 292, 311];
+const SMALL = SZ[0], WIDE = SZ[1], TALL = SZ[2];
 
 async function loadEvents() {
   const fm = FileManager.local();
@@ -1445,38 +1633,127 @@ async function loadEvents() {
 
 const data = await loadEvents();
 const now = new Date();
-const T = ymd(now), TM = ymd(addDays(now, 1)), BACK = ymd(addDays(now, -30));
-const live = data.events.filter(e => e && !e.deleted);
+const T = ymd(now), TM = ymd(addDays(now, 1)), END = ymd(addDays(now, 7)), BACK = ymd(addDays(now, -30));
+const live = data.events.filter(e => e && !e.deleted && !e.cfg && !e.nt && e.date);
 const sk = e => (e.allDay || !e.start) ? "00:00" : e.start;
-const on = ds => live.filter(e => e.date === ds).sort((a, b) => sk(a).localeCompare(sk(b)));
-const todo = on(T).filter(e => !e.done);
-const tmr = on(TM).filter(e => !e.done);
-const overdue = live.filter(e => !e.done && !e.nt && e.src !== "gcal" && e.date < T && e.date >= BACK && (e.allDay || !e.start || e.color === "#FFC94D"));
+const byTime = (a, b) => (a.date + sk(a)).localeCompare(b.date + sk(b));
+const todo = live.filter(e => !e.done && e.date === T).sort(byTime);
+const upcoming = live.filter(e => !e.done && e.date >= T && e.date < END).sort(byTime);
+const overdue = live.filter(e => !e.done && e.src !== "gcal" && e.date < T && e.date >= BACK && (e.allDay || !e.start || e.color === "#FFC94D"));
 const fam = config.widgetFamily || "large";
+const dd = ds => Math.round((new Date(ds + "T00:00:00") - new Date(T + "T00:00:00")) / 864e5);
+const CP = data.events.filter(e => e && e.cfg === "note" && !e.deleted && e.kind === "coupon" && !e.used && e.exp && e.exp >= T).sort((a, b) => a.exp.localeCompare(b.exp));
+const cpSoon = CP.filter(c => dd(c.exp) <= 7);
+
+// 清單：只計仍有未完成事項的清單
+const LISTS = data.events.filter(e => e && e.cfg === "list" && !e.deleted).sort((a, b) => (a.order || 0) - (b.order || 0));
+const ITEMS = data.events.filter(e => e && e.cfg === "li" && !e.deleted);
+const openLists = LISTS.map(l => {
+  const it = ITEMS.filter(x => x.list === l.id).sort((a, b) => (a.order || 0) - (b.order || 0));
+  return { l, it, left: it.filter(x => !x.done) };
+}).filter(x => x.left.length);
+const lsDone = openLists.reduce((a, x) => a + x.it.length - x.left.length, 0);
+const lsAll = openLists.reduce((a, x) => a + x.it.length, 0);
+// 健身：運動分類並已打卡／完成／有紀錄組數
+const isWorkout = e => String(e.color || "").toUpperCase() === "#3FE0A5" && !!(e.geo || e.wkLive || e.done || (e.wk && e.wk.length));
+const MON = addDays(now, -((now.getDay() + 6) % 7));
+const weekDays = [0, 1, 2, 3, 4, 5, 6].map(i => ymd(addDays(MON, i)));
+const gymWeek = live.filter(e => isWorkout(e) && e.date >= weekDays[0] && e.date <= weekDays[6]);
+const gymSet = new Set(gymWeek.map(e => e.date));
+const gymPlan = new Set(live.filter(e => String(e.color || "").toUpperCase() === "#3FE0A5" && !isWorkout(e) && e.date >= T).map(e => e.date));
+const gymPast = live.filter(e => isWorkout(e) && e.date <= T).sort((a, b) => (b.date + (b.start || "")).localeCompare(a.date + (a.start || "")));
+// 有資料先顯示：清單要有未完成事項；優惠券要有未用及未過期；健身要最近 14 天做過或未來 7 天已安排
+const SHOW_LIST = openLists.length > 0;
+const SHOW_CP = CP.length > 0;
+const SHOW_GYM = gymWeek.length > 0 || (gymPast[0] && gymPast[0].date >= ymd(addDays(now, -14))) || [...gymPlan].some(d => d < END);
+const HAS_STATS = SHOW_LIST || SHOW_CP || SHOW_GYM;
+
 const HCFG = data.events.find(e => e && e.id === "cfg-holidays" && !e.deleted);
-const HOL = (HCFG && Array.isArray(HCFG.list) ? HCFG.list : []).filter(h => {
-  if (!h || !h.date) return false;
-  const a = h.date, b = h.end && h.end >= h.date ? h.end : h.date;
-  if (h.yearly) { const md = T.slice(5), am = a.slice(5), bm = b.slice(5); return am <= bm ? (md >= am && md <= bm) : (md >= am || md <= bm); }
-  return T >= a && T <= b;
-});
-const RED_DAY = now.getDay() === 0 || HOL.some(h => h.type !== "own");
-const DAY_COLOR = RED_DAY ? new Color("#FF7B8E") : HOL.length ? new Color("#FFA36B") : now.getDay() === 6 ? new Color("#8FB4FF") : null;
-
-function accessory() {
-  const lw = new ListWidget();
-  const a = lw.addText(todo.length ? "今日 " + todo.length + " 項待辦" : "今日暫無待辦");
-  a.font = Font.boldSystemFont(13);
-  if (todo[0]) {
-    const b = lw.addText(((todo[0].allDay || !todo[0].start) ? "全日" : todo[0].start) + " " + todo[0].title);
-    b.font = Font.systemFont(12);
-    b.lineLimit = 1;
-  }
-  lw.url = APP_URL;
-  return lw;
+const HLIST = HCFG && Array.isArray(HCFG.list) ? HCFG.list : [];
+function holOn(ds) {
+  return HLIST.filter(h => {
+    if (!h || !h.date) return false;
+    const a = h.date, b = h.end && h.end >= h.date ? h.end : h.date;
+    if (h.yearly) { const md = ds.slice(5), am = a.slice(5), bm = b.slice(5); return am <= bm ? (md >= am && md <= bm) : (md >= am || md <= bm); }
+    return ds >= a && ds <= b;
+  });
 }
+function dayColor(d, ds) {
+  const hs = holOn(ds);
+  if (d.getDay() === 0 || hs.some(h => h.type !== "own")) return C.sun;
+  if (hs.length) return C.leave;
+  if (d.getDay() === 6) return C.sat;
+  return null;
+}
+const HOL = holOn(T);
+const DAY_COLOR = dayColor(now, T);
+const byDay = {};
+for (const e of live) (byDay[e.date] = byDay[e.date] || []).push(e);
+const cpDay = {};
+for (const c of CP) (cpDay[c.exp] = cpDay[c.exp] || []).push(c);
 
-function main() {
+function txt(p, s, size, color, bold, lines) {
+  const t = p.addText(s);
+  t.font = bold ? Font.boldSystemFont(size) : Font.mediumSystemFont(size);
+  t.textColor = color;
+  if (lines) t.lineLimit = lines;
+  return t;
+}
+function whenOf(e, short) {
+  const allDay = e.allDay || !e.start;
+  if (e.date === T) return allDay ? "全日" : e.start;
+  if (e.date === TM) return short || allDay ? "明天" : "明 " + e.start;
+  return "週" + WK[new Date(e.date + "T00:00:00").getDay()];
+}
+// 一行行程：左邊時間或日子，右邊標題
+function rowTo(p, e, o) {
+  const s = p.addStack();
+  s.centerAlignContent();
+  s.spacing = 6;
+  const bar = s.addStack();
+  bar.size = new Size(3, o.bar);
+  bar.cornerRadius = 1.5;
+  bar.backgroundColor = new Color(e.color || "#4F7BFF");
+  const ts = s.addStack();
+  ts.size = new Size(o.col, 0);
+  const w = whenOf(e, o.short);
+  const tt = txt(ts, w, o.font - 1.5, e.date === T ? C.muted : C.cyan, false, 1);
+  tt.minimumScaleFactor = 0.8;
+  ts.addSpacer();
+  txt(s, e.title || "", o.font, C.ink, false, 1);
+  s.addSpacer();
+  p.addSpacer(o.gap);
+}
+function cpRowTo(p, c, o) {
+  const s = p.addStack();
+  s.centerAlignContent();
+  s.spacing = 6;
+  const bar = s.addStack();
+  bar.size = new Size(3, o.bar);
+  bar.cornerRadius = 1.5;
+  bar.backgroundColor = C.orange;
+  const ts = s.addStack();
+  ts.size = new Size(o.col, 0);
+  const d = dd(c.exp);
+  const tt = txt(ts, d === 0 ? "今日" : d === 1 ? "明天" : d + " 天", o.font - 1.5, d <= 3 ? C.orange : C.muted, true, 1);
+  tt.minimumScaleFactor = 0.8;
+  ts.addSpacer();
+  txt(s, (c.title || "優惠券") + (c.value ? "　" + c.value : ""), o.font, C.orange, false, 1);
+  s.addSpacer();
+  p.addSpacer(o.gap);
+}
+function moreTo(p, n, size) {
+  if (n > 0) txt(p, "另有 " + n + " 項", size || 10, C.faint);
+}
+function footer(p, more) {
+  const at = data.at ? new Date(data.at) : null;
+  const f = p.addStack();
+  f.centerAlignContent();
+  txt(f, data.empty ? "未能連線，請檢查同步設定" : (data.offline ? "離線，顯示 " : "更新於 ") + (at ? pad(at.getHours()) + ":" + pad(at.getMinutes()) : ""), 9.5, C.faint, false, 1);
+  f.addSpacer();
+  if (more > 0) txt(f, "未來 7 天另有 " + more + " 項", 10, C.muted, false, 1);
+}
+function base() {
   const w = new ListWidget();
   const g = new LinearGradient();
   g.colors = [new Color("#1A2C7A"), new Color("#060A1C")];
@@ -1485,115 +1762,408 @@ function main() {
   g.endPoint = new Point(0, 1);
   w.backgroundGradient = g;
   w.url = APP_URL;
-  w.setPadding(14, 15, 12, 15);
   w.refreshAfterDate = new Date(Date.now() + 15 * 60 * 1000);
-
+  return w;
+}
+function status() {
+  if (todo.length) return "今日 " + todo.length + " 項待辦";
+  if (upcoming.length) return "今日沒有待辦";
+  return "未來 7 天沒有待辦";
+}
+function header(w, big) {
   const head = w.addStack();
   head.centerAlignContent();
-  const day = head.addText(String(now.getDate()));
-  day.font = Font.boldSystemFont(fam === "small" ? 30 : 28);
-  day.textColor = DAY_COLOR || C.ink;
-  head.addSpacer(7);
+  txt(head, String(now.getDate()), big, DAY_COLOR || C.ink, true);
+  head.addSpacer(8);
   const hv = head.addStack();
   hv.layoutVertically();
-  const t1 = hv.addText((now.getMonth() + 1) + "月　" + (HOL.length ? HOL[0].name : "星期" + WK[now.getDay()]));
-  t1.font = Font.mediumSystemFont(11);
-  t1.textColor = DAY_COLOR || C.muted;
-  t1.lineLimit = 1;
-  const t2 = hv.addText(todo.length ? "今日 " + todo.length + " 項待辦" : "今日暫無待辦");
-  t2.font = Font.boldSystemFont(12);
-  t2.textColor = C.cyan;
+  txt(hv, (now.getMonth() + 1) + "月　" + (HOL.length ? HOL[0].name : "星期" + WK[now.getDay()]), 11, DAY_COLOR || C.muted, false, 1);
+  txt(hv, status(), 12.5, C.cyan, true, 1);
   head.addSpacer();
-  if (overdue.length && fam !== "small") {
-    const od = head.addText("逾期 " + overdue.length);
-    od.font = Font.boldSystemFont(11);
-    od.textColor = C.red;
+  if (overdue.length && fam !== "small") txt(head, "逾期 " + overdue.length, 11, C.red, true);
+}
+
+// 字體：圓角數字（舊版 Scriptable 沒有就用普通粗體）
+const RF = (name, size) => (typeof Font[name] === "function" ? Font[name](size) : Font.boldSystemFont(size));
+// 今日標記：剛好嵌入本週底色入面的玻璃感發光方塊（圓角與底色同心），深色圓角粗體數字；
+// 大尺寸連當日圓點一齊放入方塊，圓點改為深色以保持和諧
+function todayChip(cell, o, cols) {
+  const r = Math.min(8, o.ch / 2) - 1;
+  const W = o.dots ? Math.min(o.cw - 8, Math.round(o.ch * 1.55)) : o.cw - 2;
+  const H = o.ch - 2;
+  const chip = cell.addStack();
+  chip.size = new Size(W, H);
+  chip.cornerRadius = r;
+  const g = new LinearGradient();
+  g.colors = [new Color("#D6FCFF"), new Color("#62E7FF"), new Color("#26BBFF")];
+  g.locations = [0, 0.5, 1];
+  g.startPoint = new Point(0.5, 0);
+  g.endPoint = new Point(0.5, 1);
+  chip.backgroundGradient = g;
+  chip.borderWidth = 0.75;
+  chip.borderColor = new Color("#FFFFFF", 0.6);
+  chip.centerAlignContent();
+  const col = chip.addStack();
+  col.layoutVertically();
+  col.centerAlignContent();
+  const t = col.addText(String(now.getDate()));
+  t.font = RF("heavyRoundedSystemFont", o.num + 1);
+  t.textColor = new Color("#03123A");
+  t.lineLimit = 1;
+  t.minimumScaleFactor = 0.7;
+  if (o.dots && cols.length) {
+    col.addSpacer(1);
+    const dr = col.addStack();
+    dr.spacing = 2;
+    cols.forEach(() => {
+      const dot = dr.addStack();
+      dot.size = new Size(4, 4);
+      dot.cornerRadius = 2;
+      dot.backgroundColor = new Color("#03123A", 0.55);
+    });
   }
-  w.addSpacer(fam === "small" ? 8 : 10);
+}
 
-  const row = (e, compact) => {
-    const s = w.addStack();
-    s.centerAlignContent();
-    s.spacing = 7;
-    const bar = s.addStack();
-    bar.size = new Size(3, compact ? 13 : 15);
-    bar.cornerRadius = 1.5;
-    bar.backgroundColor = new Color(e.color || "#4F7BFF");
-    if (!compact) {
-      const ts = s.addStack();
-      ts.size = new Size(36, 0);
-      const tt = ts.addText((e.allDay || !e.start) ? "全日" : e.start);
-      tt.font = Font.mediumSystemFont(11);
-      tt.textColor = C.muted;
-    }
-    const ti = s.addText(e.title || "");
-    ti.font = Font.mediumSystemFont(compact ? 12 : 13);
-    ti.textColor = C.ink;
-    ti.lineLimit = 1;
-    s.addSpacer();
-    w.addSpacer(compact ? 4 : 5);
-  };
-  const label = text => {
-    const l = w.addText(text);
-    l.font = Font.boldSystemFont(11);
-    l.textColor = C.muted;
-    w.addSpacer(5);
-  };
-  const note = text => {
-    const n = w.addText(text);
-    n.font = Font.systemFont(12);
-    n.textColor = C.muted;
-  };
-  const more = n => {
-    if (n <= 0) return;
-    const m = w.addText("另有 " + n + " 項");
-    m.font = Font.systemFont(10.5);
-    m.textColor = C.faint;
-  };
-
-  if (fam === "small") {
-    const list = todo.length ? todo : tmr;
-    if (!todo.length && tmr.length) label("明日待辦");
-    list.slice(0, 3).forEach(e => row(e, true));
-    more(list.length - 3);
-  } else if (fam === "medium") {
-    if (todo.length) {
-      todo.slice(0, 3).forEach(e => row(e));
-      more(todo.length - 3);
-    } else {
-      label(tmr.length ? "明日待辦　" + tmr.length + " 項" : "明日暫無安排");
-      tmr.slice(0, 2).forEach(e => row(e));
-    }
-  } else {
-    if (todo.length) {
-      todo.slice(0, 5).forEach(e => row(e));
-      more(todo.length - 5);
-    } else note("今日暫無待辦");
-    w.addSpacer(10);
-    label("明日待辦" + (tmr.length ? "　" + tmr.length + " 項" : ""));
-    if (tmr.length) {
-      tmr.slice(0, 4).forEach(e => row(e));
-      more(tmr.length - 4);
-    } else note("明日暫無安排");
+// 月曆。注意：細小格子內不可用 addSpacer()（彈性間距最少佔 8pt，會把數字擠走），改用置中及 padding。
+function calendar(parent, o) {
+  const first = new Date(now.getFullYear(), now.getMonth(), 1);
+  const lead = (first.getDay() + 6) % 7;
+  const start = addDays(first, -lead);
+  const days = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  const rows = Math.ceil((lead + days) / 7);
+  const box = parent.addStack();
+  box.layoutVertically();
+  if (o.title) {
+    txt(box, now.getFullYear() + "年" + (now.getMonth() + 1) + "月", o.head + 2.5, C.ink, true, 1);
+    box.addSpacer(3);
   }
+  const hr = box.addStack();
+  ["一", "二", "三", "四", "五", "六", "日"].forEach((x, i) => {
+    const c = hr.addStack();
+    c.layoutVertically();
+    c.size = new Size(o.cw, o.head + 6);
+    c.centerAlignContent();
+    const isCol = i === (now.getDay() + 6) % 7;
+    const t = txt(c, x, o.head, isCol ? C.cyan : i === 5 ? C.sat : i === 6 ? C.sun : C.faint, isCol, 1);
+    t.minimumScaleFactor = 0.7;
+  });
+  for (let r = 0; r < rows; r++) {
+    const row = box.addStack();
+    const thisWeek = T >= ymd(addDays(start, r * 7)) && T <= ymd(addDays(start, r * 7 + 6));
+    if (thisWeek) { row.backgroundColor = C.week; row.cornerRadius = Math.min(8, o.ch / 2); }
+    for (let i = 0; i < 7; i++) {
+      const d = addDays(start, r * 7 + i), ds = ymd(d);
+      const cell = row.addStack();
+      cell.size = new Size(o.cw, o.ch);
+      cell.centerAlignContent();
+      if (d.getMonth() !== now.getMonth()) continue;
+      const isT = ds === T, ev = byDay[ds] || [], cps = cpDay[ds] || [];
+      if (isT) {
+        const cols = [];
+        for (const e of ev) { const c = String(e.color || "#4F7BFF").toUpperCase(); if (!cols.includes(c)) cols.push(c); if (cols.length >= 3) break; }
+        if (cps.length) { if (cols.length >= 3) cols.pop(); cols.push("#FF9E5E"); }
+        todayChip(cell, o, cols);
+        continue;
+      }
+      const inner = cell.addStack();
+      inner.layoutVertically();
+      inner.size = new Size(o.cw, 0);
+      inner.centerAlignContent();
+      const nb = inner.addStack();
+      nb.layoutVertically();
+      nb.size = new Size(o.d, o.d);
+      nb.cornerRadius = o.d / 2;
+      nb.centerAlignContent();
+      nb.setPadding(Math.max(0, (o.d - o.num * 1.2) / 2), 0, 0, 0);
+      let col = isT ? C.dark : dayColor(d, ds) || (ds < T ? C.faint : C.ink);
+      if (!o.dots && !isT) {
+        if (cps.length) col = C.orange;
+        else if (ev.some(e => !e.done) && ds >= T && !dayColor(d, ds)) col = C.ink;
+        else if (!dayColor(d, ds)) col = C.faint;
+      }
+      const t = nb.addText(String(d.getDate()));
+      t.font = (!o.dots && (ev.length || cps.length)) ? RF("boldRoundedSystemFont", o.num) : RF("mediumRoundedSystemFont", o.num);
+      t.textColor = col;
+      t.lineLimit = 1;
+      t.minimumScaleFactor = 0.7;
+      if (o.dots) {
+        const cols = [];
+        for (const e of ev) {
+          const c = String(e.color || "#4F7BFF").toUpperCase();
+          if (!cols.includes(c)) cols.push(c);
+          if (cols.length >= 3) break;
+        }
+        if (cps.length) { if (cols.length >= 3) cols.pop(); cols.push("#FF9E5E"); }
+        inner.addSpacer(2);
+        const dr = inner.addStack();
+        dr.spacing = 2;
+        if (!cols.length) { const ph = dr.addStack(); ph.size = new Size(4, 4); }
+        cols.forEach(c => {
+          const dot = dr.addStack();
+          dot.size = new Size(4, 4);
+          dot.cornerRadius = 2;
+          dot.backgroundColor = new Color(c, ds < T ? 0.45 : 1);
+        });
+      }
+    }
+  }
+  return { box, rows };
+}
 
+// 按可用高度（pt）分配行程同優惠券；inlineMore=true 時「另有 N 項」交由頁腳顯示。回傳未顯示的行程數目。
+function agenda(p, hAvail, o, inlineMore) {
+  const rowH = o.font * 1.25 + o.gap, moreH = (o.font - 2.5) * 1.25 + 1, sep = 2;
+  const nU = upcoming.length, nC = cpSoon.length;
+  const urgent = cpSoon.filter(c => dd(c.exp) <= 3).length;
+  const need = (e, c) => (e + c) * rowH + (e && c ? sep : 0) + (!inlineMore && nU > e ? moreH : 0);
+  let cpN = o.noCp ? 0 : nC ? Math.min(nC, Math.max(1, Math.min(2, urgent))) : 0;
+  let evN = nU;
+  while (evN > 0 && need(evN, cpN) > hAvail) evN--;
+  if (evN === 0 && nU) { while (cpN > 0 && need(1, cpN) > hAvail) cpN--; if (need(1, cpN) <= hAvail) evN = 1; }
+  while (cpN > 0 && need(evN, cpN) > hAvail) cpN--;
+  while (!o.noCp && cpN < nC && need(evN, cpN + 1) <= hAvail) cpN++;
+  upcoming.slice(0, evN).forEach(e => rowTo(p, e, o));
+  if (!inlineMore && nU > evN) moreTo(p, nU - evN, o.font - 2.5);
+  if (cpN && evN) p.addSpacer(sep);
+  cpSoon.slice(0, cpN).forEach(c => cpRowTo(p, c, o));
+  if (!o.noCp && !o.noHint && nC > cpN && cpN && hAvail - need(evN, cpN) >= moreH) txt(p, "另有 " + (nC - cpN) + " 張優惠券將於 7 天內到期", o.font - 2.5, C.faint, false, 1);
+  return nU - evN;
+}
+
+// 概覽一行：清單進度、優惠券數目、本週健身次數
+function statsRow(p, compact) {
+  const s = p.addStack();
+  s.centerAlignContent();
+  const seg = (label, val, col) => {
+    txt(s, label, compact ? 9.5 : 10, C.faint, false, 1);
+    s.addSpacer(3);
+    txt(s, val, compact ? 10.5 : 11, col, true, 1);
+  };
+  const parts = [];
+  if (SHOW_LIST) parts.push(["清單", lsDone + "/" + lsAll, C.yellow]);
+  if (SHOW_CP) parts.push([compact ? "券" : "優惠券", String(CP.length), C.orange]);
+  if (SHOW_GYM) parts.push(["健身", gymWeek.length + "次", C.green]);
+  parts.forEach((x, i) => { if (i) s.addSpacer(compact ? 7 : 10); seg(x[0], x[1], x[2]); });
+  s.addSpacer();
+}
+// 分區標題：左邊色條＋名稱，右邊補充
+function label(p, name, col, right) {
+  const s = p.addStack();
+  s.centerAlignContent();
+  const b = s.addStack();
+  b.size = new Size(3, 10);
+  b.cornerRadius = 1.5;
+  b.backgroundColor = col;
+  s.addSpacer(5);
+  txt(s, name, 10.5, col, true, 1);
+  s.addSpacer();
+  if (right) txt(s, right, 10, C.muted, false, 1);
+}
+function listBlock(p, W, n) {
+  const x = openLists[0];
+  label(p, x ? "清單　" + x.l.name : "清單", C.yellow, x ? (x.it.length - x.left.length) + "/" + x.it.length : "");
+  p.addSpacer(3);
+  if (!x) { txt(p, LISTS.length ? "全部完成" : "未有清單", 11, C.faint, false, 1); return; }
+  const bar = p.addStack();
+  bar.size = new Size(W, 4);
+  bar.cornerRadius = 2;
+  bar.backgroundColor = new Color("#FFFFFF", 0.1);
+  const iw = Math.max(4, Math.round(W * (x.it.length - x.left.length) / x.it.length));
+  const fill = bar.addStack();
+  fill.size = new Size(W - iw < 8 ? W : iw, 4);
+  fill.cornerRadius = 2;
+  fill.backgroundColor = C.yellow;
+  if (W - iw >= 8) bar.addSpacer();
+  p.addSpacer(4);
+  x.left.slice(0, n).forEach(it => {
+    const r = p.addStack();
+    r.centerAlignContent();
+    txt(r, "○ " + (it.text || ""), 11, C.ink, false, 1);
+    r.addSpacer();
+    p.addSpacer(1);
+  });
+  const more = x.left.length - n + openLists.slice(1).reduce((a, y) => a + y.left.length, 0);
+  return more;
+}
+function couponBlock(p, n) {
+  label(p, "優惠券", C.orange, CP.length ? "共 " + CP.length + " 張" : "");
+  p.addSpacer(3);
+  if (!CP.length) { txt(p, "未有優惠券", 11, C.faint, false, 1); return; }
+  CP.slice(0, n).forEach(c => {
+    const r = p.addStack();
+    r.centerAlignContent();
+    const d = dd(c.exp);
+    const ts = r.addStack();
+    ts.size = new Size(28, 0);
+    const t = txt(ts, d === 0 ? "今日" : d === 1 ? "明天" : d + "天", 10.5, d <= 3 ? C.orange : C.muted, true, 1);
+    t.minimumScaleFactor = 0.8;
+    ts.addSpacer();
+    r.addSpacer(4);
+    txt(r, (c.title || "優惠券") + (c.value ? " " + c.value : ""), 11.5, d <= 3 ? C.orange : C.ink, false, 1);
+    r.addSpacer();
+    p.addSpacer(1.5);
+  });
+}
+function gymBlock(p, W, extra) {
+  label(p, "健身", C.green, "本週 " + gymWeek.length + " 次");
+  p.addSpacer(4);
+  const r = p.addStack();
+  const gap = 3, sq = Math.floor((W - gap * 6) / 7);
+  r.spacing = gap;
+  ["一", "二", "三", "四", "五", "六", "日"].forEach((w, i) => {
+    const ds = weekDays[i], did = gymSet.has(ds), plan = !did && gymPlan.has(ds);
+    const c = r.addStack();
+    c.size = new Size(sq, 17);
+    c.cornerRadius = 4;
+    c.centerAlignContent();
+    c.backgroundColor = did ? C.green : plan ? new Color("#3FE0A5", 0.22) : new Color("#FFFFFF", 0.06);
+    if (ds === T) { c.borderWidth = 1.5; c.borderColor = C.cyan; }
+    const t = txt(c, w, 9, did ? C.dark : ds < T ? C.faint : C.muted, did, 1);
+    t.minimumScaleFactor = 0.7;
+  });
+  if (extra) {
+    p.addSpacer(4);
+    const last = gymPast[0], nx = [...gymPlan].sort()[0];
+    const day = ds => { const d = dd(ds); return d === 0 ? "今日" : d === -1 ? "昨日" : d === 1 ? "明天" : (+ds.slice(5, 7)) + "月" + (+ds.slice(8)) + "日"; };
+    const parts = [];
+    if (last) parts.push("上次 " + day(last.date));
+    if (nx) { const ne = live.filter(e => e.date === nx && String(e.color || "").toUpperCase() === "#3FE0A5" && !isWorkout(e)).sort(byTime)[0]; parts.push("下次 " + day(nx) + (ne && ne.start && !ne.allDay ? " " + ne.start : "")); }
+    if (parts.length) txt(p, parts.join("　"), 10.5, C.muted, false, 1);
+  }
+}
+const LIST_H = n => 10.5 * 1.25 + 3 + 4 + 4 + n * (11 * 1.25 + 1);
+const CP_H = n => 10.5 * 1.25 + 3 + n * (11.5 * 1.25 + 1.5);
+const GYM_H = 10.5 * 1.25 + 4 + 17, GYM_X = 4 + 10.5 * 1.25;
+
+function accessory() {
+  const lw = new ListWidget();
+  txt(lw, status(), 13, Color.white(), true);
+  const e = upcoming[0];
+  if (e) txt(lw, whenOf(e) + " " + e.title, 12, Color.white(), false, 1);
+  else if (cpSoon[0]) txt(lw, "優惠券：" + (cpSoon[0].title || cpSoon[0].value), 12, Color.white(), false, 1);
+  lw.url = APP_URL;
+  return lw;
+}
+
+function small() {
+  const w = base();
+  w.setPadding(14, 14, 12, 14);
+  header(w, 30);
+  w.addSpacer(8);
+  const o = { bar: 12, col: 37, font: 11.5, gap: 3, short: true, noHint: true };
+  agenda(w, SMALL - 26 - 36 - 8 - (HAS_STATS ? 15 : 0), o);
   w.addSpacer();
-  const at = data.at ? new Date(data.at) : null;
-  const ft = w.addText(data.empty ? "未能連線，請檢查同步設定" : (data.offline ? "離線，顯示 " : "更新於 ") + (at ? pad(at.getHours()) + ":" + pad(at.getMinutes()) : ""));
-  ft.font = Font.systemFont(9.5);
-  ft.textColor = C.faint;
+  if (HAS_STATS) statsRow(w, true);
   return w;
 }
 
-const widget = fam.startsWith("accessory") ? accessory() : main();
+function medium() {
+  const w = base();
+  const P = 12;
+  w.setPadding(P, 14, P, 14);
+  const innerW = WIDE - 28, innerH = SMALL - P * 2;
+  const h = w.addStack();
+  h.layoutHorizontally();
+  h.topAlignContent();
+  const cw = Math.floor(Math.min(20, (innerW * 0.43) / 7));
+  const ch = Math.floor(((innerH - 30) / 6) * 2) / 2;
+  const cal = calendar(h, { cw, ch, d: Math.min(ch, cw - 2), num: 9.5, head: 8, dots: false, title: true });
+  const calH = 10.5 * 1.2 + 3 + 14 + cal.rows * ch;
+  h.addSpacer(12);
+  const r = h.addStack();
+  r.layoutVertically();
+  txt(r, (now.getMonth() + 1) + "月" + now.getDate() + "日　" + (HOL.length ? HOL[0].name : "星期" + WK[now.getDay()]), 12.5, DAY_COLOR || C.ink, true, 1);
+  txt(r, status() + (overdue.length ? "　逾期 " + overdue.length : ""), 10.5, C.cyan, false, 1);
+  r.addSpacer(6);
+  const o = { bar: 12, col: 37, font: 11.5, gap: 3.5, short: true };
+  agenda(r, Math.min(innerH, calH) - 15 - 12.6 - 6 - 2 - (HAS_STATS || data.empty || data.offline ? 17 : 0), o);
+  r.addSpacer();
+  if (data.empty || data.offline) footer(r);
+  else if (HAS_STATS) statsRow(r, false);
+  return w;
+}
+
+function large() {
+  const w = base();
+  const PX = 15, PT = 14, PB = 12;
+  w.setPadding(PT, PX, PB, PX);
+  const innerW = WIDE - PX * 2, innerH = TALL - PT - PB;
+  // 頂部：日期、待辦狀態、逾期及更新時間
+  const head = w.addStack();
+  head.centerAlignContent();
+  txt(head, String(now.getDate()), 26, DAY_COLOR || C.ink, true);
+  head.addSpacer(8);
+  const hv = head.addStack();
+  hv.layoutVertically();
+  txt(hv, (now.getMonth() + 1) + "月　" + (HOL.length ? HOL[0].name : "星期" + WK[now.getDay()]), 11, DAY_COLOR || C.muted, false, 1);
+  txt(hv, status(), 12.5, C.cyan, true, 1);
+  head.addSpacer();
+  const hr = head.addStack();
+  hr.layoutVertically();
+  const at = data.at ? new Date(data.at) : null;
+  if (overdue.length) txt(hr, "逾期 " + overdue.length, 11, C.red, true, 1);
+  txt(hr, data.empty ? "未能連線" : (data.offline ? "離線 " : "更新 ") + (at ? pad(at.getHours()) + ":" + pad(at.getMinutes()) : ""), 9, data.offline ? C.orange : C.faint, false, 1);
+  w.addSpacer(6);
+  // 月曆：高度按手機尺寸調整，下面最少留 132pt 畀各分區
+  const cw = Math.floor((innerW - 2) / 7);
+  const first = new Date(now.getFullYear(), now.getMonth(), 1);
+  const rows = Math.ceil((((first.getDay() + 6) % 7) + new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()) / 7);
+  const ch = Math.max(19, Math.min(23, Math.floor((innerH - 32 - 6 - 15.5 - 8 - 132) / rows)));
+  calendar(w, { cw, ch, d: ch - 6, num: ch >= 22 ? 11.5 : 10.5, head: 9.5, dots: true, title: false });
+  w.addSpacer(8);
+  const bottomH = innerH - 32 - 6 - 15.5 - rows * ch - 8 - 2;
+  // 下半：左邊未來 7 天；右邊只放有資料的清單／優惠券／健身，全部都冇就用全闊
+  const RW = HAS_STATS ? Math.floor(innerW * 0.45) : 0, LW = innerW - RW - (HAS_STATS ? 12 : 0);
+  const b = w.addStack();
+  b.topAlignContent();
+  const l = b.addStack();
+  l.layoutVertically();
+  l.size = new Size(LW, 0);
+  label(l, "未來 7 天", C.cyan, upcoming.length ? upcoming.length + " 項" : "");
+  l.addSpacer(4);
+  if (!upcoming.length) txt(l, "沒有待辦，好好休息", 11.5, C.faint, false, 1);
+  agenda(l, bottomH - 10.5 * 1.25 - 4, { bar: 12, col: 52, font: 12, gap: 4, short: false, noCp: true });
+  l.addSpacer();
+  if (HAS_STATS) {
+    b.addSpacer(12);
+    const r = b.addStack();
+    r.layoutVertically();
+    r.size = new Size(RW, 0);
+    const lsMax = SHOW_LIST ? Math.min(4, openLists[0].left.length) : 0, cpMax = SHOW_CP ? Math.min(4, CP.length) : 0;
+    let li = Math.min(1, lsMax), cp = Math.min(1, cpMax), gx = false;
+    const blocks = () => (SHOW_LIST ? 1 : 0) + (SHOW_CP ? 1 : 0) + (SHOW_GYM ? 1 : 0);
+    const need = () => (SHOW_LIST ? LIST_H(li) : 0) + (SHOW_CP ? CP_H(cp) : 0) + (SHOW_GYM ? GYM_H + (gx ? GYM_X : 0) : 0) + (blocks() - 1) * 7;
+    if (need() > bottomH) li = 0;
+    // 有空位就逐項加多：清單、優惠券輪流，最後加健身上次／下次
+    let grew = true;
+    while (grew) {
+      grew = false;
+      if (li < lsMax) { li++; if (need() <= bottomH) grew = true; else li--; }
+      if (cp < cpMax) { cp++; if (need() <= bottomH) grew = true; else cp--; }
+    }
+    if (SHOW_GYM) { gx = true; if (need() > bottomH) gx = false; }
+    let first = true;
+    const gap = () => { if (!first) r.addSpacer(7); first = false; };
+    if (SHOW_LIST) { gap(); listBlock(r, RW, li); }
+    if (SHOW_CP) { gap(); couponBlock(r, cp); }
+    if (SHOW_GYM) { gap(); gymBlock(r, RW, gx); }
+    r.addSpacer();
+  }
+  w.addSpacer();
+  return w;
+}
+
+const widget = fam.startsWith("accessory") ? accessory() : fam === "small" ? small() : fam === "medium" ? medium() : large();
 if (config.runsInWidget) Script.setWidget(widget);
+else if (fam === "medium") await widget.presentMedium();
+else if (fam === "small") await widget.presentSmall();
 else await widget.presentLarge();
 Script.complete();
 </script>
 <script>
 (()=>{
 const DEMO=false;
-const APP_VERSION='2026.11.21-3';
+const APP_VERSION='2026.11.22-1';
 const $=s=>document.querySelector(s);
 const pad=n=>String(n).padStart(2,'0');
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -1655,9 +2225,18 @@ function demoEvents(){
   [4,6,9,11,13,16,18,20,23,27,30,32,34,37,41,44,46,48,51].forEach((o,i)=>{const st=['18:20','18:45','19:05','07:30'][i%4],len=[62,75,55,80][i%3];out.push({id:'demogym'+i,title:'健身',date:d(-o),start:st,end:fromMin(toMin(st)+len),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:true,geo:'gym',geoOut:true,wk:dw(i),updatedAt:1})});
   const gs=Math.max(0,nowMin()-42);out.push({id:'demogymlive',title:'健身',date:d(0),start:fromMin(gs),end:fromMin(Math.min(1439,gs+40)),allDay:false,color:C(3),location:'健身室',notes:'到達地點時自動記錄',done:false,geo:'gym',geoSeen:Date.now(),wk:[{n:'飛鳥',s:[{w:20,r:12,t:Date.now()-900000},{w:22.5,r:10,t:Date.now()-500000}]},{n:'哈克',s:[]}],updatedAt:1});
   out.push({id:'ls-demo',cfg:'list',name:'本週要做',created:1,order:1,updatedAt:1});
+  const st=a=>a.map(([t,dn],i)=>({id:'s'+i,t,done:!!dn,doneAt:dn?1:0}));
+  [['考取 IT 專業認證',1,'y1',d(30),'為轉職及升級打好基礎',st([['報名考試',1],['完成模擬試題 3 份',1],['溫習網絡安全章節',0],['正式應考',0]])],
+   ['存夠旅行基金 $30,000',3,'y1',d(39),'',st([['每月自動轉帳 $2,500',1],['減少外出用餐',0],['檢視保險開支',0]])],
+   ['完成半馬拉松',2,'y3','','證明自己做得到',st([['每週跑 3 次',1],['完成 10 公里賽',1],['報名半馬',0],['完成半馬',0]])],
+   ['同家人去日本旅行',7,'y3','','',[]],
+   ['擁有自己的物業',3,'life','','',st([['了解首置計劃',0]])]].forEach(([t,a,hz,due,why,steps],i)=>out.push({id:'gl-demo'+i,cfg:'goal',title:t,area:a,hz,due,why,steps,status:'active',created:1,order:i,updatedAt:1}));
+  out.push({id:'gl-demo9',cfg:'goal',title:'學會游泳',area:2,hz:'y1',due:'',why:'',steps:st([['報名成人泳班',1],['游到 25 米',1]]),status:'done',doneAt:d(-96),created:1,order:9,updatedAt:1});
+  [['完成第一次 10 公里跑',2,-21,'用了 58 分鐘，比預期快。'],['升職為高級主任',0,-210,''],['第一次獨自去台灣旅行',7,-320,'九份、台南都好難忘。'],['考到車牌',1,-410,'']].forEach(([t,a,o,n],i)=>out.push({id:'ac-demo'+i,cfg:'ach',title:t,area:a,date:d(o),note:n,updatedAt:1}));
   ['覆核年度預算表','回覆陳主任電郵','預約汽車驗車','整理報稅文件','買打印機墨盒','預備開考公文練習'].forEach((t,i)=>out.push({id:'li-demo'+i,cfg:'li',list:'ls-demo',text:t,done:i<2,doneAt:i<2?1:0,due:i===3?d(2):'',note:i===2?'需攜帶行車證':'',order:i+1,updatedAt:1}));
   [['coupon','新苗超市','滿$200減$30','',2,'限星期一至五使用，每張單據限用一張。',1,0,0],['coupon','澳門通 MPay','8折','MPAY80',9,'適用於指定餐廳，最多折 $50。',1,0,0],['coupon','書城','$50現金券','BOOK50',25,'',0,0,0],
-   ['note','健身室會員資料','','','','會員號碼：GM-20481\n儲物櫃：B12',0,1,0],['coupon','咖啡店','買一送一','',-3,'',0,0,1]].forEach(([k,t,v,c,o,b,cal,pin,used],i)=>out.push({id:'nt-demo'+i,cfg:'note',kind:k,title:t,value:v,code:c,exp:o===''?'':d(o),body:b,cal:!!cal,pin:!!pin,used:!!used,usedAt:used?1:0,created:1,updatedAt:1}));
+   ['note','健身室會員資料','','','','會員號碼：GM-20481\n儲物櫃：B12',0,1,0],['coupon','咖啡店','買一送一','',-3,'',0,0,1]].forEach(([k,t,v,c,o,b,cal,pin,used],i)=>out.push({id:'nt-demo'+i,cfg:'note',kind:k,title:t,value:v,code:c,exp:o===''?'':d(o),body:b,cal:!!cal,pin:!!pin,used:!!used,usedAt:used?Date.now()-2*864e5:0,created:1,updatedAt:1}));
+  out.push({id:'ev-demo-shop',title:'去新苗超市買餸',date:d(1),start:'18:30',end:'19:15',allDay:false,location:'新苗超市',notes:'',color:'#FF6F9C',done:false,updatedAt:1});
   out.push({id:'cfg-holidays',cfg:'holidays',list:[{id:'hd1',name:'元旦',date:'2026-01-01',yearly:true,type:'ph'},{id:'hd2',name:'澳門特別行政區成立紀念日',date:'2026-12-20',yearly:true,type:'ph'},{id:'hd3',name:'聖誕節',date:'2026-12-25',yearly:true,type:'ph'},{id:'hd4',name:'年假',date:d(9),end:d(10),type:'own'}],updatedAt:1});
   return out;
 }
@@ -1772,7 +2351,7 @@ function renderTimeline(ds){
   const y=m=>(m-sh*60)/60*H;
   let h='<section class="glass tlwrap">';
   const hsd=holOn(ds);
-  if(allday.length||hsd.length)h+=`<div class="allday" style="position:relative"><span class="lbl">全日</span>${hsd.map(x=>`<span class="holtag ${x.type==='own'?'leave':''}" data-holedit="${x.id}">${esc(x.name)}</span>`).join('')}${allday.map(e=>`<span class="adchip ${e.done?'done':''}" data-id="${e.id}" style="--c:${e.color||COLORS[0]}">${esc(e.title)}</span>`).join('')}</div>`;
+  if(allday.length||hsd.length)h+=`<div class="allday" style="position:relative"><span class="lbl">全日</span>${hsd.map(x=>`<span class="holtag ${x.type==='own'?'leave':''}" data-holedit="${x.id}">${esc(x.name)}</span>`).join('')}${allday.map(e=>`<span class="adchip ${e.done?'done':''} ${e.nt?'tkt':''}" data-id="${e.id}" style="--c:${e.nt?'#FF9E5E':e.color||COLORS[0]}">${esc(e.title)}</span>`).join('')}</div>`;
   h+=`<div class="tl" style="height:${(eh-sh)*H+8}px">`;
   const nmk=ds===todayStr()?nowMin():-999;
   for(let k=sh;k<=eh;k++){h+=`<div class="hr" style="top:${y(k*60)}px"><span>${Math.abs(k*60-nmk)<18?'':pad(k)+':00'}</span></div>`;if(k<eh)h+=`<div class="hr half" style="top:${y(k*60+30)}px"></div>`}
@@ -1797,7 +2376,7 @@ function renderMonth(){
     const d=addDays(start,i),ds=ymd(d),evs=eventsOn(ds),lv=heatLevel(loadOf(ds));
     const hs=holOn(ds),cls=['cell',dayCls(ds),d.getMonth()!==cursor.getMonth()?'out':'',ds===today?'today':'',ds===selected?'sel':''].join(' ');
     h+=`<div class="${cls}" data-day="${ds}" role="button" tabindex="0" style="--heat:${HEAT[lv]}" aria-label="${d.getMonth()+1}月${d.getDate()}日${hs.length?'，'+hs.map(x=>x.name).join('、'):''}，${evs.length} 個行程"><div class="n">${d.getDate()}</div>${hs.length?`<div class="hn ${hs.every(x=>x.type==='own')?'leave':''}">${esc(hs[0].name)}</div>`:''}`;
-    evs.slice(0,2).forEach(e=>h+=`<div class="chip ${e.done?'done':''}" style="--c:${e.color||COLORS[0]}">${esc(e.title)}</div>`);
+    evs.slice(0,2).forEach(e=>{const n=e.nt&&ntById(e.nt);h+=`<div class="chip ${e.done?'done':''} ${n?'tkt':''}" style="--c:${n?'#FF9E5E':e.color||COLORS[0]}">${esc(n?(n.title||n.value):e.title)}</div>`});
     if(evs.length>2)h+=`<div class="more">另有 ${evs.length-2} 項</div>`;
     h+='</div>';
   }
@@ -1809,10 +2388,11 @@ function timeCol(e){
   return `<div class="t"><b>${e.start||''}</b>${e.end||''}</div>`;
 }
 function evRow(e){
+  const ntn=e.nt&&ntById(e.nt);if(ntn)return ntEvRow(e,ntn);
   const parts=[];
   if(e.location)parts.push(`<span>${ICON_PIN}${esc(e.location)}</span>`);
   if(e.notes)parts.push(esc(e.notes));
-  return `<div class="ev ${e.done?'done':''}" data-id="${e.id}" style="--c:${e.color||COLORS[0]}" tabindex="0">${timeCol(e)}<div class="bar"></div><div class="b"><div class="ti">${esc(e.title)}</div>${parts.length?`<div class="sub">${parts.join('\n')}</div>`:''}</div><button class="chk ${e.done?'on':''}" data-done="${e.id}" aria-label="標記完成"></button></div>`;
+  return `<div class="ev ${e.done?'done':''}" data-id="${e.id}" style="--c:${e.color||COLORS[0]}" tabindex="0">${timeCol(e)}<div class="bar"></div><div class="b"><div class="ti">${esc(e.title)}</div>${parts.length?`<div class="sub">${parts.join('\n')}</div>`:''}${ntChip(ntMatches(e))}</div><button class="chk ${e.done?'on':''}" data-done="${e.id}" aria-label="標記完成"></button></div>`;
 }
 function relLabel(ds){
   const diff=Math.round((parseYmd(ds)-parseYmd(todayStr()))/864e5);
@@ -1873,7 +2453,7 @@ function renderStats(s){
   const dl=`<section class="glass"><div class="ptitle">截止及考試<span>未來 30 日</span></div>`+(dues.length?dues.map(e=>{
     const diff=Math.round((parseYmd(e.date)-parseYmd(today))/864e5),over=diff<0;
     return `<div class="dl ${over?'overdue':''}" data-goto="${e.date}" style="--c:${e.color}" role="button" tabindex="0"><div class="cd"><b>${over?-diff:diff}</b><span>${over?'天前':diff===0?'今天':'天後'}</span></div><div class="b"><div class="ti">${esc(e.title)}</div><div class="meta">${fmtDate(e.date)}　${fmtTime(e)}${over?'　已逾期':''}</div></div><button class="chk" data-done="${e.id}" style="--c:${e.color}" aria-label="標記完成"></button></div>`}).join(''):'<div class="none">未來 30 日沒有截止事項。把行程分類設為「截止」就會顯示在這裡。</div>')+'</section>';
-  return `<div class="stats">${ring}${habitCard(s)}${trainCard(s)}${bars}${cats}${dl}</div>`;
+  return `<div class="stats">${ring}${habitCard(s)}${trainCard(s)}${ntStatsCard()}${bars}${cats}${dl}</div>`;
 }
 function renderSyncStatus(){
   const el=$('#syncStatus');el.classList.toggle('err',!!syncError);
@@ -1913,6 +2493,7 @@ $('#main').addEventListener('click',e=>{
   if(e.target.closest('#qGo')){quickAdd();return}
   const ge=e.target.closest('[data-gyend]');if(ge){geoEnd(ge.dataset.gyend);return}
   if(e.target.closest('[data-gycheck]')){geoCheck(true);return}
+  if(e.target.closest('[data-ntitem],[data-ntcopy],[data-ntuse],[data-ntopen],[data-ntnew],[data-lfopen],[data-vtopen]'))return;
   if(lsClick(e)||aiClick(e)||fitClick(e))return;
   const lsw=e.target.closest('[data-lssw]');if(lsw){settings.activeList=lsw.dataset.lssw;saveSettings();lsRerender();return}
   const lso=e.target.closest('[data-lsopen]');if(lso){openList(lso.dataset.lsopen);return}
@@ -1933,7 +2514,7 @@ $('#main').addEventListener('click',e=>{
   const pk=e.target.closest('[data-pick]');if(pk){slideDir='';pickDay(pk.dataset.pick);return}
   const fr=e.target.closest('[data-free]');if(fr){const[ds,a,b]=fr.dataset.free.split('|');openEditor(null,ds,{start:a,end:fromMin(Math.min(toMin(a)+60,toMin(b)))});return}
   const add=e.target.closest('[data-add]');if(add){openEditor(null,add.dataset.add);return}
-  const ev=e.target.closest('.ev,.blk,.adchip,.td');if(ev){openEditor(events.find(x=>x.id===ev.dataset.id));return}
+  const ev=e.target.closest('.ev,.blk,.adchip,.td');if(ev){const x=events.find(x=>x.id===ev.dataset.id);if(x&&x.nt&&ntById(x.nt)){openNote(x.nt);return}openEditor(x);return}
   const c=e.target.closest('[data-day]');
   if(c){
     const ds=c.dataset.day;
@@ -1971,7 +2552,7 @@ function openEditor(ev,date,preset){
   $('#fTitle').value=src.title||'';$('#fDate').value=src.date||selected;
   $('#fAll').checked=!!src.allDay;$('#fStart').value=src.start||'';$('#fEnd').value=src.end||'';
   $('#fLoc').value=src.location||'';$('#fNotes').value=src.notes||'';$('#fDone').checked=!!src.done;
-  catAuto=!ev&&!(preset&&preset.color);editColor=COLORS.includes(src.color)?src.color:COLORS[catAuto?6:0];paintCats();$('#fAuto').textContent=catAuto?'自動判斷':'';if(catAuto&&src.title)autoCat();
+  catAuto=!ev&&!(preset&&preset.color);editColor=COLORS.includes(src.color)?src.color:COLORS[catAuto?6:0];paintCats();$('#fAuto').textContent=catAuto?'自動判斷':'';if(catAuto&&src.title)autoCat();ntEdBox();
   $('#timeRow').style.display=src.allDay?'none':'flex';
   $('#delBtn').style.display=ev?'block':'none';$('#doneRow').style.display=ev?'block':'none';
   $('#remOne').style.display=ev?'flex':'none';$('#wkOpenEd').style.display=ev&&catIdx(src.color)===3?'flex':'none';
@@ -2059,6 +2640,8 @@ ${JSON.stringify(ntCtx())}
 - 完成清單事項：{"type":"todo_done","id":"清單事項 id"}
 - 記低資料或優惠券：{"type":"note","kind":"coupon 或 note","title":"商戶或標題","value":"優惠內容，例如 滿$200減$30","code":"優惠碼，沒有則空","exp":"到期日 YYYY-MM-DD，沒有則空","body":"使用條件或內容"}
 - 優惠券已使用：{"type":"note_used","id":"記事 id"}
+- 記錄成就：{"type":"achieve","title":"完成了甚麼","date":"YYYY-MM-DD","area":"事業|學習|健康|財務|家庭|人際|興趣|旅遊","note":"感想，沒有則空"}
+- 新增人生目標：{"type":"goal","title":"目標","area":"事業|學習|健康|財務|家庭|人際|興趣|旅遊","horizon":"今年|三年內|五年內|人生","due":"YYYY-MM-DD，沒有則空","why":"動機，沒有則空","steps":["步驟一","步驟二"]}
 規則：
 - 「聽日/明天、後日/後天、下星期三、月尾、15號」等換算成實際日期；只講日子未講月份時取最近的未來日期。「下星期X」= 下一個日曆週的星期X；「今個星期X/這星期X」= 本週。
 - 時間用 24 小時制：「下午3點/3pm」=15:00，「晚上7點半」=19:30，「中午」=12:00。沒有具體時間 → allDay=true，start/end 為 null。只有開始時間時，按事情性質估計合理的結束時間（例如會議 1 小時、溫習 2 小時）。
@@ -2067,6 +2650,8 @@ ${JSON.stringify(ntCtx())}
 - 使用者說「做完、完成、搞掂」某件事 → 若是現有行程，update 該行程 "done":true；若是清單事項，用 todo_done。
 - 使用者要求「加入清單」「待辦」「要做」而沒有具體日期或時間 → 用 todo；有具體日期或時間 → 用 add。
 - 使用者要求記低資料（例如優惠券、會員號碼、地址、尺寸）→ 用 note；優惠券用 kind coupon 並盡量填 value、code、exp。查詢優惠券或記事時，直接在 reply 回答。
+- 使用者想記低人生里程碑或成就（例如「記低我今日考到車牌」「我完成咗第一次半馬」），而不是現有行程或清單事項 → achieve，date 預設今日。
+- 使用者講長遠目標、願望或人生計劃（例如「我想三年內學好日文」「今年目標係存夠三萬」）→ goal，horizon 按所講時間；合適時拆成 2 至 5 個具體步驟。你看不到使用者已有的人生規劃內容，不要假裝知道。
 - title 精簡（15 字內）；地點放 location；要帶的東西、聯絡人、連結等放 notes。
 - 修改或刪除時，根據標題、日期、時間在現有行程中找出最符合的 id；有多個可能或找不到時，不要動作，在 reply 問清楚。
 - 只是查詢（例如「聽日有咩做」「這星期有甚麼安排」）時，actions 留空，在 reply 用簡短條列回答。
@@ -2153,6 +2738,19 @@ function applyActions(acts){
     }
     else if(a.type==='note'){const n=ntMake(a,now);if(!n)continue;events.push(n);res.push({type:'note',id:n.id,snap:{title:n.title,date:n.exp,kind:n.kind,value:n.value,code:n.code,body:n.body}})}
     else if(a.type==='note_used'){const n=events.find(x=>x.id===a.id&&x.cfg==='note'&&!x.deleted);if(!n)continue;const was=!!n.used;n.used=true;n.usedAt=now;n.updatedAt=now;res.push({type:'nused',id:n.id,was,snap:{title:n.title,date:'',kind:n.kind,value:n.value,code:n.code}})}
+    else if(a.type==='achieve'||a.type==='goal'){
+      const t=String(a.title||'').replace(/\n/g,' ').trim().slice(0,60);if(!t)continue;
+      const ai=LF_AREAS.findIndex(x=>x[0]===String(a.area||'').trim()),area=ai<0?0:ai,okd=v=>/^\d{4}-\d{2}-\d{2}$/.test(String(v||''));
+      if(a.type==='achieve'){
+        const x={id:'ac-'+uid().slice(-9),cfg:'ach',title:t,date:okd(a.date)?a.date:todayStr(),area,note:String(a.note||'').trim().slice(0,300),updatedAt:now};
+        events.push(x);res.push({type:'ach',id:x.id,snap:{title:t,date:x.date,area}});
+      }else{
+        const hz=({'今年':'y1','三年內':'y3','五年內':'y5','人生':'life'})[String(a.horizon||'').trim()]||'y1';
+        const steps=(Array.isArray(a.steps)?a.steps:[]).map(x=>String(x||'').replace(/\n/g,' ').trim()).filter(Boolean).slice(0,10).map(x=>({id:uid().slice(-6),t:x.slice(0,60),done:false,doneAt:0}));
+        const g={id:'gl-'+uid().slice(-9),cfg:'goal',title:t,area,hz,due:okd(a.due)?a.due:'',why:String(a.why||'').trim().slice(0,300),steps,status:'active',created:now,order:now,updatedAt:now};
+        events.push(g);res.push({type:'goal',id:g.id,snap:{title:t,date:g.due,area,hz,steps:steps.map(x=>x.t)}});
+      }
+    }
     else if(a.type==='todo_done'){
       const it=events.find(x=>x.id===a.id&&x.cfg==='li'&&!x.deleted);if(!it)continue;
       const was=!!it.done;it.done=a.done!==false;it.doneAt=it.done?now:0;it.updatedAt=now;
@@ -2165,7 +2763,7 @@ function applyActions(acts){
 function undo(key){
   const[i,j]=key.split(':').map(Number);const r=chat[i]?.results?.[j];if(!r||r.undone)return;
   const now=Date.now();
-  if(r.type==='note'){const x=events.find(e=>e.id===r.id);if(x){x.deleted=true;x.updatedAt=now}}
+  if(r.type==='note'||r.type==='ach'||r.type==='goal'){const x=events.find(e=>e.id===r.id);if(x){x.deleted=true;x.updatedAt=now}}
   else if(r.type==='nused'){const x=events.find(e=>e.id===r.id);if(x){x.used=r.was;if(!r.was)x.usedAt=0;x.updatedAt=now}}
   else if(r.type==='todo'){for(const id of r.ids||[]){const x=events.find(e=>e.id===id);if(x){x.deleted=true;x.updatedAt=now}}}
   else if(r.type==='tdone'){const x=events.find(e=>e.id===r.id);if(x){x.done=r.was;if(!r.was)x.doneAt=0;x.updatedAt=now}}
@@ -2236,10 +2834,11 @@ function nowNext(){
   return{cur,next};
 }
 function tdRow(e,o={}){
+  const ntn=e.nt&&ntById(e.nt);if(ntn)return ntTdRow(e,ntn,o);
   const tm=o.showDate?`<div class="tm">${parseYmd(e.date).getDate()}日<small>${relLabel(e.date)}</small></div>`
     :e.allDay?`<div class="tm"><span class="ad">全日</span></div>`:`<div class="tm">${e.start||''}<small>${e.end||''}</small></div>`;
   const meta=[o.showDate?fmtTime(e):'',e.location,wkSummary(e)||e.notes].filter(Boolean).join('　');
-  return `<div class="td ${e.done?'done':''} ${o.now?'now':''}" data-id="${e.id}" style="--c:${e.color||COLORS[0]}" tabindex="0"><button class="chk ${e.done?'on':''}" data-done="${e.id}" aria-label="標記完成"></button>${tm}<div class="bar"></div><div class="b"><div class="ti">${esc(e.title)}</div>${meta?`<div class="meta">${esc(meta)}</div>`:''}</div>${o.act||''}</div>`;
+  return `<div class="td ${e.done?'done':''} ${o.now?'now':''}" data-id="${e.id}" style="--c:${e.color||COLORS[0]}" tabindex="0"><button class="chk ${e.done?'on':''}" data-done="${e.id}" aria-label="標記完成"></button>${tm}<div class="bar"></div><div class="b"><div class="ti">${esc(e.title)}</div>${meta?`<div class="meta">${esc(meta)}</div>`:''}${ntChip(ntMatches(e))}</div>${o.act||''}</div>`;
 }
 function greetHTML(){
   const t=todayStr(),todo=eventsOn(t).filter(e=>!e.done),od=overdueList(),all=eventsOn(t);
@@ -2252,8 +2851,8 @@ function greetHTML(){
 }
 function renderTodo(){
   const t=todayStr(),tm=ymd(addDays(new Date(),1)),evening=new Date().getHours()>=18;
-  const today=eventsOn(t),todo=today.filter(e=>!e.done),done=today.filter(e=>e.done);
-  const tmr=eventsOn(tm).filter(e=>!e.done),od=overdueList(),{cur,next}=nowNext();
+  const today=eventsOn(t).filter(e=>!e.nt),todo=today.filter(e=>!e.done),done=today.filter(e=>e.done);
+  const tmr=eventsOn(tm).filter(e=>!e.done&&!e.nt),od=overdueList(),{cur,next}=nowNext();
   const pct=today.length?Math.round(done.length/today.length*100):0,C=2*Math.PI*48;
   let nx;
   if(cur)nx=`<div class="nextup"><small>進行中<span class="tag">剩餘 ${durTxt(spanOf(cur)[1]-nowMin())}</span></small><b>${esc(cur.title)}</b>　${cur.start}${cur.end?'–'+cur.end:''}</div>`;
@@ -2268,6 +2867,7 @@ function renderTodo(){
   h+=`<section class="glass todaycard"><div class="ring sm"><svg viewBox="0 0 120 120"><defs><linearGradient id="rg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D6BFF"/><stop offset="1" stop-color="#4FE3FF"/></linearGradient></defs><circle cx="60" cy="60" r="48" fill="none" stroke="rgba(130,160,255,.12)" stroke-width="12"/><circle cx="60" cy="60" r="48" fill="none" stroke="url(#rg2)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${pct/100*C} ${C}" style="filter:drop-shadow(0 0 6px rgba(79,227,255,.6))"/></svg><div class="rv"><b>${today.length?pct:'—'}<small>${today.length?'%':''}</small></b></div></div><div class="tc-b"><div class="big">今日進度 <em>${done.length}</em> / ${today.length}</div>${nx}</div></section>`;
   h+=listCard();
   h+=noteCard();
+  h+=spaceTiles();
   if(od.length)h+=`<section class="glass sect warn"><div class="sh"><b>逾期事項</b><span class="cnt">${od.length}</span><button class="r" data-moveall="${t}">全部改至今日</button></div>${od.map(e=>tdRow(e,{showDate:true,act:`<button class="act" data-move="${e.id}|${t}">改至今日</button>`})).join('')}</section>`;
   h+=`<section class="glass sect"><div class="sh"><b>今日待辦</b><span class="cnt">${todo.length}</span><span class="sd">${md(t)}</span><button class="r" data-add="${t}">＋ 新增</button></div>`+
     (todo.length?todo.map(e=>tdRow(e,{now:cur&&e.id===cur.id})).join(''):`<div class="sempty">${today.length?'今日待辦已全部完成。':'今日暫無待辦事項。'}</div>`)+
@@ -2277,7 +2877,7 @@ function renderTodo(){
     (tmr.length?tmr.map(e=>tdRow(e)).join(''):`<div class="sempty">明日暫無安排。</div>`)+
     (remCandidates(tm).length?`<button class="more-btn" data-remday="${tm}">${BELL}將明日事項加入 iPhone 提醒事項</button>`:'')+`</section>`;
   const from=ymd(addDays(new Date(),2)),to=ymd(addDays(new Date(),60));
-  const fut=live().filter(e=>!e.done&&e.date>=from&&e.date<=to).sort((a,b)=>(a.date+sortKey(a)).localeCompare(b.date+sortKey(b)));
+  const fut=live().filter(e=>!e.done&&!e.nt&&e.date>=from&&e.date<=to).sort((a,b)=>(a.date+sortKey(a)).localeCompare(b.date+sortKey(b)));
   const shown=futExpanded?fut:fut.slice(0,12);
   h+=`<section class="glass sect"><div class="sh"><b>後續待辦</b><span class="cnt">${fut.length}</span><span class="sd">未來 60 日</span></div>`;
   if(!fut.length)h+=`<div class="sempty">暫無後續安排。事項將於前一日自動移至「明日待辦」。</div>`;
@@ -2317,11 +2917,11 @@ let briefKind='day';
 const XBTN='<button class="x" data-close aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
 function briefHTML(kind){
   const t=todayStr(),tm=ymd(addDays(new Date(),1));
-  const tmr=eventsOn(tm).filter(e=>!e.done);
+  const tmr=eventsOn(tm).filter(e=>!e.done&&!e.nt);
   if(kind==='eve')return `<h3><span>明日預告</span>${XBTN}</h3><p class="hint" style="margin:-8px 0 14px">${md(tm)}，共 ${tmr.length} 項安排。</p>`+
-    (tmr.length?`<div class="blist">${tmr.slice(0,8).map(e=>tdRow(e)).join('')}</div>`:'<p class="hint">明日暫無安排。</p>')+
+    (tmr.length?`<div class="blist">${tmr.slice(0,8).map(e=>tdRow(e)).join('')}</div>`:'<p class="hint">明日暫無安排。</p>')+ntBriefLine(1,1)+
     `<div class="actions">${remCandidates(tm).length?`<button class="btn ghost" data-bremd="${tm}">加入提醒事項</button>`:''}<button class="btn primary" data-close>確定</button></div>`;
-  const today=eventsOn(t).filter(e=>!e.done),od=overdueList();
+  const today=eventsOn(t).filter(e=>!e.done&&!e.nt),od=overdueList();
   return `<h3><span>${greetWord()}！</span>${XBTN}</h3><p class="hint" style="margin:-8px 0 14px">${md(t)}</p>
     <div class="brief-stats"><div><b>${today.length}</b><span>今日待辦</span></div><div class="${od.length?'warnc':''}"><b>${od.length}</b><span>逾期事項</span></div><div><b>${tmr.length}</b><span>明日待辦</span></div></div>`+
     (today.length?`<div class="blist">${today.slice(0,6).map(e=>tdRow(e)).join('')}</div>`:'<p class="hint">今日暫無安排。</p>')+
@@ -2338,6 +2938,7 @@ function maybeBrief(){
   if(eveDue){store.set('cal.eveDay',t);showBrief('eve')}
 }
 $('#briefBody').addEventListener('click',e=>{
+  if(e.target.closest('[data-ntitem],[data-ntcopy],[data-ntuse],[data-ntopen]'))return;
   const dn=e.target.closest('[data-done]');if(dn){e.stopPropagation();toggleDone(dn.dataset.done);$('#briefBody').innerHTML=briefHTML(briefKind);return}
   const rm=e.target.closest('[data-bremd]');if(rm){closeOv($('#ovBrief'));sendToReminders(remCandidates(rm.dataset.bremd));return}
   if(e.target.closest('[data-bmoveall]')){moveTo(overdueList().map(x=>x.id),todayStr());return}
@@ -2982,6 +3583,7 @@ function lsMove(it,dir){
   const o=todo[j].order;todo[j].order=it.order;it.order=o;todo[j].updatedAt=it.updatedAt=Date.now();persist();scheduleSync();
 }
 function lsClick(e){
+  if(e.target.closest('[data-ntitem],[data-ntcopy]'))return false;
   let b=e.target.closest('[data-lsdone]');if(b){const it=lsById(b.dataset.lsdone);if(it){lsToggle(it);lsRerender()}return true}
   b=e.target.closest('[data-lsskip]');if(b){const it=lsById(b.dataset.lsskip);if(it){it.order=Math.max(...lsItems(it.list).map(x=>x.order||0))+1;it.updatedAt=Date.now();persist();scheduleSync();lsRerender()}return true}
   b=e.target.closest('[data-lsitem]');if(b){openLi(b.dataset.lsitem);return true}
@@ -3018,7 +3620,7 @@ function listReconcile(){
 }
 function lsRow(x,manage){
   const k=itCat(x);
-  return `<div class="lsrow ${x.done?'done':''}" style="--c:${COLORS[k]}"><button class="chk ${x.done?'on':''}" data-lsdone="${x.id}" aria-label="${x.done?'標記未完成':'標記完成'}"></button><div class="lb" data-lsitem="${x.id}"><span>${esc(x.text)}</span>${catTag(k)}${x.due?`<em class="due ${!x.done&&x.due<todayStr()?'late':''}">${relLabel(x.due)}</em>`:''}${x.note?`<small>${esc(x.note)}</small>`:''}</div>`+
+  return `<div class="lsrow ${x.done?'done':''}" style="--c:${COLORS[k]}"><button class="chk ${x.done?'on':''}" data-lsdone="${x.id}" aria-label="${x.done?'標記未完成':'標記完成'}"></button><div class="lb" data-lsitem="${x.id}"><span>${esc(x.text)}</span>${catTag(k)}${x.done?'':ntChip(ntMatchText(x.text))}${x.due?`<em class="due ${!x.done&&x.due<todayStr()?'late':''}">${relLabel(x.due)}</em>`:''}${x.note?`<small>${esc(x.note)}</small>`:''}</div>`+
     (manage&&!x.done&&lsFilt<0?`<div class="ls-mv"><button data-lsmv="${x.id}|-1" aria-label="上移"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button><button data-lsmv="${x.id}|1" aria-label="下移"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div>`:'')+`</div>`;
 }
 function catCounts(list){const c=CATS.map(()=>0);for(const x of list)c[itCat(x)]++;return c}
@@ -3038,7 +3640,7 @@ function listCard(){
   else if(!todo.length)h+=`<div class="ls-alldone">清單已全部完成。</div>`;
   else{
     const[f,...rest]=todo,k=itCat(f);
-    h+=`<div class="ls-next" style="--c:${COLORS[k]}"><button class="chk" data-lsdone="${f.id}" aria-label="完成「${esc(f.text)}」"></button><div class="lb" data-lsitem="${f.id}"><small>下一項</small><b>${esc(f.text)}</b><div class="nm">${catTag(k)}${f.due?`<span class="due ${f.due<todayStr()?'late':''}">${relLabel(f.due)}</span>`:''}</div></div>${rest.length?`<button class="ls-skip" data-lsskip="${f.id}">稍後</button>`:''}</div>`;
+    h+=`<div class="ls-next" style="--c:${COLORS[k]}"><button class="chk" data-lsdone="${f.id}" aria-label="完成「${esc(f.text)}」"></button><div class="lb" data-lsitem="${f.id}"><small>下一項</small><b>${esc(f.text)}</b><div class="nm">${catTag(k)}${ntChip(ntMatchText(f.text))}${f.due?`<span class="due ${f.due<todayStr()?'late':''}">${relLabel(f.due)}</span>`:''}</div></div>${rest.length?`<button class="ls-skip" data-lsskip="${f.id}">稍後</button>`:''}</div>`;
     h+=rest.slice(0,3).map(x=>lsRow(x)).join('');
     if(rest.length>3)h+=`<button class="more-btn" data-lsopen="${l.id}">查看其餘 ${rest.length-3} 項</button>`;
   }
@@ -3151,7 +3753,7 @@ function aiSuggest(){
   const td=todayStr(),tu=eventsOn(td).find(e=>!e.done&&!e.gcRec);
   const up=live().filter(e=>e.date>td&&!e.done&&!e.gcRec&&!e.nt&&!e.li).sort((a,b)=>(a.date+sortKey(a)).localeCompare(b.date+sortKey(b)))[0];
   return [['add','明天下午三點與教授開會'],['edit',up?`把「${shortT(up.title)}」改到下星期一`:'把明天的會議改到下午四點'],
-    ['list','把「買文具」和「覆電郵」加入清單'],['note','記低：新苗超市滿$200減$30，月底到期'],['ask','本星期有甚麼安排？']];
+    ['list','把「買文具」和「覆電郵」加入清單'],['note',ntAll().some(n=>n.kind==='coupon'&&!n.used&&!(ntDays(n)<0))?'我有邊啲優惠券就快到期？':'記低：新苗超市滿$200減$30，月底到期'],['ask','本星期有甚麼安排？']];
 }
 function aiWelcome(){
   const n=new Date(),td=todayStr(),all=eventsOn(td),todays=all.filter(e=>!e.done),nm=nowMin();
@@ -3160,6 +3762,8 @@ function aiWelcome(){
   let s=todays.length?`今日尚有 <b>${todays.length}</b> 項行程未完成`:all.length?'今日的行程已全部完成':'今日沒有行程';
   if(next)s+=`，下一項是 <b>${next.start}</b>「${esc(next.title)}」`;
   s+='。';if(left)s+=`清單「${esc(l.name)}」尚餘 <b>${left}</b> 項。`;
+  const cs=ntAll().filter(n=>n.kind==='coupon'&&!n.used&&n.exp).map(n=>[n,ntDays(n)]).filter(([,d])=>d>=0&&d<=3).sort((a,b)=>a[1]-b[1]);
+  if(cs.length)s+=`優惠券「${esc(cs[0][0].title||cs[0][0].value)}」${cs[0][1]===0?'今日':cs[0][1]===1?'明天':cs[0][1]+' 天後'}到期${cs.length>1?`，另有 <b>${cs.length-1}</b> 張快將到期`:''}。`;
   return `<div class="aiw"><div class="aiw-hi"><span class="aiw-orb"><span class="orb"></span></span><div><b>${greetWord()}</b><small>${n.getMonth()+1}月${n.getDate()}日　星期${WK[n.getDay()]}</small></div></div>
 <p class="aiw-sum">${s}</p>
 <div class="aiw-list">${aiSuggest().map(([k,t])=>`<button data-sug="${esc(t)}" style="--c:${AIC[k][1]}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${AIC[k][2]}</svg></span><span class="tx"><small>${AIC[k][0]}</small>${esc(t)}</span></button>`).join('')}</div>
@@ -3167,6 +3771,12 @@ function aiWelcome(){
 }
 function resCard(r,i,j){
   const und=r.undone?'':`<button data-undo="${i}:${j}">撤銷</button>`;
+  if(r.type==='ach'||r.type==='goal'){
+    const s=r.snap,c=lfC(s.area),isA=r.type==='ach',lab=r.undone?'已撤銷':isA?'已加入我的足跡':'已加入人生規劃';
+    const hz=(LF_HZ.find(x=>x[0]===s.hz)||[])[1]||'',meta=isA?(s.date?mdShort(s.date):''):[hz,s.date?mdShort(s.date)+'前':''].filter(Boolean).join('　');
+    return `<div class="tk ${r.type} ${r.undone?'undone':''}" style="--c:${c}"><div class="dt">${isA?ICON_STAR:ICON_MTN}<span>${isA?'成就':'目標'}</span></div><div class="b"><div class="tg"><span class="st">${lab}</span><span class="cn">${lfN(s.area)}</span></div><div class="ti">${esc(s.title)}</div>${meta?`<div class="meta">${meta}</div>`:''}`+
+      `${!isA&&s.steps&&s.steps.length?`<ul class="lis">${s.steps.map(t=>`<li style="--c:${c}">${esc(t)}</li>`).join('')}</ul>`:''}<div class="ta">${r.undone?'':`<button ${isA?`data-lfach="${r.id}"`:`data-lfgoal="${r.id}"`}>查看</button>`}${und}</div></div></div>`;
+  }
   if(r.type==='note'||r.type==='nused'){
     const s=r.snap,cp=s.kind==='coupon',lab=r.undone?'已撤銷':r.type==='note'?(cp?'已記低優惠券':'已記低'):'已標記使用';
     const meta=[s.date?'有效至 '+mdShort(s.date):'',s.code?'優惠碼 '+esc(s.code):''].filter(Boolean).join('　')||(s.body?esc(String(s.body).slice(0,40)):'');
@@ -3322,12 +3932,12 @@ function noteCard(){
   else{const nx=cps.filter(n=>n.exp).sort(ntByExp)[0];h+=`<div class="nt-line">${cps.length?`共 ${cps.length} 張優惠券未使用${nx?`，最近一張於 ${mdShort(nx.exp)} 到期`:''}。`:`共 ${all.length} 項記事。`}</div>`}
   return h+quick+'</section>';
 }
-function ntBriefLine(){
-  const s=ntAll().filter(n=>n.kind==='coupon'&&!n.used&&n.exp).map(n=>[n,ntDays(n)]).filter(([,d])=>d>=0&&d<=3).sort((a,b)=>a[1]-b[1]);
+function ntBriefLine(a=0,b=3){
+  const s=ntAll().filter(n=>n.kind==='coupon'&&!n.used&&n.exp).map(n=>[n,ntDays(n)]).filter(([,d])=>d>=a&&d<=b).sort((a,b)=>a[1]-b[1]);
   if(!s.length)return '';
   return `<button class="ntbrief" data-ntopen><b>優惠券</b>${s.slice(0,3).map(([n,d])=>`「${esc(n.title||n.value)}」${d===0?'今日':d===1?'明天':d+' 天後'}到期`).join('，')}${s.length>3?`，另有 ${s.length-3} 張`:''}</button>`;
 }
-const ntRerender=()=>{const y=window.scrollY;render();window.scrollTo(0,y);if($('#ovNotes').classList.contains('show'))renderNotes()};
+const ntRerender=()=>{const y=window.scrollY;render();window.scrollTo(0,y);if($('#ovNotes').classList.contains('show'))renderNotes();if($('#ovEdit').classList.contains('show'))ntEdBox()};
 function openNotes(f){ntFilt=f||'all';$('#ntQ').value='';renderNotes();openOv('#ovNotes')}
 function renderNotes(){
   const q=$('#ntQ').value.trim().toLowerCase(),all=ntAll().filter(n=>!q||[n.title,n.value,n.code,n.body].join(' ').toLowerCase().includes(q));
@@ -3442,6 +4052,388 @@ $('#swGo').onclick=()=>{
 document.addEventListener('click',e=>{
   if(e.target.closest('[data-swopen]')){const ov=e.target.closest('.overlay');if(ov&&ov.id!=='ovSet')closeOv(ov);$('#swIn').value='';openOv('#ovSwap');setTimeout(()=>$('#swIn').focus(),300);return}
   if(e.target.closest('[data-cloudset]')){fillSettings();$('#sMode').value='gdrive';showSyncGroup();openOv('#ovSet');setTimeout(()=>{const g=document.querySelector('.syncgrp[data-mode="gdrive"]');if(g)g.scrollIntoView({block:'center',behavior:'smooth'})},350)}
+});
+/* ---------- 優惠券：日曆、清單、概覽及編輯器 ---------- */
+const TKT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M14.5 7.5v9" stroke-dasharray="2 2.2"/></svg>';
+const NT_SUF=/(超級市場|超市|商場|百貨公司|百貨|茶餐廳|餐廳|酒樓|咖啡店|咖啡|書城|書店|便利店|藥房|分店|公司|集團|店)$/;
+function ntKeys(n){
+  const t=String(n.title||'').toLowerCase().trim(),k=new Set(),f=t.replace(/\s+/g,'');if(f.length>=2)k.add(f);
+  for(const w of t.split(/[\s\/·,，、()（）\-]+/)){if(w.length>=2)k.add(w);const s=w.replace(NT_SUF,'');if(s.length>=2&&s!==w)k.add(s)}
+  return [...k];
+}
+function ntMatchText(text){
+  const t=String(text||'').replace(/\s+/g,'').toLowerCase();if(t.length<2)return [];
+  return ntAll().filter(n=>n.kind==='coupon'&&!n.used&&!(ntDays(n)<0)&&ntKeys(n).some(k=>t.includes(k))).sort(ntByExp);
+}
+function ntMatches(e){return e.nt||e.cfg||e.done?[]:ntMatchText([e.title,e.location,e.notes].filter(Boolean).join(' '))}
+const ntChip=m=>m.length?`<button class="ntchip" data-ntitem="${m[0].id}" aria-label="相關優惠券：${esc(m[0].title||'')}">${TKT}${esc(m[0].value||m[0].title||'優惠券')}${m.length>1?`　+${m.length-1}`:''}</button>`:'';
+function ntSubLine(n){return `${ntBadge(n)}${n.code&&!n.used?`<button class="ntcode" data-ntcopy="${n.id}" aria-label="複製優惠碼">${esc(n.code)}${NT_COPY}</button>`:''}`}
+function ntEvRow(e,n){
+  return `<div class="ev ntev ${n.used?'done':''}" data-id="${e.id}" style="--c:#FF9E5E" tabindex="0"><div class="t"><span class="ad tkt">到期</span></div><div class="bar"></div><div class="b"><div class="ti">${esc(n.title||'優惠券')}${n.value?`<em class="ntv">${esc(n.value)}</em>`:''}</div><div class="sub ntsub">${ntSubLine(n)}</div></div><button class="chk ${n.used?'on':''}" data-done="${e.id}" aria-label="${n.used?'標記未使用':'標記已使用'}"></button></div>`;
+}
+function ntTdRow(e,n,o={}){
+  const tm=o.showDate?`<div class="tm">${parseYmd(e.date).getDate()}日<small>${relLabel(e.date)}</small></div>`:'<div class="tm"><span class="ad tkt">優惠券</span></div>';
+  return `<div class="td ntev ${n.used?'done':''}" data-id="${e.id}" style="--c:#FF9E5E" tabindex="0"><button class="chk ${n.used?'on':''}" data-done="${e.id}" aria-label="${n.used?'標記未使用':'標記已使用'}"></button>${tm}<div class="bar"></div><div class="b"><div class="ti">${esc(n.title||'優惠券')}${n.value?`<em class="ntv">${esc(n.value)}</em>`:''}</div><div class="meta ntsub">${ntSubLine(n)}</div></div>${o.act||''}</div>`;
+}
+function ntEdBox(){
+  const el=$('#fCoupons');if(!el)return;
+  const m=typeof editing!=='undefined'&&editing&&editing.nt?[]:ntMatchText([$('#fTitle').value,$('#fLoc').value,$('#fNotes').value].join(' '));
+  el.innerHTML=m.length?`<div class="fcoup-h">${TKT}你有 ${m.length} 張相關優惠券</div>`+m.slice(0,2).map(ntCard).join(''):'';
+}
+['#fTitle','#fLoc','#fNotes'].forEach(s=>$(s).addEventListener('input',ntEdBox));
+function ntSave(n){
+  const v=String(n.value||'');const m=v.match(/減\s*\$?\s*(\d+(?:\.\d+)?)/)||v.match(/\$\s*(\d+(?:\.\d+)?)/)||v.match(/(\d+(?:\.\d+)?)\s*元/);
+  return m?+m[1]:0;
+}
+const fmtMoney=x=>Number.isInteger(x)?String(x):x.toFixed(1);
+function ntStatsCard(){
+  const all=ntAll().filter(n=>n.kind==='coupon');if(!all.length)return '';
+  const td=todayStr(),m0=td.slice(0,8)+'01',act=all.filter(n=>!n.used&&!(ntDays(n)<0)),soon=act.filter(n=>n.exp&&ntDays(n)<=7).sort(ntByExp);
+  const usedM=all.filter(n=>n.used&&n.usedAt>1e6&&ymd(new Date(n.usedAt))>=m0),usedAll=all.filter(n=>n.used&&n.usedAt>1e6);
+  if(!act.length&&!usedM.length)return '';
+  const sm=usedM.reduce((a,n)=>a+ntSave(n),0),sa=usedAll.reduce((a,n)=>a+ntSave(n),0),missed=all.filter(n=>!n.used&&ntDays(n)<0&&n.exp>=m0).length;
+  const f=soon[0],fd=f?ntDays(f):0;
+  const line=(sa?`累計節省約 $${fmtMoney(sa)}。`:'')+(missed?`本月有 ${missed} 張過期未用。`:'')+(f?`最近到期：「${esc(f.title||f.value)}」${fd===0?'今日':fd===1?'明天':fd+' 天後'}。`:'');
+  return `<section class="glass ntstat" data-ntopen role="button" tabindex="0" aria-label="查看所有優惠券"><div class="ptitle">優惠券<span>點選查看全部</span></div><div class="nts-g"><div><b>${act.length}</b><span>未使用</span></div><div class="${soon.length?'hot':''}"><b>${soon.length}</b><span>7 天內到期</span></div><div><b>${usedM.length}</b><span>本月已用</span></div><div><b>${sm?'$'+fmtMoney(sm):'—'}</b><span>本月節省</span></div></div><p class="nts-s">${line}</p></section>`;
+}
+
+
+/* ---------- 人生規劃 ---------- */
+const LF_AREAS=[['事業','#4F7BFF'],['學習','#A98BFF'],['健康','#3FE0A5'],['財務','#FFC94D'],['家庭','#FF6F9C'],['人際','#FF9E5E'],['興趣','#3FD3F0'],['旅遊','#8FB4FF']];
+const LF_HZ=[['y1','今年'],['y3','三年內'],['y5','五年內'],['life','人生']];
+const LF_EX=['考取專業證書','存夠一筆儲蓄','完成半馬拉松','學一種新語言','同家人去旅行'];
+const ICON_MTN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l6.5-11 4 6.5 2.5-4L21 20z"/><path d="M14 4v5M14 4l4 1.5L14 7"/></svg>';
+const ICON_LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg>';
+const ICON_STAR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/></svg>';
+const lfLeft=g=>g.due?Math.round((parseYmd(g.due)-parseYmd(todayStr()))/864e5):null;
+const ICON_COPY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></svg>';
+const ICON_NOTE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h8l4 4v13H6z"/><path d="M9 12h6M9 16h4"/></svg>';
+const lfGoals=()=>events.filter(e=>e.cfg==='goal'&&!e.deleted).sort((a,b)=>(a.order||0)-(b.order||0));
+const lfAchs=()=>events.filter(e=>e.cfg==='ach'&&!e.deleted);
+const lfC=i=>(LF_AREAS[i]||LF_AREAS[0])[1];
+const lfN=i=>(LF_AREAS[i]||LF_AREAS[0])[0];
+const lfProg=g=>{const s=g.steps||[];return g.status==='done'?1:s.length?s.filter(x=>x.done).length/s.length:0};
+let lfTab='plan',lfCur=null,lfSteps=[],lfArea=0,lfHz='y1',acCur=null,acArea=0;
+function lfFeed(){
+  return [...lfAchs().map(a=>({k:'a',id:a.id,date:a.date||'',title:a.title,area:a.area||0,note:a.note||''})),
+    ...lfGoals().filter(g=>g.status==='done').map(g=>({k:'g',id:g.id,date:g.doneAt||'',title:g.title,area:g.area||0,note:g.why||''}))]
+    .sort((a,b)=>b.date.localeCompare(a.date));
+}
+function lfRerender(){if($('#ovLife').classList.contains('show'))renderLife();if(view==='todo'){const y=window.scrollY;render();window.scrollTo(0,y)}}
+function spaceTiles(){
+  const act=lfGoals().filter(g=>g.status!=='done'),feed=lfFeed(),h=vtHead();
+  const near=act.filter(g=>g.due&&g.due>=todayStr()).sort((a,b)=>a.due.localeCompare(b.due))[0],nl=near?lfLeft(near):null;
+  const ls=near&&nl<=60?(nl===0?`「${near.title}」今日到期`:`「${near.title}」尚餘 ${nl} 日`):act.length?`${act.length} 個目標進行中`:feed.length?`已記錄 ${feed.length} 項足跡`:'規劃未來，記錄成就';
+  const vs=h?`已加密　${vtRecs().length} 項`:'加密保存密碼';
+  return `<div class="tiles2"><button class="tile" data-lfopen style="--c:#A98BFF"><i>${ICON_MTN}</i><b>人生規劃</b><span>${esc(ls)}</span></button><button class="tile" data-vtopen style="--c:#4FE3FF"><i>${ICON_LOCK}</i><b>備忘錄</b><span>${esc(vs)}</span></button></div>`;
+}
+function lfDue(g){
+  if(!g.due)return '';const d=parseYmd(g.due),act=g.status!=='done',late=act&&g.due<todayStr(),n=lfLeft(g);
+  const t=late?'已過目標日期':act&&n===0?'今日到期':act&&n<=30?`尚餘 ${n} 日`:`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日前`;
+  return `<span class="lf-due ${late?'late':''}">${t}</span>`;
+}
+function lfGoalCard(g){
+  const s=g.steps||[],dn=s.filter(x=>x.done).length,nx=s.find(x=>!x.done),p=Math.round(lfProg(g)*100);
+  return `<button class="lf-goal" data-lfgoal="${g.id}" style="--c:${lfC(g.area)}"><div class="lf-gt"><span class="lf-area"><i></i>${lfN(g.area)}</span>${lfDue(g)}</div><b>${esc(g.title)}</b>`+
+    `<div class="lf-prog"><i style="width:${p}%"></i></div><div class="lf-gs"><span>${s.length?`${dn} / ${s.length} 步`:'未加步驟'}</span>${nx?`<span class="nx">下一步：${esc(nx.t)}</span>`:''}</div></button>`;
+}
+function renderLife(){
+  const now=new Date(),y=now.getFullYear(),y0=new Date(y,0,1),y1=new Date(y+1,0,1),yp=Math.floor((now-y0)/(y1-y0)*100);
+  const goals=lfGoals(),act=goals.filter(g=>g.status!=='done'),done=goals.filter(g=>g.status==='done'),feed=lfFeed();
+  const thisYear=feed.filter(f=>f.date.slice(0,4)===String(y)).length;
+  let h=`<div class="lf-year"><div class="lf-yt"><b>${y}</b><span>今年已過 ${yp}%</span></div><div class="lf-ybar"><i style="width:${yp}%"></i></div>`+
+    `<div class="lf-stats"><div><b>${thisYear}</b><span>今年完成</span></div><div><b>${act.length}</b><span>進行中目標</span></div><div><b>${feed.length}</b><span>累計足跡</span></div></div></div>`;
+  h+=`<div class="ntseg"><button data-lftab="plan" class="${lfTab==='plan'?'on':''}">規劃未來</button><button data-lftab="feed" class="${lfTab==='feed'?'on':''}">我的足跡</button></div>`;
+  if(lfTab==='plan'){
+    h+=`<div class="lf-act"><button class="btn primary" data-lfnew>＋ 新目標</button></div>`;
+    if(!act.length)h+=`<div class="lf-empty">寫下想達成的目標，再拆成小步驟，逐步完成。<div class="lf-ex">${LF_EX.map(t=>`<button data-lfex="${esc(t)}">${esc(t)}</button>`).join('')}</div></div>`;
+    for(const [k,n] of LF_HZ){const gs=act.filter(g=>(g.hz||'y1')===k);if(!gs.length)continue;h+=`<div class="lf-grp"><h5>${n}<em>${gs.length}</em></h5>${gs.map(lfGoalCard).join('')}</div>`}
+    if(done.length)h+=`<details class="lf-done"><summary>已達成 ${done.length} 個目標</summary>${done.map(lfGoalCard).join('')}</details>`;
+  }else{
+    h+=`<div class="lf-act"><button class="btn primary" data-lfachnew>＋ 記錄成就</button></div>`;
+    if(!feed.length)h+=`<div class="lf-empty">記低完成過的事，無論大小，日後回望就是自己的足跡。達成的目標亦會自動加入。</div>`;
+    let yr='';
+    for(const f of feed){
+      const fy=f.date.slice(0,4)||'未有日期';
+      if(fy!==yr){if(yr)h+='</div>';yr=fy;h+=`<div class="lf-yr"><b>${fy}</b><span>${feed.filter(x=>(x.date.slice(0,4)||'未有日期')===fy).length} 項</span></div><div class="lf-yg">`}
+      const d=f.date?parseYmd(f.date):null;
+      h+=`<button class="lf-ach" ${f.k==='g'?`data-lfgoal="${f.id}"`:`data-lfach="${f.id}"`} style="--c:${lfC(f.area)}"><div class="lf-dt">${d?`<b>${d.getDate()}</b><span>${d.getMonth()+1}月</span>`:'<b>—</b>'}</div>`+
+        `<div class="lf-ab"><b>${esc(f.title)}</b><div class="tags"><span class="lf-area"><i></i>${lfN(f.area)}</span>${f.k==='g'?'<span class="lf-tag">目標達成</span>':''}</div>${f.note?`<p>${esc(f.note)}</p>`:''}</div></button>`;
+    }
+    if(yr)h+='</div>';
+  }
+  $('#lfBody').innerHTML=h;
+}
+function openLife(tab){if(tab)lfTab=tab;renderLife();openOv('#ovLife')}
+function lfAreaBtns(sel,cur){$(sel).innerHTML=LF_AREAS.map(([n,c],i)=>`<button data-${sel==='#glArea'?'glarea':'acarea'}="${i}" class="${i===cur?'on':''}" style="--c:${c}"><i></i>${n}</button>`).join('')}
+function glRenderSteps(){
+  $('#glSteps').innerHTML=lfSteps.map((x,i)=>`<div class="lf-step ${x.done?'done':''}"><input type="checkbox" data-glstep="${i}" ${x.done?'checked':''} aria-label="完成"><span>${esc(x.t)}</span><button data-gldel="${i}" aria-label="刪除步驟">✕</button></div>`).join('');
+}
+function openGoal(id,preset){
+  lfCur=id?events.find(e=>e.id===id):null;const g=lfCur||{};
+  $('#glHead').textContent=lfCur?(g.status==='done'?'已達成的目標':'編輯目標'):'新目標';
+  $('#glTitle').value=g.title||preset||'';$('#glDue').value=g.due||'';$('#glWhy').value=g.why||'';$('#glStepIn').value='';
+  lfArea=g.area||0;lfHz=g.hz||'y1';lfSteps=(g.steps||[]).map(x=>({...x}));
+  lfAreaBtns('#glArea',lfArea);
+  $('#glHz').innerHTML=LF_HZ.map(([k,n])=>`<button data-glhz="${k}" class="${k===lfHz?'on':''}">${n}</button>`).join('');
+  glRenderSteps();
+  $('#glDel').style.display=lfCur?'':'none';
+  $('#glDone').textContent=g.status==='done'?'重新進行':'標記達成';
+  openOv('#ovGoal');
+}
+function glAddStep(){const t=$('#glStepIn').value.trim();if(!t)return;lfSteps.push({id:uid().slice(-6),t,done:false,doneAt:0});$('#glStepIn').value='';glRenderSteps()}
+function saveGoal(toggleDone){
+  const title=$('#glTitle').value.trim();if(!title){toast('請輸入目標');$('#glTitle').focus();return}
+  if($('#glStepIn').value.trim())glAddStep();
+  const now=Date.now();let g=lfCur;
+  if(!g){g={id:'gl-'+uid().slice(-9),cfg:'goal',status:'active',created:now,order:now};events.push(g)}
+  Object.assign(g,{title,area:lfArea,hz:lfHz,due:$('#glDue').value||'',why:$('#glWhy').value.trim(),steps:lfSteps,updatedAt:now});
+  let msg='已儲存目標';
+  if(toggleDone){if(g.status==='done'){g.status='active';g.doneAt='';msg='已重新進行'}else{g.status='done';g.doneAt=todayStr();msg='恭喜！已加入我的足跡'}}
+  persist();scheduleSync();closeOv($('#ovGoal'));lfRerender();toast(msg);
+}
+function delGoal(){
+  if(!lfCur||!confirm('刪除這個目標？'))return;
+  const g=lfCur;for(const k of Object.keys(g))if(!['id','cfg'].includes(k))delete g[k];g.deleted=true;g.updatedAt=Date.now();
+  persist();scheduleSync();closeOv($('#ovGoal'));lfRerender();toast('已刪除');
+}
+function openAch(id){
+  acCur=id?events.find(e=>e.id===id):null;const a=acCur||{};
+  $('#acHead').textContent=acCur?'編輯成就':'記錄成就';
+  $('#acTitle').value=a.title||'';$('#acDate').value=a.date||todayStr();$('#acNote').value=a.note||'';
+  acArea=a.area||0;lfAreaBtns('#acArea',acArea);
+  $('#acDel').style.display=acCur?'':'none';
+  openOv('#ovAch');
+}
+function saveAch(){
+  const title=$('#acTitle').value.trim();if(!title){toast('請輸入完成了甚麼');$('#acTitle').focus();return}
+  const now=Date.now();let a=acCur;
+  if(!a){a={id:'ac-'+uid().slice(-9),cfg:'ach'};events.push(a)}
+  Object.assign(a,{title,date:$('#acDate').value||todayStr(),area:acArea,note:$('#acNote').value.trim(),updatedAt:now});
+  persist();scheduleSync();closeOv($('#ovAch'));lfTab='feed';lfRerender();toast(acCur?'已儲存':'已加入我的足跡');
+}
+function delAch(){
+  if(!acCur||!confirm('刪除這項紀錄？'))return;
+  const a=acCur;for(const k of Object.keys(a))if(!['id','cfg'].includes(k))delete a[k];a.deleted=true;a.updatedAt=Date.now();
+  persist();scheduleSync();closeOv($('#ovAch'));lfRerender();toast('已刪除');
+}
+$('#glSave').onclick=()=>saveGoal(false);
+$('#glDone').onclick=()=>saveGoal(true);
+$('#glDel').onclick=delGoal;
+$('#glStepAdd').onclick=glAddStep;
+$('#glStepIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();glAddStep()}});
+$('#acSave').onclick=saveAch;
+$('#acDel').onclick=delAch;
+
+/* ---------- 備忘錄（主密碼加密） ----------
+   內容以 PBKDF2-SHA256 由主密碼產生 AES-GCM 金鑰，喺本機加密後先儲存及同步；主密碼及明文永不儲存或上傳。
+   cfg-vault（cfg:'vaultkey'）存 salt、kid 及驗證密文；每項內容一個 cfg:'vault' 紀錄（只有 iv＋ct）。AI 及小工具都唔會讀取。 */
+const VT_ITER=310000,VT_IDLE=180000,VT_CHK='my-calendar-vault-ok';
+let vtKey=null,vtKid='',vtItems=new Map(),vtIdle=0,vtHidden=0,vtQ='',vtCur=null,vtType='acct',vtChg=false,vtBusy=false;
+const vtHead=()=>events.find(e=>e.id==='cfg-vault'&&e.cfg==='vaultkey'&&!e.deleted);
+const vtRecs=()=>events.filter(e=>e.cfg==='vault'&&!e.deleted);
+const vtOk=()=>!!(window.crypto&&crypto.subtle&&window.TextEncoder);
+function b64(buf){const a=new Uint8Array(buf);let s='';for(let i=0;i<a.length;i++)s+=String.fromCharCode(a[i]);return btoa(s)}
+function unb64(s){const b=atob(s),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
+async function vtDerive(pw,salt,iter){
+  const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+async function vtEnc(key,obj){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(obj)));return {iv:b64(iv),ct:b64(ct)}}
+async function vtDec(key,r){const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(r.iv)},key,unb64(r.ct));return JSON.parse(new TextDecoder().decode(pt))}
+function vtTouch(){clearTimeout(vtIdle);if(vtKey)vtIdle=setTimeout(()=>vtLock(true),VT_IDLE)}
+function vtClearForm(){['#viTitle','#viUser','#viPw','#viUrl','#viNote'].forEach(s=>{const el=$(s);if(el)el.value=''});$('#viPw').type='password';$('#viShow').textContent='顯示'}
+function vtLock(auto){
+  const was=!!vtKey;vtKey=null;vtKid='';vtItems=new Map();vtCur=null;vtChg=false;clearTimeout(vtIdle);vtClearForm();
+  const vi=$('#ovVi');if(vi.classList.contains('show'))closeOv(vi);
+  if($('#ovVault').classList.contains('show'))renderVault();
+  if(view==='todo'){const y=window.scrollY;render();window.scrollTo(0,y)}
+  if(auto&&was)toast('備忘錄已自動鎖上');
+}
+async function vtDecryptAll(){
+  const m=new Map();
+  for(const r of vtRecs()){
+    if(r.kid!==vtKid||!r.ct){m.set(r.id,{r,d:null});continue}
+    try{m.set(r.id,{r,d:await vtDec(vtKey,r)})}catch(e){m.set(r.id,{r,d:null})}
+  }
+  vtItems=m;
+}
+const VT_COLS=['#4FE3FF','#A98BFF','#3FE0A5','#FFC94D','#FF6F9C','#FF9E5E','#8FB4FF'];
+const vtCol=t=>{let h=0;for(const c of String(t||''))h=(h*31+c.codePointAt(0))>>>0;return VT_COLS[h%VT_COLS.length]};
+function vtIcBox(){return `<div class="vt-ic">${ICON_LOCK}</div>`}
+function vtRow(id,x){
+  if(!x.d)return `<div class="vt-row bad" data-vtbad="${id}" role="button" tabindex="0"><span class="ic">${ICON_LOCK}</span><span class="tx"><b>無法解鎖的項目</b><span>以舊主密碼加密，點選可刪除</span></span></div>`;
+  const d=x.d,isN=d.type==='note',sub=isN?(d.note||'').split('\n')[0]:(d.user||d.url||'');
+  return `<div class="vt-row" data-vtitem="${id}" role="button" tabindex="0"><span class="ic" style="--c:${vtCol(d.title)}">${isN?ICON_NOTE:esc([...(d.title||'？')][0].toUpperCase())}</span><span class="tx"><b>${esc(d.title||'未命名')}</b><span>${esc(sub)||'&nbsp;'}</span></span>${!isN&&d.pw?`<button class="vt-cp" data-vtcp="${id}">${ICON_COPY}複製密碼</button>`:''}</div>`;
+}
+function vtListHTML(){
+  const q=vtQ.trim().toLowerCase();
+  const all=[...vtItems.entries()].filter(([,x])=>!q||!x.d||[x.d.title,x.d.user,x.d.url,x.d.note].join(' ').toLowerCase().includes(q))
+    .sort((a,b)=>(a[1].d?0:1)-(b[1].d?0:1)||String(a[1].d&&a[1].d.title||'').localeCompare(String(b[1].d&&b[1].d.title||''),'zh-Hant'));
+  if(!vtItems.size)return `<div class="vt-empty">未有內容。可以加入帳戶密碼，或者用「安全備忘」記下會員號碼、Wi-Fi 密碼等資料。</div>`;
+  if(!all.length)return `<div class="vt-empty">找不到相關內容。</div>`;
+  return all.map(([id,x])=>vtRow(id,x)).join('');
+}
+function renderVault(){
+  const b=$('#vtBody'),h=vtHead();
+  if(!vtOk()){b.innerHTML=`<div class="vt-lock">${vtIcBox()}<h4>此瀏覽器不支援加密</h4><p>請用 Safari 開啟網頁版或主畫面上的 App。</p></div>`;return}
+  if(vtKey&&(!h||h.kid!==vtKid)){vtKey=null;vtKid='';vtItems=new Map();clearTimeout(vtIdle)}
+  if(!h){
+    b.innerHTML=`<div class="vt-lock">${vtIcBox()}<h4>建立主密碼</h4><p>備忘錄的內容會先在手機上加密，才儲存及同步到雲端。只有輸入主密碼才可以讀取。</p>
+      <div class="field"><label for="vtNew">主密碼（最少 6 個字元）</label><input id="vtNew" type="password" autocomplete="new-password"></div>
+      <div class="field"><label for="vtNew2">再輸入一次</label><input id="vtNew2" type="password" autocomplete="new-password"></div>
+      <div class="field"><label for="vtHint">提示（可留空，切勿填寫密碼本身）</label><input id="vtHint" autocomplete="off"></div>
+      <label class="vt-warn"><input type="checkbox" id="vtAgree"><span>我明白如果忘記主密碼，內容將無法讀取，亦無人可以替我復原。</span></label>
+      <div class="vt-err" id="vtErr"></div><button class="btn primary" style="width:100%" id="vtCreate">建立並解鎖</button></div>`;
+    return;
+  }
+  if(!vtKey){
+    const n=vtRecs().length;
+    b.innerHTML=`<div class="vt-lock">${vtIcBox()}<h4>已鎖上</h4><p>${n?`共 ${n} 項已加密的內容。`:'請輸入主密碼。'}${h.hint?`<br>提示：${esc(h.hint)}`:''}</p>
+      <div class="field"><label for="vtPw">主密碼</label><input id="vtPw" type="password" autocomplete="current-password" enterkeyhint="go"></div>
+      <div class="vt-err" id="vtErr"></div><button class="btn primary" style="width:100%" id="vtUnlock">解鎖</button></div>`;
+    return;
+  }
+  if(vtChg){
+    b.innerHTML=`<div class="vt-lock">${vtIcBox()}<h4>更改主密碼</h4><p>所有內容會以新主密碼重新加密。</p>
+      <div class="field"><label for="vtOld">目前的主密碼</label><input id="vtOld" type="password" autocomplete="current-password"></div>
+      <div class="field"><label for="vtNew">新主密碼（最少 6 個字元）</label><input id="vtNew" type="password" autocomplete="new-password"></div>
+      <div class="field"><label for="vtNew2">再輸入一次</label><input id="vtNew2" type="password" autocomplete="new-password"></div>
+      <div class="field"><label for="vtHint">提示（可留空）</label><input id="vtHint" autocomplete="off" value="${esc(h.hint||'')}"></div>
+      <div class="vt-err" id="vtErr"></div><div class="actions" style="width:100%"><button class="btn ghost" data-vtchgx>取消</button><button class="btn primary" id="vtChgGo">確定更改</button></div></div>`;
+    return;
+  }
+  b.innerHTML=`<div class="vt-bar"><span class="st"><i></i>已解鎖</span><span>閒置 3 分鐘會自動鎖上</span><button data-vtlock>鎖上</button></div>
+    <div class="vt-top"><input id="vtQ" type="search" placeholder="搜尋" autocomplete="off" value="${esc(vtQ)}"><button class="btn primary" data-vtnew="acct">＋ 密碼</button><button class="btn ghost" data-vtnew="note">＋ 備忘</button></div>
+    <div class="vt-list" id="vtList">${vtListHTML()}</div>
+    <div class="vt-foot"><button data-vtchg>更改主密碼</button></div>`;
+}
+function vtErr(m){const e=$('#vtErr');if(e)e.textContent=m||''}
+function vtBtn(id,busy,label){const b=$(id);if(b){b.disabled=busy;b.textContent=label}}
+async function vtCreate(){
+  if(vtBusy)return;
+  const p1=$('#vtNew').value,p2=$('#vtNew2').value,hint=$('#vtHint').value.trim();
+  if(p1.length<6)return vtErr('主密碼最少 6 個字元');
+  if(p1!==p2)return vtErr('兩次輸入的主密碼不相同');
+  if(hint&&hint===p1)return vtErr('提示不可以與主密碼相同');
+  if(!$('#vtAgree').checked)return vtErr('請先剔選確認');
+  vtBusy=true;vtBtn('#vtCreate',true,'處理中…');
+  try{
+    if(syncReady()){try{await sync()}catch(e){}}
+    if(vtHead()){vtBusy=false;renderVault();toast('雲端已有備忘錄，請輸入原有的主密碼');return}
+    const salt=crypto.getRandomValues(new Uint8Array(16)),kid=uid().slice(-8),key=await vtDerive(p1,salt,VT_ITER);
+    const chk=await vtEnc(key,VT_CHK);
+    events.push({id:'cfg-vault',cfg:'vaultkey',v:1,salt:b64(salt),iter:VT_ITER,kid,chk,hint,updatedAt:Date.now()});
+    persist();scheduleSync();
+    vtKey=key;vtKid=kid;vtItems=new Map();vtTouch();renderVault();lfRerender();toast('已建立備忘錄');
+  }catch(e){vtErr('未能建立：'+(e.message||e))}
+  vtBusy=false;vtBtn('#vtCreate',false,'建立並解鎖');
+}
+async function vtUnlock(){
+  if(vtBusy)return;
+  const h=vtHead(),pw=$('#vtPw').value;if(!h)return renderVault();
+  if(!pw)return vtErr('請輸入主密碼');
+  vtBusy=true;vtBtn('#vtUnlock',true,'解鎖中…');
+  try{
+    const key=await vtDerive(pw,unb64(h.salt),h.iter||VT_ITER);
+    let ok=false;try{ok=(await vtDec(key,h.chk))===VT_CHK}catch(e){}
+    if(!ok){vtBusy=false;vtBtn('#vtUnlock',false,'解鎖');vtErr('主密碼不正確');$('#vtPw').select();return}
+    vtKey=key;vtKid=h.kid;await vtDecryptAll();vtTouch();vtBusy=false;renderVault();
+  }catch(e){vtBusy=false;vtBtn('#vtUnlock',false,'解鎖');vtErr('未能解鎖：'+(e.message||e))}
+}
+async function vtChange(){
+  if(vtBusy)return;
+  const h=vtHead(),old=$('#vtOld').value,p1=$('#vtNew').value,p2=$('#vtNew2').value,hint=$('#vtHint').value.trim();
+  if(p1.length<6)return vtErr('新主密碼最少 6 個字元');
+  if(p1!==p2)return vtErr('兩次輸入的新主密碼不相同');
+  if(hint&&hint===p1)return vtErr('提示不可以與主密碼相同');
+  vtBusy=true;vtBtn('#vtChgGo',true,'處理中…');
+  try{
+    const ok0=await vtDerive(old,unb64(h.salt),h.iter||VT_ITER);let ok=false;try{ok=(await vtDec(ok0,h.chk))===VT_CHK}catch(e){}
+    if(!ok){vtBusy=false;vtBtn('#vtChgGo',false,'確定更改');return vtErr('目前的主密碼不正確')}
+    const salt=crypto.getRandomValues(new Uint8Array(16)),kid=uid().slice(-8),key=await vtDerive(p1,salt,VT_ITER),now=Date.now();
+    for(const [id,x] of vtItems){if(!x.d)continue;const r=events.find(e=>e.id===id);if(!r)continue;Object.assign(r,await vtEnc(key,x.d),{kid,updatedAt:now})}
+    Object.assign(h,{salt:b64(salt),iter:VT_ITER,kid,chk:await vtEnc(key,VT_CHK),hint,updatedAt:now});
+    persist();scheduleSync();vtKey=key;vtKid=kid;await vtDecryptAll();vtChg=false;vtBusy=false;vtTouch();renderVault();toast('已更改主密碼');
+  }catch(e){vtBusy=false;vtBtn('#vtChgGo',false,'確定更改');vtErr('未能更改：'+(e.message||e))}
+}
+function vtGen(n=16){const cs='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*?-_';const a=crypto.getRandomValues(new Uint32Array(n));let s='';for(const x of a)s+=cs[x%cs.length];return s}
+async function vtCopy(v){
+  vtTouch();if(!v){toast('沒有內容可以複製');return}
+  try{await navigator.clipboard.writeText(v);toast('已複製')}
+  catch(e){const t=document.createElement('textarea');t.value=v;t.setAttribute('readonly','');t.style.cssText='position:fixed;opacity:0;top:0';document.body.appendChild(t);t.select();try{document.execCommand('copy');toast('已複製')}catch(_){toast('未能複製')}t.remove()}
+}
+function vtSetType(k){vtType=k;$('#ovVi').classList.toggle('note',k==='note');document.querySelectorAll('#viKind button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#viNoteL').textContent=k==='note'?'內容':'備註'}
+function openVi(id,type){
+  if(!vtKey)return;vtTouch();
+  const x=id?vtItems.get(id):null,d=x&&x.d||{};vtCur=x?id:null;
+  vtClearForm();vtSetType(d.type||type||'acct');
+  $('#viHead').textContent=vtCur?(vtType==='note'?'安全備忘':'帳戶密碼'):(vtType==='note'?'新增安全備忘':'新增密碼');
+  $('#viTitle').value=d.title||'';$('#viUser').value=d.user||'';$('#viPw').value=d.pw||'';$('#viUrl').value=d.url||'';$('#viNote').value=d.note||'';
+  $('#viDel').style.display=vtCur?'':'none';
+  openOv('#ovVi');
+}
+async function saveVi(){
+  if(!vtKey){toast('備忘錄已鎖上');return}
+  const title=$('#viTitle').value.trim();if(!title){toast('請輸入名稱');$('#viTitle').focus();return}
+  const d={type:vtType,title,note:$('#viNote').value,updated:Date.now()};
+  if(vtType==='acct'){d.user=$('#viUser').value.trim();d.pw=$('#viPw').value;d.url=$('#viUrl').value.trim()}
+  const now=Date.now(),enc=await vtEnc(vtKey,d);let r=vtCur&&events.find(e=>e.id===vtCur);
+  if(!r){r={id:'vt-'+uid().slice(-10),cfg:'vault'};events.push(r)}
+  Object.assign(r,enc,{kid:vtKid,updatedAt:now});delete r.deleted;
+  vtItems.set(r.id,{r,d});persist();scheduleSync();vtClearForm();closeOv($('#ovVi'));vtTouch();renderVault();lfRerender();toast('已加密儲存');
+}
+function vtDelete(id){
+  const r=events.find(e=>e.id===id);if(!r)return;
+  for(const k of Object.keys(r))if(!['id','cfg'].includes(k))delete r[k];r.deleted=true;r.updatedAt=Date.now();
+  vtItems.delete(id);persist();scheduleSync();
+}
+function openVault(){vtChg=false;renderVault();openOv('#ovVault')}
+$('#viSave').onclick=()=>{saveVi().catch(e=>toast('未能儲存：'+(e.message||e)))};
+$('#viDel').onclick=()=>{if(!vtCur||!confirm('刪除這個項目？刪除後無法復原。'))return;vtDelete(vtCur);vtClearForm();closeOv($('#ovVi'));renderVault();lfRerender();toast('已刪除')};
+$('#viShow').onclick=()=>{const p=$('#viPw'),s=p.type==='password';p.type=s?'text':'password';$('#viShow').textContent=s?'隱藏':'顯示';vtTouch()};
+$('#viGen').onclick=()=>{const p=$('#viPw');if(p.value&&!confirm('以新產生的密碼取代目前的密碼？'))return;p.value=vtGen();p.type='text';$('#viShow').textContent='隱藏';vtTouch();toast('已產生 16 位隨機密碼')};
+$('#viKind').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)vtSetType(b.dataset.k)});
+$('#ovVi').addEventListener('click',e=>{if(e.target===$('#ovVi')||e.target.closest('[data-close]'))setTimeout(vtClearForm,250)});
+['#ovVault','#ovVi'].forEach(s=>{$(s).addEventListener('input',vtTouch);$(s).addEventListener('pointerdown',vtTouch)});
+$('#vtBody').addEventListener('input',e=>{if(e.target.id==='vtQ'){vtQ=e.target.value;$('#vtList').innerHTML=vtListHTML()}});
+$('#vtBody').addEventListener('keydown',e=>{
+  if(e.key!=='Enter'||e.isComposing)return;
+  if(e.target.id==='vtPw'){e.preventDefault();vtUnlock()}
+  else if(e.target.id==='vtNew2'&&$('#vtCreate')){e.preventDefault();vtCreate()}
+});
+document.addEventListener('visibilitychange',()=>{
+  if(!vtKey)return;
+  if(document.visibilityState==='hidden')vtHidden=Date.now();
+  else if(vtHidden&&Date.now()-vtHidden>30000)vtLock(true);
+});
+
+document.addEventListener('click',e=>{
+  const t=e.target;
+  if(t.closest('[data-lfopen]')){openLife();return}
+  if(t.closest('[data-vtopen]')){openVault();return}
+  const lt=t.closest('[data-lftab]');if(lt){lfTab=lt.dataset.lftab;renderLife();return}
+  if(t.closest('[data-lfnew]')){openGoal();return}
+  const ex=t.closest('[data-lfex]');if(ex){openGoal(null,ex.dataset.lfex);return}
+  const lg=t.closest('[data-lfgoal]');if(lg){openGoal(lg.dataset.lfgoal);return}
+  if(t.closest('[data-lfachnew]')){openAch();return}
+  const la=t.closest('[data-lfach]');if(la){openAch(la.dataset.lfach);return}
+  const ga=t.closest('[data-glarea]');if(ga){lfArea=+ga.dataset.glarea;lfAreaBtns('#glArea',lfArea);return}
+  const aa=t.closest('[data-acarea]');if(aa){acArea=+aa.dataset.acarea;lfAreaBtns('#acArea',acArea);return}
+  const gh=t.closest('[data-glhz]');if(gh){lfHz=gh.dataset.glhz;document.querySelectorAll('#glHz button').forEach(b=>b.classList.toggle('on',b.dataset.glhz===lfHz));return}
+  const gs=t.closest('[data-glstep]');if(gs){const x=lfSteps[+gs.dataset.glstep];if(x){x.done=gs.checked;x.doneAt=x.done?Date.now():0;glRenderSteps()}return}
+  const gd=t.closest('[data-gldel]');if(gd){lfSteps.splice(+gd.dataset.gldel,1);glRenderSteps();return}
+  if(t.closest('#vtCreate')){vtCreate();return}
+  if(t.closest('#vtUnlock')){vtUnlock();return}
+  if(t.closest('#vtChgGo')){vtChange();return}
+  if(t.closest('[data-vtlock]')){vtLock(false);return}
+  if(t.closest('[data-vtchg]')){vtChg=true;renderVault();return}
+  if(t.closest('[data-vtchgx]')){vtChg=false;renderVault();return}
+  const vn=t.closest('[data-vtnew]');if(vn){openVi(null,vn.dataset.vtnew);return}
+  const vc=t.closest('[data-vtcp]');if(vc){const x=vtItems.get(vc.dataset.vtcp);vtCopy(x&&x.d&&x.d.pw);return}
+  const vb=t.closest('[data-vtbad]');if(vb){if(confirm('這個項目以舊主密碼加密，無法讀取。要刪除嗎？')){vtDelete(vb.dataset.vtbad);renderVault();lfRerender()}return}
+  const vi=t.closest('[data-vtitem]');if(vi){openVi(vi.dataset.vtitem);return}
+  const vp=t.closest('[data-vicp]');if(vp){vtCopy($('#'+vp.dataset.vicp).value);return}
 });
 
 autosize();
