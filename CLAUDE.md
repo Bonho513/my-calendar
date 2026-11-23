@@ -53,8 +53,30 @@
 - 記事紀錄：`{id:'nt-…', cfg:'note', kind:'coupon'|'note', title, value, code, exp, body, pin, cal, used, usedAt, created, updatedAt}`（用 `exp` 而非 `date`）。
 - `cal` 為真且有 `exp` 的優惠券，會由 `ntReconcile()` 建立全日事項 `'ev-' + 記事 id`（欄位 `nt`，生活分類），完成狀態與 `used` 雙向同步；這類事項不會列入逾期。
 - 「貼上文字自動填寫」先用 AI（`ntParseAI`），失敗時用 `ntParseLocal()` 的規則。AI 對話動作另有 `note` 及 `note_used`。
+- 優惠券遍及全 App：月曆格子、日程列（`ntEvRow` / `ntTdRow`，點選開優惠券而非行程編輯器）、行程及清單事項按商戶名稱配對相關優惠券（`ntMatchText` / `ntChip`）、行程編輯器（`#fCoupons`）、概覽（`ntStatsCard`，按優惠內容估算節省金額）、AI 歡迎頁、每日簡報及明日預告。今日頁的待辦列表不列出優惠券到期事項（由記事卡顯示）。
+
+### 人生規劃
+
+- 目標：`{id:'gl-…', cfg:'goal', title, area, hz:'y1'|'y3'|'y5'|'life', due, why, steps:[{id,t,done,doneAt}], status:'active'|'done', doneAt, created, order, updatedAt}`。
+- 成就：`{id:'ac-…', cfg:'ach', title, date, area, note, updatedAt}`。「我的足跡」由成就及已達成的目標合併顯示（`lfFeed()`），不會複製紀錄。
+- 範疇 `LF_AREAS`：事業、學習、健康、財務、家庭、人際、興趣、旅遊。入口是今日頁 `spaceTiles()` 的方塊，介面在 `#ovLife`、`#ovGoal`、`#ovAch`。
+- AI 對話動作 `achieve`（記錄成就）及 `goal`（新增目標，可附步驟），只寫入；人生規劃內容不會放入 AI 提示（使用者已獲告知），不可改為傳送。
+
+### 備忘錄（加密）
+
+- 主密碼以 PBKDF2-SHA256（310,000 次）產生 AES-GCM 金鑰，只在記憶體保存；主密碼及明文永不儲存、同步或傳送給 AI。
+- `cfg-vault`（`cfg:'vaultkey'`）存 `salt`、`iter`、`kid`、驗證密文 `chk` 及使用者自訂提示 `hint`；每項內容一個 `{id:'vt-…', cfg:'vault', kid, iv, ct, updatedAt}`。
+- 閒置 3 分鐘或 App 轉到背景超過 30 秒會自動鎖上（`vtLock`）。更改主密碼會重新加密所有項目並更新 `kid`；`kid` 不符的項目顯示為無法解鎖。
+- 建立主密碼前會先同步一次，避免兩部裝置各自建立。不可加入任何繞過主密碼、記錄主密碼或把內容加入 AI 對話的功能。
 
 刪除一律用墓碑（`deleted:true` 並更新 `updatedAt`），不可直接從陣列移除，否則同步會把它帶回來。
+
+### iPhone 小工具（Scriptable）
+
+- 程式碼範本在 `<script type="text/plain" id="tplWidget">`，`widgetCode()` 代入同步網址、密碼及 App 網址後供使用者複製。細尺寸：待辦＋概覽一行；中尺寸：月曆＋待辦＋概覽一行；大尺寸「全覽」：月曆、未來 7 天、清單進度、優惠券、本週健身。
+- 清單、優惠券、健身只在有資料時顯示（`SHOW_LIST` / `SHOW_CP` / `SHOW_GYM`），全部沒有時大尺寸行程改用全闊。今日以嵌入本週底色的玻璃方塊標示（`todayChip`）。
+- Scriptable 細格內不可用彈性 `addSpacer()`（最少約 8pt），用固定尺寸 stack 置中；行數按可用高度計算（`agenda()`）。
+- 修改範本後使用者須重新複製程式碼到 Scriptable 才會生效。
 
 ### 同步
 
